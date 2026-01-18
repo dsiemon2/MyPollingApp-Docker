@@ -1,0 +1,440 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ==================== AUTH & USERS ====================
+
+enum Role {
+  SUPER_ADMIN
+  POLL_ADMIN
+  USER
+}
+
+enum PlanType {
+  FREE
+  STARTER
+  PROFESSIONAL
+  ENTERPRISE
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELLED
+  EXPIRED
+  PAST_DUE
+  TRIALING
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String
+  name          String?
+  phone         String?
+  role          Role      @default(USER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  polls         Poll[]
+  votes         Vote[]
+  messages      ChatMessage[]
+  subscription  Subscription?
+  paymentMethods      UserPaymentMethod[]
+  notificationPrefs   UserNotificationPreference?
+  devices             UserDevice[]
+}
+
+// ==================== SUBSCRIPTIONS ====================
+
+model Subscription {
+  id                String             @id @default(cuid())
+  userId            String             @unique
+  user              User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan              PlanType           @default(FREE)
+  status            SubscriptionStatus @default(ACTIVE)
+
+  // Payment info
+  stripeCustomerId     String?
+  stripeSubscriptionId String?
+  paymentGateway       String?         // stripe, braintree, square, etc.
+
+  // Billing cycle
+  currentPeriodStart   DateTime?
+  currentPeriodEnd     DateTime?
+  cancelAtPeriodEnd    Boolean          @default(false)
+
+  // Trial info
+  trialStart           DateTime?
+  trialEnd             DateTime?
+
+  // Timestamps
+  createdAt            DateTime         @default(now())
+  updatedAt            DateTime         @updatedAt
+}
+
+// ==================== POLL TYPES & TEMPLATES ====================
+
+model PollType {
+  id            String   @id @default(cuid())
+  code          String   @unique  // yes_no, single_choice, rating_scale, etc.
+  name          String             // "Yes/No", "Rating Scale"
+  description   String?
+  icon          String?            // Emoji icon
+  category      String   @default("choice")  // choice, rating, ranking, text
+  defaultConfig String   @default("{}") @db.Text  // JSON config
+  isSystem      Boolean  @default(true)
+  isActive      Boolean  @default(true)
+  sortOrder     Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  polls         Poll[]
+  templates     PollTemplate[]
+}
+
+model PollTemplate {
+  id                 String   @id @default(cuid())
+  name               String   @unique
+  description        String?
+  icon               String?
+  category           String?
+  pollTypeId         String
+  pollType           PollType @relation(fields: [pollTypeId], references: [id])
+  defaultTitle       String?
+  defaultDescription String?
+  defaultOptions     String   @default("[]") @db.Text  // JSON array
+  defaultConfig      String   @default("{}") @db.Text  // JSON overrides
+  isSystem           Boolean  @default(true)
+  isActive           Boolean  @default(true)
+  sortOrder          Int      @default(0)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+// ==================== POLLS ====================
+
+model Poll {
+  id          String       @id @default(cuid())
+  title       String
+  description String?
+  type        String       @default("single") // Legacy: single, multiple
+  status      String       @default("open")   // open, closed
+  config      String       @default("{}") @db.Text  // JSON type-specific config
+  createdAt   DateTime     @default(now())
+  closedAt    DateTime?
+  creatorId   String?
+  creator     User?        @relation(fields: [creatorId], references: [id])
+  pollTypeId  String?
+  pollType    PollType?    @relation(fields: [pollTypeId], references: [id])
+
+  options     PollOption[]
+  votes       Vote[]
+  messages    ChatMessage[]
+}
+
+model PollOption {
+  id         String   @id @default(cuid())
+  pollId     String
+  poll       Poll     @relation(fields: [pollId], references: [id], onDelete: Cascade)
+  label      String
+  orderIndex Int      @default(0)
+
+  votes      Vote[]
+}
+
+model Vote {
+  id                String      @id @default(cuid())
+  pollId            String
+  poll              Poll        @relation(fields: [pollId], references: [id], onDelete: Cascade)
+  optionId          String?     // Optional for text/rating types
+  option            PollOption? @relation(fields: [optionId], references: [id], onDelete: Cascade)
+  userId            String?
+  user              User?       @relation(fields: [userId], references: [id])
+  voterFingerprint  String?
+  value             String?     // JSON: text response, rating value, rankings
+  rank              Int?        // For ranked voting
+  rating            Float?      // For rating/NPS types
+  createdAt         DateTime    @default(now())
+
+  // Removed @@unique([pollId, voterFingerprint]) to allow multiple votes per person
+  // for multiple choice and ranked voting. Duplicate prevention is handled in API.
+  @@index([pollId, optionId])
+  @@index([pollId, voterFingerprint])
+}
+
+model ChatMessage {
+  id        String   @id @default(cuid())
+  pollId    String
+  poll      Poll     @relation(fields: [pollId], references: [id], onDelete: Cascade)
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  role      String   @default("user") // user, ai, system
+  content   String
+  username  String   @default("Anonymous")
+  isVoice   Boolean  @default(false)
+  audioUrl  String?
+  createdAt DateTime @default(now())
+}
+
+// ==================== AI SETTINGS ====================
+
+model AIProvider {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  displayName String
+  apiKey      String?
+  baseUrl     String?
+  model       String?
+  enabled     Boolean  @default(false)
+  isDefault   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model AIConfig {
+  id              String   @id @default(cuid())
+  key             String   @unique
+  value           String   @db.Text
+  description     String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Voice {
+  id          String   @id @default(cuid())
+  voiceId     String   @unique
+  name        String
+  gender      String   // male, female
+  description String?
+  provider    String   @default("openai")
+  language    String   @default("en")
+  isDefault   Boolean  @default(false)
+  enabled     Boolean  @default(true)
+  createdAt   DateTime @default(now())
+}
+
+model Language {
+  id         String   @id @default(cuid())
+  code       String   @unique
+  name       String
+  nativeName String
+  flag       String?
+  enabled    Boolean  @default(true)
+  createdAt  DateTime @default(now())
+
+  documents  KnowledgeDocument[]
+}
+
+model KnowledgeDocument {
+  id         String    @id @default(cuid())
+  title      String
+  content    String    @db.Text
+  type       String    @default("text") // text, url, file
+  languageId String?
+  language   Language? @relation(fields: [languageId], references: [id])
+  enabled    Boolean   @default(true)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+// ==================== AI TOOLS & AGENTS ====================
+
+model AITool {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  displayName String
+  description String?
+  type        String   @default("builtin") // builtin, custom, api, webhook
+  schema      String?  @db.Text // JSON schema for parameters
+  endpoint    String?
+  enabled     Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  agents      AIAgentTool[]
+}
+
+model AIAgent {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  displayName String
+  description String?
+  systemPrompt String? @db.Text
+  temperature Float    @default(0.7)
+  enabled     Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  tools       AIAgentTool[]
+}
+
+model AIAgentTool {
+  id       String  @id @default(cuid())
+  agentId  String
+  agent    AIAgent @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  toolId   String
+  tool     AITool  @relation(fields: [toolId], references: [id], onDelete: Cascade)
+
+  @@unique([agentId, toolId])
+}
+
+// ==================== LOGIC RULES ====================
+
+model LogicRule {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  trigger     String   // message_received, session_start, etc.
+  condition   String?  @db.Text // JavaScript expression
+  action      String   // send_message, trigger_webhook, etc.
+  actionData  String?  @db.Text // JSON data for action
+  priority    Int      @default(0)
+  enabled     Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ==================== FUNCTIONS ====================
+
+model CustomFunction {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  displayName String
+  description String?
+  code        String   @db.Text // JavaScript function code
+  parameters  String?  @db.Text // JSON schema for parameters
+  enabled     Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ==================== WEBHOOKS ====================
+
+model Webhook {
+  id          String   @id @default(cuid())
+  name        String
+  url         String
+  secret      String?
+  events      String[] // Array of event types to subscribe
+  enabled     Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  logs        WebhookLog[]
+}
+
+model WebhookLog {
+  id          String   @id @default(cuid())
+  webhookId   String
+  webhook     Webhook  @relation(fields: [webhookId], references: [id], onDelete: Cascade)
+  event       String
+  payload     String?  @db.Text
+  response    String?  @db.Text
+  statusCode  Int?
+  success     Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+// ==================== PAYMENT GATEWAYS ====================
+
+model PaymentGateway {
+  id              String   @id @default(cuid())
+  provider        String   @unique // stripe, paypal, braintree, square, authorize
+  isEnabled       Boolean  @default(false)
+  publishableKey  String?
+  secretKey       String?
+  testMode        Boolean  @default(true)
+  achEnabled      Boolean  @default(false)
+  webhookSecret   String?
+  merchantId      String?  // For Braintree/Square
+  additionalConfig String? @db.Text // JSON for provider-specific settings
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+// ==================== SYSTEM SETTINGS ====================
+
+model SystemSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String   @db.Text
+  type      String   @default("string") // string, number, boolean, json
+  category  String   @default("general")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ==================== USER ACCOUNT SETTINGS ====================
+
+model UserPaymentMethod {
+  id                     String    @id @default(cuid())
+  userId                 String
+  user                   User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  isDefault              Boolean   @default(false)
+  cardType               String    // visa, mastercard, amex, discover
+  cardLast4              String
+  cardHolderName         String
+  expiryMonth            Int
+  expiryYear             Int
+  gateway                String?   // stripe, paypal, braintree, square, authorize
+  gatewayCustomerId      String?
+  gatewayPaymentMethodId String?
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
+
+  @@index([userId])
+}
+
+model UserNotificationPreference {
+  id                     String    @id @default(cuid())
+  userId                 String    @unique
+  user                   User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Poll notifications
+  pollResultsEmail       Boolean   @default(true)
+  pollResultsSms         Boolean   @default(false)
+  pollResultsPush        Boolean   @default(true)
+  newPollInviteEmail     Boolean   @default(true)
+  newPollInviteSms       Boolean   @default(false)
+  newPollInvitePush      Boolean   @default(true)
+  pollClosingEmail       Boolean   @default(true)
+  pollClosingSms         Boolean   @default(false)
+  pollClosingPush        Boolean   @default(true)
+
+  // Subscription & payment notifications
+  subscriptionEmail      Boolean   @default(true)
+  subscriptionSms        Boolean   @default(false)
+  subscriptionPush       Boolean   @default(false)
+  paymentEmail           Boolean   @default(true)
+  paymentSms             Boolean   @default(false)
+  paymentPush            Boolean   @default(false)
+
+  // Security notifications
+  securityEmail          Boolean   @default(true)
+  securitySms            Boolean   @default(true)
+  securityPush           Boolean   @default(true)
+
+  updatedAt              DateTime  @updatedAt
+}
+
+model UserDevice {
+  id                     String    @id @default(cuid())
+  userId                 String
+  user                   User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  deviceName             String?
+  deviceType             String    @default("desktop") // desktop, mobile, tablet
+  osName                 String?
+  osVersion              String?
+  browser                String?
+  ipAddress              String?
+  isCurrent              Boolean   @default(false)
+  lastSeenAt             DateTime  @default(now())
+  createdAt              DateTime  @default(now())
+
+  @@index([userId])
+}
