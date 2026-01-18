@@ -2,6 +2,8 @@
 
 A full-featured polling application with multiple poll types, admin panel, voice chat, and AI insights.
 
+**Production Domain:** www.poligopro.com
+
 ## Quick Start
 
 ```bash
