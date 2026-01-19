@@ -29,6 +29,10 @@ This file helps Claude Code maintain context about the project.
 | `src/pages/admin/*` | Admin panel pages |
 | `src/pages/admin/subscriptions.tsx` | Subscription management |
 | `src/pages/admin/payment-processing.tsx` | Payment gateway configuration |
+| `src/pages/admin/trial-codes.tsx` | Trial codes management |
+| `src/pages/admin/account.tsx` | Account settings page |
+| `src/pages/admin/my-subscription.tsx` | Current subscription view |
+| `src/pages/admin/pricing.tsx` | Pricing plans page |
 | `src/pages/admin/analytics.tsx` | Analytics dashboard with charts |
 | `src/pages/api/admin/analytics.ts` | Analytics API endpoint |
 | `src/pages/api/admin/polls/[id]/export.ts` | CSV export endpoint |
@@ -215,7 +219,7 @@ invalidateSubscription();
 - LogicRule, CustomFunction, Webhook, WebhookLog
 
 ### Payments & Subscriptions
-- Subscription, PaymentGateway
+- Subscription, SubscriptionPlan, PaymentGateway, TrialCode
 
 ## API Endpoints
 
@@ -232,6 +236,17 @@ invalidateSubscription();
 - `GET/POST /api/admin/subscriptions` - Manage subscriptions
 - `GET/POST /api/admin/payment-gateways` - Configure payment processors
 - `GET/POST /api/admin/settings` - System settings
+- `GET/POST /api/admin/trial-codes` - Trial codes management
+- `POST /api/admin/trial-codes/[id]/extend` - Extend trial code
+- `POST /api/admin/trial-codes/[id]/revoke` - Revoke trial code
+- `POST /api/admin/account/update` - Update profile
+- `POST /api/admin/account/change-password` - Change password
+- `GET /api/admin/my-subscription` - Get current subscription
+- `GET /api/admin/pricing` - Get pricing plans
+- `POST /api/admin/subscription/subscribe/[planId]` - Subscribe to plan
+- `POST /api/admin/subscription/start-trial/[planId]` - Start trial
+- `POST /api/admin/subscription/cancel` - Cancel subscription
+- `POST /api/admin/subscription/resume` - Resume subscription
 
 ## Feature Enforcement Points
 
@@ -264,6 +279,11 @@ Before deployment, verify:
 
 | Date | Change |
 |------|--------|
+| 2026-01-19 | Added Trial Codes management system |
+| 2026-01-19 | Added Account Settings page |
+| 2026-01-19 | Added My Subscription page |
+| 2026-01-19 | Added Pricing Plans page |
+| 2026-01-19 | Added SubscriptionPlan and TrialCode models to schema |
 | 2026-01-15 | Added analytics dashboard with vote/poll trends |
 | 2026-01-15 | Added CSV export for poll data |
 | 2026-01-15 | Added dark mode support with toggle |

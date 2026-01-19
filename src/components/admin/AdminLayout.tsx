@@ -34,6 +34,14 @@ const menuItems = [
   { id: 'sms-settings', label: 'SMS Settings', icon: '💬', href: '/admin/sms-settings' },
   { id: 'payment-processing', label: 'Payment Gateways', icon: '💳', href: '/admin/payment-processing' },
 
+  { section: 'Billing' },
+  { id: 'trial-codes', label: 'Trial Codes', icon: '🎟️', href: '/admin/trial-codes' },
+
+  { section: 'Account' },
+  { id: 'account', label: 'Account Settings', icon: '🔐', href: '/admin/account' },
+  { id: 'my-subscription', label: 'My Subscription', icon: '📋', href: '/admin/my-subscription' },
+  { id: 'pricing', label: 'Pricing Plans', icon: '🏷️', href: '/admin/pricing' },
+
   { section: 'System' },
   { id: 'users', label: 'User Management', icon: '👥', href: '/admin/users' },
   { id: 'subscriptions', label: 'Subscriptions', icon: '💎', href: '/admin/subscriptions' },

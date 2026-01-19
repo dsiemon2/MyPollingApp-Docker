@@ -61,6 +61,64 @@ async function main() {
 
   console.log('Created subscriptions for demo users');
 
+  // Create subscription plans
+  const subscriptionPlans = [
+    {
+      name: 'free',
+      displayName: 'Free Trial',
+      description: 'Perfect for trying out the platform',
+      price: 0,
+      interval: 'month',
+      features: JSON.stringify(['1 active poll', '50 responses per poll', 'Basic analytics', 'Community support']),
+      limits: JSON.stringify({ polls: 1, responses: 50 }),
+      trialDays: 14,
+      sortOrder: 0
+    },
+    {
+      name: 'starter',
+      displayName: 'Starter',
+      description: 'Great for individuals and small teams',
+      price: 9.99,
+      interval: 'month',
+      features: JSON.stringify(['5 active polls', '500 responses per poll', 'Advanced analytics', 'Email support', 'Custom branding']),
+      limits: JSON.stringify({ polls: 5, responses: 500 }),
+      trialDays: 7,
+      sortOrder: 1
+    },
+    {
+      name: 'professional',
+      displayName: 'Professional',
+      description: 'For growing organizations',
+      price: 29.99,
+      interval: 'month',
+      features: JSON.stringify(['Unlimited polls', 'Unlimited responses', 'Team collaboration', 'Priority support', 'API access', 'Advanced integrations']),
+      limits: JSON.stringify({ polls: -1, responses: -1 }),
+      trialDays: 14,
+      sortOrder: 2
+    },
+    {
+      name: 'enterprise',
+      displayName: 'Enterprise',
+      description: 'For large organizations with custom needs',
+      price: 99.99,
+      interval: 'month',
+      features: JSON.stringify(['Everything in Professional', 'Dedicated account manager', 'Custom integrations', 'SLA guarantee', 'On-premise deployment', 'White-label solution']),
+      limits: JSON.stringify({ polls: -1, responses: -1, custom: true }),
+      trialDays: 30,
+      sortOrder: 3
+    }
+  ];
+
+  for (const plan of subscriptionPlans) {
+    await prisma.subscriptionPlan.upsert({
+      where: { name: plan.name },
+      update: {},
+      create: plan
+    });
+  }
+
+  console.log('Created subscription plans');
+
   // Create system poll types
   const pollTypes = [
     { code: 'single_choice', name: 'Single Choice', description: 'Select one option from a list', icon: '⭕', category: 'choice', defaultConfig: '{}', sortOrder: 0 },

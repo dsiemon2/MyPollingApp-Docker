@@ -1,0 +1,16 @@
+import { NextApiRequest, NextApiResponse } from 'next';
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  try {
+    const { planId } = req.query;
+    // For demo, return a mock checkout URL
+    return res.json({ success: true, checkout_url: `https://checkout.stripe.com/pay/${planId}` });
+  } catch (err) {
+    console.error('Error subscribing:', err);
+    return res.status(500).json({ success: false, error: 'Failed to start subscription' });
+  }
+}
