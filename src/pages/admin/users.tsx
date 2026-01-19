@@ -20,6 +20,13 @@ interface User {
   };
 }
 
+interface Pagination {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+}
+
 export default function UsersPage() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
@@ -32,22 +39,36 @@ export default function UsersPage() {
     role: 'USER' as Role
   });
   const [error, setError] = useState('');
+  const [pagination, setPagination] = useState<Pagination>({
+    page: 1,
+    limit: 10,
+    total: 0,
+    totalPages: 0
+  });
 
   useEffect(() => {
-    fetchUsers();
+    fetchUsers(pagination.page);
   }, []);
 
-  const fetchUsers = async () => {
+  const fetchUsers = async (page: number = 1) => {
     try {
-      const res = await fetch('/api/admin/users');
+      setLoading(true);
+      const res = await fetch(`/api/admin/users?page=${page}&limit=${pagination.limit}`);
       if (res.ok) {
         const data = await res.json();
-        setUsers(data);
+        setUsers(data.users);
+        setPagination(data.pagination);
       }
     } catch (error) {
       console.error('Failed to fetch users:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handlePageChange = (newPage: number) => {
+    if (newPage >= 1 && newPage <= pagination.totalPages) {
+      fetchUsers(newPage);
     }
   };
 
@@ -101,7 +122,7 @@ export default function UsersPage() {
       setShowModal(false);
       setEditingUser(null);
       setFormData({ email: '', name: '', password: '', role: 'USER' });
-      fetchUsers();
+      fetchUsers(pagination.page);
     } catch (error) {
       setError('An error occurred');
     }
@@ -113,7 +134,7 @@ export default function UsersPage() {
     try {
       const res = await fetch(`/api/admin/users/${id}`, { method: 'DELETE' });
       if (res.ok) {
-        setUsers(users.filter(u => u.id !== id));
+        fetchUsers(pagination.page);
       } else {
         const data = await res.json();
         alert(data.error || 'Failed to delete user');
@@ -262,6 +283,46 @@ export default function UsersPage() {
               ))}
             </tbody>
           </table>
+        )}
+
+        {/* Pagination */}
+        {pagination.totalPages > 1 && (
+          <div className="px-6 py-4 border-t flex items-center justify-between">
+            <div className="text-sm text-gray-600">
+              Showing {((pagination.page - 1) * pagination.limit) + 1} to {Math.min(pagination.page * pagination.limit, pagination.total)} of {pagination.total} users
+            </div>
+            <div className="flex gap-2">
+              <button
+                onClick={() => handlePageChange(pagination.page - 1)}
+                disabled={pagination.page === 1}
+                className="px-3 py-1 border rounded text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+              >
+                Previous
+              </button>
+              {Array.from({ length: pagination.totalPages }, (_, i) => i + 1)
+                .filter(p => p === 1 || p === pagination.totalPages || Math.abs(p - pagination.page) <= 1)
+                .map((p, idx, arr) => (
+                  <span key={p}>
+                    {idx > 0 && arr[idx - 1] !== p - 1 && <span className="px-2">...</span>}
+                    <button
+                      onClick={() => handlePageChange(p)}
+                      className={`px-3 py-1 border rounded text-sm ${
+                        p === pagination.page ? 'bg-purple-600 text-white border-purple-600' : 'hover:bg-gray-50'
+                      }`}
+                    >
+                      {p}
+                    </button>
+                  </span>
+                ))}
+              <button
+                onClick={() => handlePageChange(pagination.page + 1)}
+                disabled={pagination.page === pagination.totalPages}
+                className="px-3 py-1 border rounded text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+              >
+                Next
+              </button>
+            </div>
+          </div>
         )}
       </div>
 

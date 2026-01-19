@@ -9,15 +9,33 @@ import { onPollCreatedRule } from '@/services/logicRules';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
     try {
-      const polls = await prisma.poll.findMany({
-        include: {
-          options: true,
-          pollType: true,
-          _count: { select: { votes: true, messages: true, options: true } }
-        },
-        orderBy: { createdAt: 'desc' }
+      const page = parseInt(req.query.page as string) || 1;
+      const limit = parseInt(req.query.limit as string) || 10;
+      const skip = (page - 1) * limit;
+
+      const [polls, total] = await Promise.all([
+        prisma.poll.findMany({
+          include: {
+            options: true,
+            pollType: true,
+            _count: { select: { votes: true, messages: true, options: true } }
+          },
+          orderBy: { createdAt: 'desc' },
+          skip,
+          take: limit
+        }),
+        prisma.poll.count()
+      ]);
+
+      return res.json({
+        polls,
+        pagination: {
+          page,
+          limit,
+          total,
+          totalPages: Math.ceil(total / limit)
+        }
       });
-      return res.json(polls);
     } catch (error) {
       console.error('Failed to fetch polls:', error);
       return res.status(500).json({ error: 'Failed to fetch polls' });

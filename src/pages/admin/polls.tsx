@@ -47,6 +47,13 @@ interface PollTemplate {
 
 type CreateMode = 'select' | 'scratch' | 'template';
 
+interface Pagination {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+}
+
 export default function PollManagementPage() {
   const [polls, setPolls] = useState<Poll[]>([]);
   const [pollTypes, setPollTypes] = useState<PollType[]>([]);
@@ -63,24 +70,38 @@ export default function PollManagementPage() {
     config: {} as Record<string, unknown>
   });
   const [loading, setLoading] = useState(true);
+  const [pagination, setPagination] = useState<Pagination>({
+    page: 1,
+    limit: 10,
+    total: 0,
+    totalPages: 0
+  });
 
   useEffect(() => {
-    fetchPolls();
+    fetchPolls(1);
     fetchPollTypes();
     fetchTemplates();
   }, []);
 
-  const fetchPolls = async () => {
+  const fetchPolls = async (page: number = 1) => {
     try {
-      const res = await fetch('/api/admin/polls');
+      setLoading(true);
+      const res = await fetch(`/api/admin/polls?page=${page}&limit=${pagination.limit}`);
       if (res.ok) {
         const data = await res.json();
-        setPolls(data);
+        setPolls(data.polls);
+        setPagination(data.pagination);
       }
     } catch (error) {
       console.error('Failed to fetch polls:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handlePageChange = (newPage: number) => {
+    if (newPage >= 1 && newPage <= pagination.totalPages) {
+      fetchPolls(newPage);
     }
   };
 
@@ -172,7 +193,7 @@ export default function PollManagementPage() {
       if (res.ok) {
         setShowModal(false);
         resetForm();
-        fetchPolls();
+        fetchPolls(pagination.page);
       } else {
         const data = await res.json();
         alert(data.error || 'Failed to create poll');
@@ -189,7 +210,7 @@ export default function PollManagementPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'close' })
       });
-      fetchPolls();
+      fetchPolls(pagination.page);
     } catch (error) {
       console.error('Failed to close poll:', error);
     }
@@ -199,7 +220,7 @@ export default function PollManagementPage() {
     if (!confirm('Are you sure you want to delete this poll?')) return;
     try {
       await fetch(`/api/polls/${id}`, { method: 'DELETE' });
-      fetchPolls();
+      fetchPolls(pagination.page);
     } catch (error) {
       console.error('Failed to delete poll:', error);
     }
@@ -414,6 +435,7 @@ export default function PollManagementPage() {
             <p>No polls created yet.</p>
           </div>
         ) : (
+          <>
           <table className="w-full">
             <thead className="bg-gray-50">
               <tr>
@@ -473,6 +495,47 @@ export default function PollManagementPage() {
               ))}
             </tbody>
           </table>
+
+          {/* Pagination */}
+          {pagination.totalPages > 1 && (
+            <div className="px-6 py-4 border-t flex items-center justify-between">
+              <div className="text-sm text-gray-600">
+                Showing {((pagination.page - 1) * pagination.limit) + 1} to {Math.min(pagination.page * pagination.limit, pagination.total)} of {pagination.total} polls
+              </div>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => handlePageChange(pagination.page - 1)}
+                  disabled={pagination.page === 1}
+                  className="px-3 py-1 border rounded text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                >
+                  Previous
+                </button>
+                {Array.from({ length: pagination.totalPages }, (_, i) => i + 1)
+                  .filter(p => p === 1 || p === pagination.totalPages || Math.abs(p - pagination.page) <= 1)
+                  .map((p, idx, arr) => (
+                    <span key={p}>
+                      {idx > 0 && arr[idx - 1] !== p - 1 && <span className="px-2">...</span>}
+                      <button
+                        onClick={() => handlePageChange(p)}
+                        className={`px-3 py-1 border rounded text-sm ${
+                          p === pagination.page ? 'bg-purple-600 text-white border-purple-600' : 'hover:bg-gray-50'
+                        }`}
+                      >
+                        {p}
+                      </button>
+                    </span>
+                  ))}
+                <button
+                  onClick={() => handlePageChange(pagination.page + 1)}
+                  disabled={pagination.page === pagination.totalPages}
+                  className="px-3 py-1 border rounded text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+          )}
+          </>
         )}
       </div>
 

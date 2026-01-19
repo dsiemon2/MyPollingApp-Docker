@@ -6,8 +6,8 @@ import Image from 'next/image';
 import { useSettings } from '@/hooks/useSettings';
 
 const demoAdmins = [
-  { email: 'admin@pollchat.com', password: 'password123', role: 'Super Admin', icon: '🛡️' },
-  { email: 'polladmin@pollchat.com', password: 'password123', role: 'Poll Admin', icon: '📊' },
+  { email: 'admin@mypollingapp.com', password: 'password123', role: 'Super Admin', icon: '🛡️' },
+  { email: 'polladmin@mypollingapp.com', password: 'password123', role: 'Poll Admin', icon: '📊' },
 ];
 
 export default function AdminLoginPage() {
@@ -118,7 +118,7 @@ export default function AdminLoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full px-4 py-3 bg-slate-700 border border-slate-600 text-white rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition placeholder:text-slate-500"
-                  placeholder="admin@pollchat.com"
+                  placeholder="admin@mypollingapp.com"
                   required
                   autoComplete="email"
                 />

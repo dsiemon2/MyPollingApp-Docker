@@ -10,10 +10,10 @@ async function main() {
   const hashedPassword = await bcrypt.hash('password123', 10);
 
   const superAdmin = await prisma.user.upsert({
-    where: { email: 'admin@pollchat.com' },
+    where: { email: 'admin@mypollingapp.com' },
     update: {},
     create: {
-      email: 'admin@pollchat.com',
+      email: 'admin@mypollingapp.com',
       password: hashedPassword,
       name: 'Super Admin',
       role: Role.SUPER_ADMIN
@@ -21,10 +21,10 @@ async function main() {
   });
 
   const pollAdmin = await prisma.user.upsert({
-    where: { email: 'polladmin@pollchat.com' },
+    where: { email: 'polladmin@mypollingapp.com' },
     update: {},
     create: {
-      email: 'polladmin@pollchat.com',
+      email: 'polladmin@mypollingapp.com',
       password: hashedPassword,
       name: 'Poll Admin',
       role: Role.POLL_ADMIN
@@ -32,10 +32,10 @@ async function main() {
   });
 
   const user = await prisma.user.upsert({
-    where: { email: 'user@pollchat.com' },
+    where: { email: 'user@mypollingapp.com' },
     update: {},
     create: {
-      email: 'user@pollchat.com',
+      email: 'user@mypollingapp.com',
       password: hashedPassword,
       name: 'Demo User',
       role: Role.USER
@@ -525,7 +525,12 @@ async function main() {
     { key: 'businessName', value: 'MyPollingApp', category: 'branding' },
     { key: 'tagline', value: 'Voice-Enabled Polling', category: 'branding' },
     { key: 'primaryColor', value: '#7c3aed', category: 'branding' },
-    { key: 'secondaryColor', value: '#4f46e5', category: 'branding' }
+    { key: 'secondaryColor', value: '#4f46e5', category: 'branding' },
+    // Twilio SMS settings (use environment variables)
+    { key: 'twilio_account_sid', value: process.env.TWILIO_ACCOUNT_SID || '', category: 'sms' },
+    { key: 'twilio_auth_token', value: process.env.TWILIO_AUTH_TOKEN || '', category: 'sms' },
+    { key: 'twilio_phone_number', value: process.env.TWILIO_PHONE_NUMBER || '', category: 'sms' },
+    { key: 'sms_enabled', value: 'true', category: 'sms' }
   ];
 
   for (const setting of settings) {

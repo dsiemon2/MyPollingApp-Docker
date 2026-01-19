@@ -19,6 +19,7 @@ App runs at: http://localhost:8610
 - **Admin Panel**: Full poll and user management
 - **Voice Chat**: OpenAI Whisper transcription
 - **AI Assistant**: Configurable AI providers
+- **SMS Notifications**: Twilio integration for poll alerts
 - **Templates**: Quick poll creation from templates
 
 ## Demo Accounts
@@ -62,6 +63,7 @@ App runs at: http://localhost:8610
 | `/admin/ai-providers` | AI configuration |
 | `/admin/voices` | Voice settings |
 | `/admin/webhooks` | Webhook management |
+| `/admin/sms-settings` | Twilio SMS configuration |
 
 ## Tech Stack
 
@@ -103,6 +105,11 @@ NEXTAUTH_SECRET=your-secret
 NEXTAUTH_URL=http://localhost:8610
 OPENAI_API_KEY=your-key
 HUGGINGFACE_API_KEY=your-key
+
+# Twilio SMS (optional)
+TWILIO_ACCOUNT_SID=your-twilio-sid
+TWILIO_AUTH_TOKEN=your-twilio-token
+TWILIO_PHONE_NUMBER=+1234567890
 ```
 
 ## Docker Commands

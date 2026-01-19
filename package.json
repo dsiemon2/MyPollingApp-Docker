@@ -1,5 +1,5 @@
 {
-  "name": "pollchat-docker",
+  "name": "mypollingapp-docker",
   "version": "2.0.0",
   "description": "Polling App with Voice Chat, AI Assistant, and Admin Panel - Dockerized",
   "prisma": {

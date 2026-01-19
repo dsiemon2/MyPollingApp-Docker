@@ -31,6 +31,7 @@ const menuItems = [
 
   { section: 'Integrations' },
   { id: 'webhooks', label: 'Webhooks', icon: '🔗', href: '/admin/webhooks' },
+  { id: 'sms-settings', label: 'SMS Settings', icon: '💬', href: '/admin/sms-settings' },
   { id: 'payment-processing', label: 'Payment Gateways', icon: '💳', href: '/admin/payment-processing' },
 
   { section: 'System' },
