@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import logger from '@/utils/logger';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../auth/[...nextauth]';
 import { prisma } from '@/lib/prisma';
@@ -41,7 +42,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       return res.json(subscriptions);
     } catch (error) {
-      console.error('Failed to fetch subscriptions:', error);
+      logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Failed to fetch subscriptions:');
       return res.status(500).json({ error: 'Failed to fetch subscriptions' });
     }
   }
@@ -82,7 +83,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       return res.json(subscription);
     } catch (error) {
-      console.error('Failed to update subscription:', error);
+      logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Failed to update subscription:');
       return res.status(500).json({ error: 'Failed to update subscription' });
     }
   }

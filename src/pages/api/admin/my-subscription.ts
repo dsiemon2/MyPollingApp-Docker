@@ -23,7 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     return res.json({ success: true, subscription });
   } catch (err) {
-    console.error('Error fetching subscription:', err);
+    logger.error({ error: err instanceof Error ? err.message : String(err) }, 'Error fetching subscription:');
     return res.status(500).json({ success: false, error: 'Failed to fetch subscription' });
   }
 }

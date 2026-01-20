@@ -50,7 +50,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     return res.json({ success: true, paymentMethod: updated });
   } catch (error) {
-    console.error('Set default payment method error:', error);
+    logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Set default payment method error:');
     return res.status(500).json({ error: 'Failed to set default payment method' });
   }
 }

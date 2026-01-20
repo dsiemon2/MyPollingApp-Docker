@@ -24,7 +24,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     res.json({ success: true, user });
   } catch (error) {
-    console.error('Update phone error:', error);
+    logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Update phone error:');
     res.status(500).json({ error: 'Failed to update phone' });
   }
 }

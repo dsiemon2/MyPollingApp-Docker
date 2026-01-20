@@ -28,7 +28,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     res.json({ success: true, user });
   } catch (error) {
-    console.error('Update name error:', error);
+    logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Update name error:');
     res.status(500).json({ error: 'Failed to update name' });
   }
 }

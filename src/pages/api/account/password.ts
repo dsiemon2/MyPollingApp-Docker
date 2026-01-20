@@ -49,7 +49,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     res.json({ success: true, message: 'Password updated successfully' });
   } catch (error) {
-    console.error('Change password error:', error);
+    logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Change password error:');
     res.status(500).json({ error: 'Failed to change password' });
   }
 }

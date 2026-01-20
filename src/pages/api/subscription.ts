@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import logger from '@/utils/logger';
 import { getServerSession } from 'next-auth';
 import { authOptions } from './auth/[...nextauth]';
 import prisma from '@/lib/prisma';
@@ -61,7 +62,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       activePolls,
     });
   } catch (error) {
-    console.error('Subscription API error:', error);
+    logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Subscription API error:');
     return res.status(500).json({ error: 'Internal server error' });
   }
 }

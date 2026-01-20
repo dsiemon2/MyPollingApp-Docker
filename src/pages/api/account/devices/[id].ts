@@ -39,7 +39,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     await prisma.userDevice.delete({ where: { id } });
     return res.json({ success: true, message: 'Device signed out' });
   } catch (error) {
-    console.error('Delete device error:', error);
+    logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Delete device error:');
     return res.status(500).json({ error: 'Failed to sign out device' });
   }
 }

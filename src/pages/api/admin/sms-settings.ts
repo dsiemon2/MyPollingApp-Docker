@@ -29,7 +29,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       return res.status(200).json(result);
     } catch (error) {
-      console.error('Get SMS settings error:', error);
+      logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Get SMS settings error:');
       return res.status(500).json({ error: 'Failed to fetch settings' });
     }
   }
@@ -65,7 +65,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       return res.status(200).json({ success: true, message: 'SMS settings saved successfully' });
     } catch (error) {
-      console.error('Save SMS settings error:', error);
+      logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Save SMS settings error:');
       return res.status(500).json({ error: 'Failed to save settings' });
     }
   }

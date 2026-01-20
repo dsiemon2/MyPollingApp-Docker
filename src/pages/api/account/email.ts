@@ -57,7 +57,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     res.json({ success: true, user: updatedUser });
   } catch (error) {
-    console.error('Update email error:', error);
+    logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Update email error:');
     res.status(500).json({ error: 'Failed to update email' });
   }
 }

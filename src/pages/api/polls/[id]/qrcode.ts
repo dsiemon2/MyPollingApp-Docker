@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import logger from '@/utils/logger';
 import QRCode from 'qrcode';
 import { prisma } from '@/lib/prisma';
 
@@ -80,7 +81,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.send(buffer);
     }
   } catch (error) {
-    console.error('QR code generation error:', error);
+    logger.error({ error: error instanceof Error ? error.message : String(error) }, 'QR code generation error:');
     return res.status(500).json({ error: 'Failed to generate QR code' });
   }
 }

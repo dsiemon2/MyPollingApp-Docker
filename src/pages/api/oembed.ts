@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import logger from '@/utils/logger';
 import { prisma, getSetting } from '@/lib/prisma';
 
 /**
@@ -91,7 +92,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     return res.status(200).json(oembedResponse);
   } catch (error) {
-    console.error('oEmbed error:', error);
+    logger.error({ error: error instanceof Error ? error.message : String(error) }, 'oEmbed error:');
     return res.status(500).json({ error: 'Failed to generate oEmbed response' });
   }
 }

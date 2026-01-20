@@ -46,7 +46,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       return res.json({ success: true, message: 'Signed out of all other devices' });
     } catch (error) {
-      console.error('Sign out all devices error:', error);
+      logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Sign out all devices error:');
       return res.status(500).json({ error: 'Failed to sign out devices' });
     }
   }

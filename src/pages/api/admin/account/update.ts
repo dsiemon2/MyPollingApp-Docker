@@ -27,7 +27,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     return res.json({ success: true });
   } catch (err) {
-    console.error('Error updating account:', err);
+    logger.error({ error: err instanceof Error ? err.message : String(err) }, 'Error updating account:');
     return res.status(500).json({ success: false, error: 'Failed to update account' });
   }
 }

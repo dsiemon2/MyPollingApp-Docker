@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import logger from '@/utils/logger';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../auth/[...nextauth]';
 import OpenAI from 'openai';
@@ -76,7 +77,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     return res.json({ text: transcription.text });
   } catch (error: any) {
-    console.error('Transcription error:', error);
+    logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Transcription error:');
     return res.status(500).json({ error: 'Failed to transcribe audio' });
   }
 }

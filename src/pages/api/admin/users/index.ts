@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import logger from '@/utils/logger';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
@@ -58,7 +59,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         }
       });
     } catch (error) {
-      console.error('Failed to fetch users:', error);
+      logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Failed to fetch users:');
       return res.status(500).json({ error: 'Failed to fetch users' });
     }
   }
@@ -102,7 +103,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       return res.json(user);
     } catch (error: any) {
-      console.error('Failed to create user:', error);
+      logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Failed to create user:');
       return res.status(500).json({ error: 'Failed to create user' });
     }
   }

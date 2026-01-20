@@ -29,7 +29,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     return res.json({ success: true, plans, currentPlanId });
   } catch (err) {
-    console.error('Error fetching pricing:', err);
+    logger.error({ error: err instanceof Error ? err.message : String(err) }, 'Error fetching pricing:');
     return res.status(500).json({ success: false, error: 'Failed to fetch pricing' });
   }
 }

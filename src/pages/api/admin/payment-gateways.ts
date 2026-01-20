@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import logger from '@/utils/logger';
 import { prisma } from '@/lib/prisma';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -9,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       });
       return res.json({ gateways });
     } catch (error) {
-      console.error('Failed to fetch payment gateways:', error);
+      logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Failed to fetch payment gateways:');
       return res.status(500).json({ error: 'Failed to fetch payment gateways' });
     }
   }
@@ -55,7 +56,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       return res.json({ success: true });
     } catch (error) {
-      console.error('Failed to save payment gateways:', error);
+      logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Failed to save payment gateways:');
       return res.status(500).json({ error: 'Failed to save payment gateways' });
     }
   }

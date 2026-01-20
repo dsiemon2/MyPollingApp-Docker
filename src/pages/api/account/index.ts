@@ -50,7 +50,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       devices,
     });
   } catch (error) {
-    console.error('Account API error:', error);
+    logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Account API error:');
     res.status(500).json({ error: 'Failed to load account data' });
   }
 }

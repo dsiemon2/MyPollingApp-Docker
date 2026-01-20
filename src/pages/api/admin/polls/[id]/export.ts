@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import logger from '@/utils/logger';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
@@ -65,7 +66,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     res.setHeader('Content-Disposition', `attachment; filename="poll-${poll.id}-export.csv"`);
     return res.send(csv);
   } catch (error) {
-    console.error('Export error:', error);
+    logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Export error:');
     return res.status(500).json({ error: 'Failed to export poll data' });
   }
 }

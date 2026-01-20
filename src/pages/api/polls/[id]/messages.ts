@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import logger from '@/utils/logger';
 import { prisma } from '@/lib/prisma';
 import { onChatMessage } from '@/services/webhooks';
 import { onChatMessageRule } from '@/services/logicRules';
@@ -41,13 +42,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         pollId: String(id),
         content,
         role: sender
-      }).catch(err => console.error('Webhook error:', err));
+      }).catch(err => logger.error({ error: err instanceof Error ? err.message : String(err) }, 'Webhook error:'));
 
       // Evaluate logic rules for chat message
       onChatMessageRule(
         { id: String(id), title: '' }, // Title not needed for most rules
         { content, role: sender }
-      ).catch(err => console.error('Logic rule error:', err));
+      ).catch(err => logger.error({ error: err instanceof Error ? err.message : String(err) }, 'Logic rule error:'));
 
       return res.json({ ...message, sender: message.role });
     } catch (error) {

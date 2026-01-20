@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import logger from '@/utils/logger';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../../auth/[...nextauth]';
 import prisma from '../../../../lib/prisma';
@@ -29,7 +30,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       return res.json(template);
     } catch (error) {
-      console.error('Failed to fetch template:', error);
+      logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Failed to fetch template:');
       return res.status(500).json({ error: 'Failed to fetch template' });
     }
   }
@@ -74,7 +75,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       return res.json(template);
     } catch (error) {
-      console.error('Failed to update template:', error);
+      logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Failed to update template:');
       return res.status(500).json({ error: 'Failed to update template' });
     }
   }
@@ -96,7 +97,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       return res.json({ success: true });
     } catch (error) {
-      console.error('Failed to delete template:', error);
+      logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Failed to delete template:');
       return res.status(500).json({ error: 'Failed to delete template' });
     }
   }

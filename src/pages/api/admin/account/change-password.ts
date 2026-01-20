@@ -16,7 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // For demo purposes, just return success
     return res.json({ success: true, message: 'Password changed successfully' });
   } catch (err) {
-    console.error('Error changing password:', err);
+    logger.error({ error: err instanceof Error ? err.message : String(err) }, 'Error changing password:');
     return res.status(500).json({ success: false, error: 'Failed to change password' });
   }
 }

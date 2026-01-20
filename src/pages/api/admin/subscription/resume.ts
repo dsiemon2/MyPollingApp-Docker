@@ -32,7 +32,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     return res.json({ success: true, message: 'Subscription resumed' });
   } catch (err) {
-    console.error('Error resuming subscription:', err);
+    logger.error({ error: err instanceof Error ? err.message : String(err) }, 'Error resuming subscription:');
     return res.status(500).json({ success: false, error: 'Failed to resume subscription' });
   }
 }

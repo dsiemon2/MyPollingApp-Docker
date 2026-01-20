@@ -10,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // For demo, return a mock checkout URL
     return res.json({ success: true, checkout_url: `https://checkout.stripe.com/pay/${planId}` });
   } catch (err) {
-    console.error('Error subscribing:', err);
+    logger.error({ error: err instanceof Error ? err.message : String(err) }, 'Error subscribing:');
     return res.status(500).json({ success: false, error: 'Failed to start subscription' });
   }
 }

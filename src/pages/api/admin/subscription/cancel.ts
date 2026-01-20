@@ -32,7 +32,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     return res.json({ success: true, message: 'Subscription canceled' });
   } catch (err) {
-    console.error('Error canceling subscription:', err);
+    logger.error({ error: err instanceof Error ? err.message : String(err) }, 'Error canceling subscription:');
     return res.status(500).json({ success: false, error: 'Failed to cancel subscription' });
   }
 }

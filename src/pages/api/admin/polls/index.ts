@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import logger from '@/utils/logger';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../../auth/[...nextauth]';
 import { prisma } from '@/lib/prisma';
@@ -37,7 +38,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         }
       });
     } catch (error) {
-      console.error('Failed to fetch polls:', error);
+      logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Failed to fetch polls:');
       return res.status(500).json({ error: 'Failed to fetch polls' });
     }
   }
@@ -136,18 +137,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         title: poll.title,
         type: poll.type,
         creatorId: userId || 'anonymous'
-      }).catch(err => console.error('Webhook error:', err));
+      }).catch(err => logger.error({ error: err instanceof Error ? err.message : String(err) }, 'Webhook error:'));
 
       // Evaluate logic rules for poll creation
       onPollCreatedRule({
         id: poll.id,
         title: poll.title,
         type: poll.type
-      }).catch(err => console.error('Logic rule error:', err));
+      }).catch(err => logger.error({ error: err instanceof Error ? err.message : String(err) }, 'Logic rule error:'));
 
       return res.json(poll);
     } catch (error) {
-      console.error('Failed to create poll:', error);
+      logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Failed to create poll:');
       return res.status(500).json({ error: 'Failed to create poll' });
     }
   }

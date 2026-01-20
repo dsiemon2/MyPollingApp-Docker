@@ -51,7 +51,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       return res.json({ success: true, message: 'Payment method removed' });
     } catch (error) {
-      console.error('Delete payment method error:', error);
+      logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Delete payment method error:');
       return res.status(500).json({ error: 'Failed to remove payment method' });
     }
   }

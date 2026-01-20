@@ -50,7 +50,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     res.json({ success: true, preferences: prefs });
   } catch (error) {
-    console.error('Update notifications error:', error);
+    logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Update notifications error:');
     res.status(500).json({ error: 'Failed to update notification preferences' });
   }
 }

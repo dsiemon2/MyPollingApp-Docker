@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import logger from '@/utils/logger';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
@@ -79,7 +80,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       return res.json(user);
     } catch (error: any) {
-      console.error('Failed to update user:', error);
+      logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Failed to update user:');
       if (error.code === 'P2002') {
         return res.status(400).json({ error: 'Email already in use' });
       }
@@ -101,7 +102,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       return res.json({ success: true });
     } catch (error) {
-      console.error('Failed to delete user:', error);
+      logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Failed to delete user:');
       return res.status(500).json({ error: 'Failed to delete user' });
     }
   }

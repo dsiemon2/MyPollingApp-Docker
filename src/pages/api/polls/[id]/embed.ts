@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import logger from '@/utils/logger';
 import { prisma } from '@/lib/prisma';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -64,7 +65,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     return res.status(200).json(embedData);
   } catch (error) {
-    console.error('Failed to fetch poll for embed:', error);
+    logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Failed to fetch poll for embed:');
     return res.status(500).json({ error: 'Failed to fetch poll' });
   }
 }

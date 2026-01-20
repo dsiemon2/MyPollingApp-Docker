@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import logger from '@/utils/logger';
 import prisma from '@/lib/prisma';
 import { withAuth } from '@/lib/auth';
 
@@ -22,7 +23,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       activePolls
     });
   } catch (error) {
-    console.error('Stats error:', error);
+    logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Stats error:');
     res.status(500).json({ message: 'Failed to fetch stats' });
   }
 }

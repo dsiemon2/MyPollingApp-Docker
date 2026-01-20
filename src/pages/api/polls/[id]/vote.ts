@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import logger from '@/utils/logger';
 import { prisma } from '@/lib/prisma';
 import { canAcceptVote, getPlanFeatures, PlanType } from '@/config/plans';
 import { onVoteCast } from '@/services/webhooks';
@@ -54,7 +55,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       return res.json(response);
     } catch (error) {
-      console.error('Failed to check vote status:', error);
+      logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Failed to check vote status:');
       return res.status(500).json({ error: 'Failed to check vote status' });
     }
   }
@@ -215,17 +216,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         pollId: String(id),
         optionId: optionId || optionIds?.[0],
         value: value || (rating !== undefined ? String(rating) : undefined)
-      }).catch(err => console.error('Webhook error:', err));
+      }).catch(err => logger.error({ error: err instanceof Error ? err.message : String(err) }, 'Webhook error:'));
 
       // Evaluate logic rules for vote cast
       onVoteCastRule(
         { id: String(id), title: poll.title },
         { optionId, value, rating }
-      ).catch(err => console.error('Logic rule error:', err));
+      ).catch(err => logger.error({ error: err instanceof Error ? err.message : String(err) }, 'Logic rule error:'));
 
       return res.json({ success: true });
     } catch (error) {
-      console.error('Failed to submit vote:', error);
+      logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Failed to submit vote:');
       return res.status(500).json({ error: 'Failed to submit vote' });
     }
   }
@@ -244,7 +245,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       return res.json({ success: true });
     } catch (error) {
-      console.error('Failed to reset vote:', error);
+      logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Failed to reset vote:');
       return res.status(500).json({ error: 'Failed to reset vote' });
     }
   }

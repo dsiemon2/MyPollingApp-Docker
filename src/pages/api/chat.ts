@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import logger from '@/utils/logger';
 import { getServerSession } from 'next-auth';
 import { authOptions } from './auth/[...nextauth]';
 import { HfInference } from '@huggingface/inference';
@@ -94,12 +95,12 @@ Keep responses concise and friendly. If asked about poll results, use the contex
         pollId,
         response: aiResponse,
         model: 'mistralai/Mistral-7B-Instruct-v0.2'
-      }).catch(err => console.error('Webhook error:', err));
+      }).catch(err => logger.error({ error: err instanceof Error ? err.message : String(err) }, 'Webhook error:'));
     }
 
     return res.json({ response: aiResponse, agentName });
   } catch (error: any) {
-    console.error('Chat error:', error);
+    logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Chat error:');
     return res.status(500).json({ error: 'Failed to generate response' });
   }
 }

@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import logger from '@/utils/logger';
 import { hash } from 'bcryptjs';
 import prisma from '@/lib/prisma';
 
@@ -46,7 +47,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
     });
   } catch (error) {
-    console.error('Registration error:', error);
+    logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Registration error:');
     res.status(500).json({ message: 'Failed to create user' });
   }
 }

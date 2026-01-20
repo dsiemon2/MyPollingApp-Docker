@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import logger from '@/utils/logger';
 import { prisma } from '@/lib/prisma';
 import { onPollClosed, emitWebhookEvent } from '@/services/webhooks';
 import { onPollClosedRule } from '@/services/logicRules';
@@ -38,7 +39,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         emitWebhookEvent('poll.deleted', {
           pollId: pollToDelete.id,
           title: pollToDelete.title
-        }).catch(err => console.error('Webhook error:', err));
+        }).catch(err => logger.error({ error: err instanceof Error ? err.message : String(err) }, 'Webhook error:'));
       }
 
       return res.json({ success: true });
@@ -67,13 +68,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           id: poll.id,
           title: poll.title,
           totalVotes: poll._count.votes
-        }).catch(err => console.error('Webhook error:', err));
+        }).catch(err => logger.error({ error: err instanceof Error ? err.message : String(err) }, 'Webhook error:'));
 
         onPollClosedRule({
           id: poll.id,
           title: poll.title,
           totalVotes: poll._count.votes
-        }).catch(err => console.error('Logic rule error:', err));
+        }).catch(err => logger.error({ error: err instanceof Error ? err.message : String(err) }, 'Logic rule error:'));
       }
 
       return res.json(poll);

@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import logger from '@/utils/logger';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 
@@ -70,7 +71,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     return res.json({ success, message });
   } catch (error: any) {
-    console.error(`AI provider test error (${provider}):`, error);
+    logger.error({ error: error instanceof Error ? error.message : String(error) }, `AI provider test error (${provider}):`);
     return res.json({
       success: false,
       message: error.message || 'Connection test failed'

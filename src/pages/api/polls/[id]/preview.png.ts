@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import logger from '@/utils/logger';
 import { prisma, getSetting } from '@/lib/prisma';
 
 /**
@@ -119,7 +120,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     res.setHeader('Cache-Control', 'public, max-age=300'); // Cache 5 minutes
     return res.send(svg);
   } catch (error) {
-    console.error('Preview image generation error:', error);
+    logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Preview image generation error:');
     return res.status(500).json({ error: 'Failed to generate preview image' });
   }
 }

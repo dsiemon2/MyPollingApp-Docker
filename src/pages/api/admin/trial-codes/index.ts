@@ -18,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       return res.json({ success: true, trialCodes, stats });
     } catch (err) {
-      console.error('Error fetching trial codes:', err);
+      logger.error({ error: err instanceof Error ? err.message : String(err) }, 'Error fetching trial codes:');
       return res.status(500).json({ success: false, error: 'Failed to fetch trial codes' });
     }
   }
@@ -50,7 +50,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       return res.json({ success: true, trialCode });
     } catch (err) {
-      console.error('Error creating trial code:', err);
+      logger.error({ error: err instanceof Error ? err.message : String(err) }, 'Error creating trial code:');
       return res.status(500).json({ success: false, error: 'Failed to create trial code' });
     }
   }

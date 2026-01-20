@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import logger from '@/utils/logger';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../../auth/[...nextauth]';
 import prisma from '../../../../lib/prisma';
@@ -22,7 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       });
       return res.json(templates);
     } catch (error) {
-      console.error('Failed to fetch poll templates:', error);
+      logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Failed to fetch poll templates:');
       return res.status(500).json({ error: 'Failed to fetch poll templates' });
     }
   }
@@ -64,7 +65,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       return res.json(template);
     } catch (error) {
-      console.error('Failed to create poll template:', error);
+      logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Failed to create poll template:');
       return res.status(500).json({ error: 'Failed to create poll template' });
     }
   }

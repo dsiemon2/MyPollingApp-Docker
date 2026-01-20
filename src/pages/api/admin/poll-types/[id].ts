@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import logger from '@/utils/logger';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../../auth/[...nextauth]';
 import prisma from '../../../../lib/prisma';
@@ -29,7 +30,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       return res.json(pollType);
     } catch (error) {
-      console.error('Failed to fetch poll type:', error);
+      logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Failed to fetch poll type:');
       return res.status(500).json({ error: 'Failed to fetch poll type' });
     }
   }
@@ -53,7 +54,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       return res.json(pollType);
     } catch (error) {
-      console.error('Failed to update poll type:', error);
+      logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Failed to update poll type:');
       return res.status(500).json({ error: 'Failed to update poll type' });
     }
   }
@@ -84,7 +85,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       return res.json({ success: true });
     } catch (error) {
-      console.error('Failed to delete poll type:', error);
+      logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Failed to delete poll type:');
       return res.status(500).json({ error: 'Failed to delete poll type' });
     }
   }

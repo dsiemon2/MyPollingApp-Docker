@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import logger from '@/utils/logger';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../../auth/[...nextauth]';
 import prisma from '../../../../lib/prisma';
@@ -22,7 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       });
       return res.json(pollTypes);
     } catch (error) {
-      console.error('Failed to fetch poll types:', error);
+      logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Failed to fetch poll types:');
       return res.status(500).json({ error: 'Failed to fetch poll types' });
     }
   }
@@ -46,7 +47,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       return res.json(pollType);
     } catch (error) {
-      console.error('Failed to create poll type:', error);
+      logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Failed to create poll type:');
       return res.status(500).json({ error: 'Failed to create poll type' });
     }
   }

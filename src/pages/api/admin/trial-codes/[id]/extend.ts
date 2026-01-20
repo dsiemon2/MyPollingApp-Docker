@@ -27,7 +27,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     return res.json({ success: true });
   } catch (err) {
-    console.error('Error extending trial code:', err);
+    logger.error({ error: err instanceof Error ? err.message : String(err) }, 'Error extending trial code:');
     return res.status(500).json({ success: false, error: 'Failed to extend trial code' });
   }
 }
