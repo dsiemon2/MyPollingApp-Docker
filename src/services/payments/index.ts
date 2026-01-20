@@ -1,15 +1,16 @@
-// Payment Services Module
-// Export all payment-related services and types
+// ===========================================
+// Payment Services - Main Export
+// ===========================================
 
-// Types
-export * from './types';
+// Individual service exports
+export * as stripeService from './stripe.service';
+export * as paypalService from './paypal.service';
+export * as squareService from './square.service';
+export * as braintreeService from './braintree.service';
+export * as authorizeService from './authorize.service';
 
-// Services
-export { StripeService, stripeService } from './StripeService';
-export { PayPalService, paypalService } from './PayPalService';
-export { BraintreeService, braintreeService } from './BraintreeService';
-export { SquareService, squareService } from './SquareService';
-export { AuthorizeNetService, authorizeNetService } from './AuthorizeNetService';
+// Unified payment service
+export * from './payment.service';
 
-// Manager
-export { PaymentManager, paymentManager, getPaymentManager } from './PaymentManager';
+// Re-export types
+export type { PaymentProvider, PaymentResult, RefundResult } from './payment.service';

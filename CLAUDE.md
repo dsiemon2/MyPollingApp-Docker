@@ -1,4 +1,12 @@
-# Claude Code Context File
+# PollChat Docker - Project Reference
+
+**Type:** Voice-enabled Polling Platform
+**Port:** 8610
+**Status:** Active (Development)
+**Live URL:** https://www.poligopro.com
+**Last Updated:** 2026-01-19
+
+---
 
 This file helps Claude Code maintain context about the project.
 
@@ -87,14 +95,13 @@ All 5 payment gateways are fully integrated:
 ### Payment Services Location
 ```
 src/services/payments/
-├── StripeService.ts      # Stripe payment processing
-├── PayPalService.ts      # PayPal order management
-├── BraintreeService.ts   # Braintree transactions
-├── SquareService.ts      # Square payment processing
-├── AuthorizeNetService.ts # Authorize.net processing
-├── PaymentManager.ts     # Unified payment orchestrator
-├── types.ts              # TypeScript interfaces
-└── index.ts              # Service exports
+├── stripe.service.ts       # Stripe payment processing
+├── paypal.service.ts       # PayPal order management
+├── braintree.service.ts    # Braintree transactions
+├── square.service.ts       # Square payment processing
+├── authorize.service.ts    # Authorize.net processing
+├── payment.service.ts      # Unified payment orchestrator
+└── index.ts                # Service exports
 ```
 
 ## Key Features That Must Work
@@ -147,6 +154,37 @@ const demoUsers = [
   { email: 'user@pollchat.com', password: 'password123', role: 'USER', plan: 'FREE' },
 ];
 ```
+
+## Logging
+
+Simple logger for payment services and server operations:
+
+```
+src/utils/logger.ts
+```
+
+### Features
+- **Console Output**: Formatted logs with level prefixes
+- **Log Levels**: info, error, warn, debug
+- **Development Mode**: Debug logs only appear in development
+- **Payment Integration**: Used by all payment services for transaction logging
+
+### Log Levels
+- `error` - Error conditions
+- `warn` - Warning conditions
+- `info` - Informational messages
+- `debug` - Debug information (dev only)
+
+### Usage
+```typescript
+import logger from '../utils/logger';
+
+logger.info({ userId, action }, 'User action logged');
+logger.error({ error: err.message }, 'Database connection failed');
+logger.debug({ paymentId }, 'Processing payment');
+```
+
+---
 
 ## Commands
 
@@ -279,6 +317,8 @@ Before deployment, verify:
 
 | Date | Change |
 |------|--------|
+| 2026-01-19 | Replaced payment services with full implementations |
+| 2026-01-19 | Added logging utilities for payment services |
 | 2026-01-19 | Added Trial Codes management system |
 | 2026-01-19 | Added Account Settings page |
 | 2026-01-19 | Added My Subscription page |
