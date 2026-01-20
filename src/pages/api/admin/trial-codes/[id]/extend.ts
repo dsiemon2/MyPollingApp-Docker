@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '@/lib/prisma';
+import logger from '@/utils/logger';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -21,7 +22,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       where: { id: id as string },
       data: {
         expiresAt: newExpiresAt,
-        extensionCount: { increment: 1 },
       },
     });
 

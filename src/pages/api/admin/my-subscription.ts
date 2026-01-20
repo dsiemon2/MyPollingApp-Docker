@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { prisma } from '@/lib/prisma';
+import logger from '@/utils/logger';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'GET') {
@@ -17,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const userId = (session.user as any).id;
     const subscription = await prisma.subscription.findFirst({
       where: { userId },
-      include: { plan: true },
+      include: { subscriptionPlan: true },
       orderBy: { createdAt: 'desc' },
     });
 

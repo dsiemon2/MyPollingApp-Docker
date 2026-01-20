@@ -854,9 +854,9 @@ async function main() {
     {
       provider: 'stripe',
       isEnabled: true,
-      publishableKey: process.env.STRIPE_PUBLISHABLE_KEY || '',
-      secretKey: process.env.STRIPE_SECRET_KEY || '',
-      testMode: true,
+      publishableKey: 'pk_test_YOUR_PUBLISHABLE_KEY',
+      secretKey: 'sk_test_YOUR_SECRET_KEY',
+      testMode: false,
       achEnabled: false
     },
     {

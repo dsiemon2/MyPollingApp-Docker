@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
+import logger from '@/utils/logger';
 
 const SMS_KEYS = ['twilio_account_sid', 'twilio_auth_token', 'twilio_phone_number', 'sms_enabled'];
 

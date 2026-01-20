@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '@/lib/prisma';
+import logger from '@/utils/logger';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -12,7 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     await prisma.trialCode.update({
       where: { id: id as string },
       data: {
-        status: 'revoked',
+        status: 'REVOKED',
         revokedAt: new Date(),
       },
     });

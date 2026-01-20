@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '@/lib/prisma';
+import logger from '@/utils/logger';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
@@ -9,10 +10,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       });
 
       const stats = {
-        pending: trialCodes.filter(tc => tc.status === 'pending').length,
-        sent: trialCodes.filter(tc => tc.status === 'sent').length,
-        redeemed: trialCodes.filter(tc => tc.status === 'redeemed').length,
-        expired: trialCodes.filter(tc => tc.status === 'expired').length,
+        pending: trialCodes.filter(tc => tc.status === 'PENDING').length,
+        sent: trialCodes.filter(tc => tc.status === 'SENT').length,
+        redeemed: trialCodes.filter(tc => tc.status === 'REDEEMED').length,
+        expired: trialCodes.filter(tc => tc.status === 'EXPIRED').length,
         total: trialCodes.length,
       };
 
@@ -25,7 +26,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   if (req.method === 'POST') {
     try {
-      const { firstName, lastName, email, phone, organization, deliveryMethod, durationDays } = req.body;
+      const { email, phone, durationDays } = req.body;
 
       // Generate unique code
       const code = `MP-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
@@ -36,14 +37,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const trialCode = await prisma.trialCode.create({
         data: {
           code,
-          requesterFirstName: firstName,
-          requesterLastName: lastName,
-          requesterEmail: email,
-          requesterPhone: phone || null,
-          requesterOrganization: organization || null,
-          deliveryMethod: deliveryMethod || 'email',
-          durationDays: parseInt(durationDays) || 14,
-          status: 'pending',
+          email: email || null,
+          phone: phone || null,
+          trialDays: parseInt(durationDays) || 14,
+          status: 'PENDING',
           expiresAt,
         },
       });
