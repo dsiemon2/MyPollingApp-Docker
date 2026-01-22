@@ -4,7 +4,7 @@
 **Port:** 8610
 **Status:** Active (Development)
 **Live URL:** https://www.poligopro.com
-**Last Updated:** 2026-01-22
+**Last Updated:** 2026-01-22 (v2.2.0)
 
 ---
 
@@ -61,6 +61,20 @@ This file helps Claude Code maintain context about the project.
 | `src/hooks/useSubscription.ts` | Subscription status hook |
 | `src/config/plans.ts` | Subscription plan configuration |
 | `src/services/payments/*` | Payment processor modules |
+| `src/services/email.service.ts` | Email notifications (Nodemailer) |
+| `src/services/emailTemplates.ts` | Email HTML templates |
+| `src/pages/checkout/[planId].tsx` | Payment checkout page |
+| `src/pages/checkout/success.tsx` | Payment success page |
+| `src/pages/checkout/cancel.tsx` | Payment cancel page |
+| `src/pages/api/checkout/create-session.ts` | Stripe session creation |
+| `src/pages/api/checkout/verify.ts` | Payment verification |
+| `src/pages/api/webhooks/stripe.ts` | Stripe webhook handler |
+| `src/pages/api/webhooks/paypal.ts` | PayPal webhook handler |
+| `src/pages/api/webhooks/braintree.ts` | Braintree webhook handler |
+| `src/pages/api/webhooks/square.ts` | Square webhook handler |
+| `src/pages/api/webhooks/authorize.ts` | Authorize.net webhook handler |
+| `src/pages/api/cron/process-polls.ts` | Poll scheduling cron endpoint |
+| `src/lib/pollStatus.ts` | Poll status calculation helpers |
 | `src/components/poll-inputs/*` | Vote input components |
 | `src/components/poll-results/*` | Results display components |
 | `public/images/MyPollingSoftwareLogo.png` | Logo image |
@@ -112,6 +126,62 @@ src/services/payments/
 ├── authorize.service.ts    # Authorize.net processing
 ├── payment.service.ts      # Unified payment orchestrator
 └── index.ts                # Service exports
+```
+
+### Payment Webhooks
+All payment providers have webhook handlers that:
+1. Verify webhook signatures
+2. Handle subscription events (created, updated, cancelled)
+3. Handle payment events (succeeded, failed)
+4. Update database subscription status
+5. Send email notifications
+
+| Provider | Webhook URL |
+|----------|-------------|
+| Stripe | `/api/webhooks/stripe` |
+| PayPal | `/api/webhooks/paypal` |
+| Braintree | `/api/webhooks/braintree` |
+| Square | `/api/webhooks/square` |
+| Authorize.net | `/api/webhooks/authorize` |
+
+## Poll Scheduling
+
+Polls support automatic scheduling with:
+- `scheduledAt` - When to auto-open the poll
+- `closedAt` - When to auto-close the poll
+- Status transitions: `draft` → `scheduled` → `open` → `closed`
+
+### Cron Endpoint
+`GET/POST /api/cron/process-polls` - Call periodically to process scheduled polls
+- Opens polls where `scheduledAt` has passed
+- Closes polls where `closedAt` has passed
+- Secured with optional `CRON_SECRET` environment variable
+
+## Email Service
+
+SMTP email service using Nodemailer with 9 templates:
+
+| Template | Trigger |
+|----------|---------|
+| Welcome | User registration |
+| Password Reset | Forgot password |
+| Subscription Activated | New subscription |
+| Subscription Cancelled | Subscription cancelled |
+| Payment Receipt | Successful payment |
+| Payment Failed | Failed payment |
+| Poll Created | New poll created |
+| Poll Closed | Poll ended |
+| Poll Results | Results notification |
+
+### Environment Variables
+```env
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=your-email@gmail.com
+SMTP_PASSWORD=your-app-password
+SMTP_FROM_NAME=MyPollingApp
+SMTP_FROM_EMAIL=noreply@mypollingapp.com
 ```
 
 ## Key Features That Must Work
@@ -384,8 +454,22 @@ invalidateSubscription();
 - `POST /api/ai-assistant/transcribe` - Voice-to-text with Whisper (plan-gated)
 - `GET/POST /api/ai-assistant/settings` - AI assistant configuration
 
+### Checkout
+- `POST /api/checkout/create-session` - Create Stripe checkout session
+- `POST /api/checkout/verify` - Verify payment completion
+
+### Webhooks
+- `POST /api/webhooks/stripe` - Stripe webhook handler
+- `POST /api/webhooks/paypal` - PayPal webhook handler
+- `POST /api/webhooks/braintree` - Braintree webhook handler
+- `POST /api/webhooks/square` - Square webhook handler
+- `POST /api/webhooks/authorize` - Authorize.net webhook handler
+
+### Cron
+- `GET/POST /api/cron/process-polls` - Process scheduled polls
+
 ### Admin
-- `GET/POST /api/admin/polls` - Manage polls (enforces plan limits)
+- `GET/POST /api/admin/polls` - Manage polls with scheduling (enforces plan limits)
 - `GET/POST /api/admin/greeting` - AI greeting configuration
 - `GET/POST /api/admin/voices` - Manage voices, languages, KB documents
 - `GET/POST /api/admin/subscriptions` - Manage subscriptions
@@ -437,6 +521,10 @@ Before deployment, verify:
 
 | Date | Change |
 |------|--------|
+| 2026-01-22 | **v2.2.0** - Added Poll Scheduling (scheduledAt, closedAt, cron endpoint) |
+| 2026-01-22 | **v2.2.0** - Added Payment Checkout Flow (checkout pages, session creation, verification) |
+| 2026-01-22 | **v2.2.0** - Added Payment Webhooks (Stripe, PayPal, Braintree, Square, Authorize.net) |
+| 2026-01-22 | **v2.2.0** - Added Email Notifications (Nodemailer, 9 templates) |
 | 2026-01-22 | Added greeting configuration page (`/admin/greeting`) |
 | 2026-01-22 | Added Jest test suite with 256 tests |
 | 2026-01-22 | Fixed business name consistency (removed PollChat references) |

@@ -174,10 +174,11 @@ model Poll {
   title       String
   description String?
   type        String       @default("single") // Legacy: single, multiple
-  status      String       @default("open")   // open, closed
+  status      String       @default("open")   // draft, scheduled, open, closed
   config      String       @default("{}") @db.Text  // JSON type-specific config
   createdAt   DateTime     @default(now())
-  closedAt    DateTime?
+  scheduledAt DateTime?    // When to auto-open (null = immediately open)
+  closedAt    DateTime?    // When to auto-close (null = manual close only)
   creatorId   String?
   creator     User?        @relation(fields: [creatorId], references: [id])
   pollTypeId  String?

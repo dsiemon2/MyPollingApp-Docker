@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import logger from '@/utils/logger';
 import { hash } from 'bcryptjs';
 import prisma from '@/lib/prisma';
+import { sendWelcomeEmail } from '@/services/email.service';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -35,6 +36,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         password: hashedPassword,
         role: 'USER'
       }
+    });
+
+    // Create default FREE subscription
+    await prisma.subscription.create({
+      data: {
+        userId: user.id,
+        plan: 'FREE',
+        status: 'ACTIVE'
+      }
+    });
+
+    // Send welcome email (non-blocking)
+    sendWelcomeEmail({ email: user.email, name: user.name }).catch((err) => {
+      logger.warn({ error: err instanceof Error ? err.message : String(err) }, 'Failed to send welcome email');
     });
 
     res.status(201).json({

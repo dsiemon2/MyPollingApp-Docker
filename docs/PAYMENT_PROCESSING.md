@@ -65,15 +65,28 @@ AUTHNET_ENVIRONMENT=sandbox  # or production
 - Invoicing and receipts
 - Multiple payment methods
 
-### Webhook Events
+### Webhook Setup
 
-Configure these events in Stripe Dashboard:
+1. Go to Stripe Dashboard → Developers → Webhooks
+2. Add endpoint: `https://yourdomain.com/api/webhooks/stripe`
+3. Select events to listen for:
+   - `checkout.session.completed`
+   - `customer.subscription.created`
+   - `customer.subscription.updated`
+   - `customer.subscription.deleted`
+   - `invoice.payment_succeeded`
+   - `invoice.payment_failed`
+4. Copy the webhook signing secret and add it to your PaymentGateway settings
 
-- `customer.subscription.created`
-- `customer.subscription.updated`
-- `customer.subscription.deleted`
-- `invoice.payment_succeeded`
-- `invoice.payment_failed`
+### Webhook Events Handled
+
+| Event | Action |
+|-------|--------|
+| `checkout.session.completed` | Activates subscription, sends welcome email |
+| `customer.subscription.updated` | Updates subscription status |
+| `customer.subscription.deleted` | Marks subscription cancelled, sends email |
+| `invoice.payment_succeeded` | Sends payment receipt email |
+| `invoice.payment_failed` | Marks subscription past due, sends email |
 
 ### Price IDs
 
@@ -85,13 +98,55 @@ Create products and prices in Stripe Dashboard, then map them in the admin panel
 | Professional | price_professional_monthly |
 | Enterprise | price_enterprise_monthly |
 
+## PayPal Integration
+
+### Setup
+
+1. Create a [PayPal Developer account](https://developer.paypal.com)
+2. Create an app in the Dashboard
+3. Get Client ID and Secret
+4. Configure webhook URL: `https://yourdomain.com/api/webhooks/paypal`
+
+### Webhook Setup
+
+1. Go to PayPal Developer Dashboard → My Apps & Credentials
+2. Select your app → Webhooks
+3. Add webhook URL: `https://yourdomain.com/api/webhooks/paypal`
+4. Subscribe to events:
+   - `CHECKOUT.ORDER.APPROVED`
+   - `PAYMENT.CAPTURE.COMPLETED`
+   - `BILLING.SUBSCRIPTION.ACTIVATED`
+   - `BILLING.SUBSCRIPTION.CANCELLED`
+   - `BILLING.SUBSCRIPTION.EXPIRED`
+   - `BILLING.SUBSCRIPTION.SUSPENDED`
+   - `PAYMENT.SALE.COMPLETED`
+
+### Features
+
+- Direct PayPal payments
+- PayPal subscriptions
+- Order management
+- Refund processing
+
 ## Braintree Integration
 
 ### Setup
 
 1. Create a [Braintree account](https://www.braintreepayments.com)
 2. Get credentials from Settings → API
-3. Configure webhook destination
+3. Configure webhook destination: `https://yourdomain.com/api/webhooks/braintree`
+
+### Webhook Setup
+
+1. Go to Braintree Control Panel → Settings → Webhooks
+2. Add destination URL: `https://yourdomain.com/api/webhooks/braintree`
+3. Enable notifications for:
+   - Subscription Charged Successfully
+   - Subscription Charged Unsuccessfully
+   - Subscription Canceled
+   - Subscription Expired
+   - Subscription Went Active
+   - Subscription Went Past Due
 
 ### Features
 
@@ -116,6 +171,19 @@ Create products and prices in Stripe Dashboard, then map them in the admin panel
 1. Create a [Square Developer account](https://developer.squareup.com)
 2. Create an application
 3. Get credentials from Developer Dashboard
+4. Configure webhook URL: `https://yourdomain.com/api/webhooks/square`
+
+### Webhook Setup
+
+1. Go to Square Developer Dashboard → Webhooks
+2. Add webhook URL: `https://yourdomain.com/api/webhooks/square`
+3. Subscribe to events:
+   - `payment.completed`
+   - `payment.updated`
+   - `subscription.created`
+   - `subscription.updated`
+   - `invoice.payment_made`
+4. Copy the signature key and add to your PaymentGateway settings
 
 ### Features
 
@@ -138,6 +206,21 @@ Square requires a Location ID for payments:
 
 1. Create an [Authorize.net account](https://www.authorize.net)
 2. Get credentials from Account → Settings → Security Settings → API Credentials & Keys
+3. Configure webhook URL: `https://yourdomain.com/api/webhooks/authorize`
+
+### Webhook Setup
+
+1. Go to Authorize.net Merchant Interface → Account → Webhooks
+2. Add webhook URL: `https://yourdomain.com/api/webhooks/authorize`
+3. Subscribe to events:
+   - `net.authorize.payment.authcapture.created`
+   - `net.authorize.payment.capture.created`
+   - `net.authorize.payment.refund.created`
+   - `net.authorize.customer.subscription.created`
+   - `net.authorize.customer.subscription.updated`
+   - `net.authorize.customer.subscription.cancelled`
+   - `net.authorize.customer.subscription.suspended`
+4. Copy the signature key for webhook verification
 
 ### Features
 
@@ -288,4 +371,24 @@ Response:
   "currentPeriodEnd": "2026-02-15T00:00:00.000Z",
   "cancelAtPeriodEnd": false
 }
+```
+
+## Webhook URL Quick Reference
+
+Configure these webhook endpoints in your payment provider dashboards:
+
+| Provider | Webhook URL |
+|----------|-------------|
+| Stripe | `https://yourdomain.com/api/webhooks/stripe` |
+| PayPal | `https://yourdomain.com/api/webhooks/paypal` |
+| Braintree | `https://yourdomain.com/api/webhooks/braintree` |
+| Square | `https://yourdomain.com/api/webhooks/square` |
+| Authorize.net | `https://yourdomain.com/api/webhooks/authorize` |
+
+Replace `yourdomain.com` with your actual domain (e.g., `poligopro.com`).
+
+For local testing, use a tunneling service like ngrok:
+```bash
+ngrok http 8610
+# Use the ngrok URL as your webhook endpoint
 ```

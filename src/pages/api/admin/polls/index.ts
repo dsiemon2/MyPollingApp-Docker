@@ -6,6 +6,7 @@ import { prisma } from '@/lib/prisma';
 import { canCreatePoll, canUsePollType, getPlanFeatures, PlanType } from '@/config/plans';
 import { onPollCreated } from '@/services/webhooks';
 import { onPollCreatedRule } from '@/services/logicRules';
+import { determineInitialStatus } from '@/lib/pollStatus';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
@@ -76,10 +77,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         }
       }
 
-      const { title, description, type, pollTypeId, options, config } = req.body;
+      const { title, description, type, pollTypeId, options, config, scheduledAt, closedAt } = req.body;
 
       if (!title) {
         return res.status(400).json({ error: 'Title is required' });
+      }
+
+      // Parse scheduling dates
+      const scheduledAtDate = scheduledAt ? new Date(scheduledAt) : null;
+      const closedAtDate = closedAt ? new Date(closedAt) : null;
+
+      // Validate dates
+      if (scheduledAtDate && closedAtDate && scheduledAtDate >= closedAtDate) {
+        return res.status(400).json({ error: 'Scheduled open time must be before close time' });
       }
 
       // Check if poll type is allowed for this plan
@@ -91,13 +101,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         });
       }
 
+      // Determine initial status based on scheduling
+      const initialStatus = determineInitialStatus(scheduledAtDate);
+
       // Build poll data
       const pollData: any = {
         title,
         description: description || null,
         type: pollTypeCode,
-        status: 'open',
-        config: config ? JSON.stringify(config) : '{}'
+        status: initialStatus,
+        config: config ? JSON.stringify(config) : '{}',
+        scheduledAt: scheduledAtDate,
+        closedAt: closedAtDate
       };
 
       // Connect to creator if logged in

@@ -212,6 +212,42 @@ Content-Type: application/json
 2. API returns error with upgrade prompt
 3. Frontend shows upgrade modal
 4. User selects new plan
-5. Payment processed via configured gateway
-6. Subscription updated in database
-7. Features immediately available
+5. User is redirected to `/checkout/[planId]`
+6. Payment page shows plan details and payment form
+7. For Stripe: Redirects to Stripe Checkout
+8. For other gateways: Shows embedded payment form
+9. On success: Redirected to `/checkout/success`
+10. Payment verified via API
+11. Subscription updated in database
+12. Features immediately available
+
+## Checkout Pages
+
+| Page | Purpose |
+|------|---------|
+| `/checkout/[planId]` | Payment form with plan details |
+| `/checkout/success` | Confirmation after successful payment |
+| `/checkout/cancel` | Retry option after cancellation |
+
+## Payment Webhooks
+
+Subscription status is automatically updated via webhooks:
+
+| Provider | Webhook URL | Events |
+|----------|-------------|--------|
+| Stripe | `/api/webhooks/stripe` | Checkout, subscriptions, invoices |
+| PayPal | `/api/webhooks/paypal` | Orders, subscriptions |
+| Braintree | `/api/webhooks/braintree` | Subscriptions |
+| Square | `/api/webhooks/square` | Payments, subscriptions |
+| Authorize.net | `/api/webhooks/authorize` | ARB subscriptions |
+
+## Email Notifications
+
+Automatic emails are sent for subscription events:
+
+| Event | Email |
+|-------|-------|
+| New subscription | Subscription activated email |
+| Subscription cancelled | Cancellation confirmation |
+| Payment succeeded | Payment receipt |
+| Payment failed | Payment failed notification |

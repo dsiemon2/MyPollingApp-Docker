@@ -4,6 +4,7 @@ import { prisma } from '@/lib/prisma';
 import { canAcceptVote, getPlanFeatures, PlanType } from '@/config/plans';
 import { onVoteCast } from '@/services/webhooks';
 import { onVoteCastRule } from '@/services/logicRules';
+import { canAcceptVotes } from '@/lib/pollStatus';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { id } = req.query;
@@ -84,7 +85,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       });
 
       if (!poll) return res.status(404).json({ error: 'Poll not found' });
-      if (poll.status !== 'open') return res.status(400).json({ error: 'Poll is not open' });
+
+      // Check if poll can accept votes (considers scheduling)
+      if (!canAcceptVotes({ status: poll.status, scheduledAt: poll.scheduledAt, closedAt: poll.closedAt })) {
+        if (poll.status === 'scheduled') {
+          return res.status(400).json({ error: 'Poll is not open yet', code: 'POLL_NOT_OPEN' });
+        }
+        return res.status(400).json({ error: 'Poll is not accepting votes', code: 'POLL_CLOSED' });
+      }
 
       // Check vote limit based on poll creator's subscription
       const creatorPlan: PlanType = (poll.creator?.subscription?.plan as PlanType) || 'FREE';

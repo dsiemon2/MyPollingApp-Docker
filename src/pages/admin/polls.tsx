@@ -9,6 +9,8 @@ interface Poll {
   type: string;
   status: string;
   createdAt: string;
+  scheduledAt?: string;
+  closedAt?: string;
   pollType?: {
     code: string;
     name: string;
@@ -67,7 +69,10 @@ export default function PollManagementPage() {
     description: '',
     pollTypeId: '',
     options: ['', ''],
-    config: {} as Record<string, unknown>
+    config: {} as Record<string, unknown>,
+    enableScheduling: false,
+    scheduledAt: '',
+    closedAt: ''
   });
   const [loading, setLoading] = useState(true);
   const [pagination, setPagination] = useState<Pagination>({
@@ -135,7 +140,10 @@ export default function PollManagementPage() {
       description: '',
       pollTypeId: '',
       options: ['', ''],
-      config: {}
+      config: {},
+      enableScheduling: false,
+      scheduledAt: '',
+      closedAt: ''
     });
     setSelectedType(null);
     setSelectedTemplate(null);
@@ -165,7 +173,10 @@ export default function PollManagementPage() {
       description: template.defaultDescription || '',
       pollTypeId: template.pollTypeId,
       options: defaultOptions.length > 0 ? defaultOptions : (needsOptions(template.pollType.code) ? ['', ''] : []),
-      config: { ...typeConfig, ...defaultConfig }
+      config: { ...typeConfig, ...defaultConfig },
+      enableScheduling: false,
+      scheduledAt: '',
+      closedAt: ''
     });
     setCreateMode('scratch'); // Go to form
   };
@@ -177,17 +188,29 @@ export default function PollManagementPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      const payload: Record<string, unknown> = {
+        title: formData.title,
+        description: formData.description,
+        pollTypeId: formData.pollTypeId,
+        type: selectedType?.code || 'single_choice',
+        options: formData.options.filter(o => o.trim()),
+        config: formData.config
+      };
+
+      // Add scheduling if enabled
+      if (formData.enableScheduling) {
+        if (formData.scheduledAt) {
+          payload.scheduledAt = new Date(formData.scheduledAt).toISOString();
+        }
+        if (formData.closedAt) {
+          payload.closedAt = new Date(formData.closedAt).toISOString();
+        }
+      }
+
       const res = await fetch('/api/polls', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          title: formData.title,
-          description: formData.description,
-          pollTypeId: formData.pollTypeId,
-          type: selectedType?.code || 'single_choice',
-          options: formData.options.filter(o => o.trim()),
-          config: formData.config
-        })
+        body: JSON.stringify(payload)
       });
 
       if (res.ok) {
@@ -412,7 +435,7 @@ export default function PollManagementPage() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-3 gap-4 mb-6">
+      <div className="grid grid-cols-4 gap-4 mb-6">
         <div className="bg-white rounded-xl shadow-sm p-4">
           <p className="text-2xl font-bold text-purple-600">{polls.length}</p>
           <p className="text-sm text-gray-500">Total Polls</p>
@@ -422,7 +445,11 @@ export default function PollManagementPage() {
           <p className="text-sm text-gray-500">Active Polls</p>
         </div>
         <div className="bg-white rounded-xl shadow-sm p-4">
-          <p className="text-2xl font-bold text-blue-600">{polls.reduce((sum, p) => sum + p._count.votes, 0)}</p>
+          <p className="text-2xl font-bold text-blue-600">{polls.filter(p => p.status === 'scheduled').length}</p>
+          <p className="text-sm text-gray-500">Scheduled</p>
+        </div>
+        <div className="bg-white rounded-xl shadow-sm p-4">
+          <p className="text-2xl font-bold text-indigo-600">{polls.reduce((sum, p) => sum + p._count.votes, 0)}</p>
           <p className="text-sm text-gray-500">Total Votes</p>
         </div>
       </div>
@@ -467,10 +494,24 @@ export default function PollManagementPage() {
                     <span className={`px-2 py-1 text-xs rounded ${
                       poll.status === 'open'
                         ? 'bg-green-100 text-green-700'
+                        : poll.status === 'scheduled'
+                        ? 'bg-blue-100 text-blue-700'
+                        : poll.status === 'draft'
+                        ? 'bg-yellow-100 text-yellow-700'
                         : 'bg-gray-100 text-gray-700'
                     }`}>
                       {poll.status}
                     </span>
+                    {poll.scheduledAt && poll.status === 'scheduled' && (
+                      <div className="text-xs text-gray-500 mt-1">
+                        Opens: {new Date(poll.scheduledAt).toLocaleDateString()}
+                      </div>
+                    )}
+                    {poll.closedAt && poll.status === 'open' && (
+                      <div className="text-xs text-gray-500 mt-1">
+                        Closes: {new Date(poll.closedAt).toLocaleDateString()}
+                      </div>
+                    )}
                   </td>
                   <td className="px-6 py-4 text-right">
                     <Link href={`/polls/${poll.id}`} className="text-purple-600 hover:text-purple-800 mr-3">
@@ -680,6 +721,48 @@ export default function PollManagementPage() {
                     placeholder="Add more context (optional)"
                     rows={2}
                   />
+                </div>
+
+                {/* Scheduling Section */}
+                <div className="mb-4 p-4 bg-gray-50 rounded-lg">
+                  <label className="flex items-center gap-2 cursor-pointer mb-3">
+                    <input
+                      type="checkbox"
+                      checked={formData.enableScheduling}
+                      onChange={(e) => setFormData({ ...formData, enableScheduling: e.target.checked })}
+                      className="rounded text-purple-600 focus:ring-purple-500"
+                    />
+                    <span className="font-medium text-gray-700">Enable Scheduling</span>
+                  </label>
+
+                  {formData.enableScheduling && (
+                    <div className="grid grid-cols-2 gap-4 mt-3">
+                      <div>
+                        <label className="block text-sm text-gray-600 mb-1">
+                          Open At (optional)
+                        </label>
+                        <input
+                          type="datetime-local"
+                          value={formData.scheduledAt}
+                          onChange={(e) => setFormData({ ...formData, scheduledAt: e.target.value })}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                        />
+                        <p className="text-xs text-gray-500 mt-1">Leave empty to open immediately</p>
+                      </div>
+                      <div>
+                        <label className="block text-sm text-gray-600 mb-1">
+                          Close At (optional)
+                        </label>
+                        <input
+                          type="datetime-local"
+                          value={formData.closedAt}
+                          onChange={(e) => setFormData({ ...formData, closedAt: e.target.value })}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                        />
+                        <p className="text-xs text-gray-500 mt-1">Leave empty for manual close</p>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Type-specific config */}

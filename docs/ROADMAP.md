@@ -2,7 +2,7 @@
 
 This document outlines the development roadmap for MyPollingApp, including completed features and planned enhancements.
 
-## Current Version: 1.0
+## Current Version: 2.2
 
 ### Completed Features
 
@@ -51,7 +51,10 @@ This document outlines the development roadmap for MyPollingApp, including compl
 - [x] Braintree integration
 - [x] Square integration
 - [x] Authorize.net integration
+- [x] PayPal integration
 - [x] Admin payment configuration
+- [x] Checkout flow (checkout pages, success/cancel)
+- [x] Payment webhooks (all 5 providers)
 
 #### Branding & Customization
 - [x] Dynamic business name
@@ -78,7 +81,7 @@ This document outlines the development roadmap for MyPollingApp, including compl
 - [x] Top polls leaderboard
 
 ### Poll Enhancements
-- [ ] Scheduled poll start/end times
+- [x] Scheduled poll start/end times (v2.2.0)
 - [x] Poll templates library
 - [ ] Duplicate poll functionality
 - [x] Poll embedding (iframe)
@@ -87,7 +90,7 @@ This document outlines the development roadmap for MyPollingApp, including compl
 ### User Experience
 - [x] Dark mode support (system + toggle)
 - [ ] Mobile app (React Native)
-- [ ] Email notifications
+- [x] Email notifications (v2.2.0 - Nodemailer with templates)
 - [ ] Poll reminders
 - [x] Social sharing (Facebook, X, LinkedIn, Email)
 
@@ -192,6 +195,15 @@ This document outlines the development roadmap for MyPollingApp, including compl
 ### January 2026
 | Date | Feature |
 |------|---------|
+| Jan 22 | **v2.2.0** Poll scheduling (scheduledAt, closedAt, cron) |
+| Jan 22 | **v2.2.0** Payment checkout flow (checkout pages, verification) |
+| Jan 22 | **v2.2.0** Payment webhooks (Stripe, PayPal, Braintree, Square, Authorize.net) |
+| Jan 22 | **v2.2.0** Email notifications (Nodemailer, 9 templates) |
+| Jan 22 | AI Chat Slider with OpenAI integration |
+| Jan 22 | Voice transcription with Whisper |
+| Jan 22 | Jest test suite (256 tests) |
+| Jan 19 | Full payment service implementations |
+| Jan 19 | Trial codes management |
 | Jan 15 | Analytics dashboard with trends and charts |
 | Jan 15 | CSV export for poll data |
 | Jan 15 | Dark mode support (toggle + system preference) |

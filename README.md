@@ -20,9 +20,12 @@ App runs at: http://localhost:8610
 - **Voice Chat**: OpenAI Whisper transcription
 - **AI Assistant**: Floating chat slider with OpenAI integration
 - **SMS Notifications**: Twilio integration for poll alerts
+- **Email Notifications**: SMTP email service with templates
 - **Templates**: Quick poll creation from templates
+- **Poll Scheduling**: Schedule polls to auto-open and auto-close
 - **Dark Mode**: System and manual toggle support
-- **Subscriptions**: 4-tier plan system with payment processing
+- **Subscriptions**: 4-tier plan system with full payment checkout
+- **Payment Webhooks**: Stripe, PayPal, Braintree, Square, Authorize.net
 
 ## Demo Accounts
 
@@ -55,11 +58,18 @@ App runs at: http://localhost:8610
 | `/polls` | Browse active polls |
 | `/polls/[id]` | Vote and chat |
 
+### Checkout
+| Route | Description |
+|-------|-------------|
+| `/checkout/[planId]` | Payment checkout page |
+| `/checkout/success` | Payment success confirmation |
+| `/checkout/cancel` | Payment cancellation |
+
 ### Admin
 | Route | Description |
 |-------|-------------|
 | `/admin` | Dashboard |
-| `/admin/polls` | Manage polls |
+| `/admin/polls` | Manage polls (with scheduling) |
 | `/admin/poll-types` | Configure poll types |
 | `/admin/poll-templates` | Manage templates |
 | `/admin/ai-providers` | AI configuration |
@@ -130,9 +140,19 @@ TWILIO_ACCOUNT_SID=your-twilio-sid
 TWILIO_AUTH_TOKEN=your-twilio-token
 TWILIO_PHONE_NUMBER=+1234567890
 
+# SMTP Email (optional)
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=your-email@gmail.com
+SMTP_PASSWORD=your-app-password
+SMTP_FROM_NAME=MyPollingApp
+SMTP_FROM_EMAIL=noreply@mypollingapp.com
+
 # Payment Gateways (optional)
 STRIPE_SECRET_KEY=sk_test_xxx
 STRIPE_PUBLISHABLE_KEY=pk_test_xxx
+STRIPE_WEBHOOK_SECRET=whsec_xxx
 PAYPAL_CLIENT_ID=your-client-id
 PAYPAL_CLIENT_SECRET=your-client-secret
 ```

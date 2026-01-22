@@ -2,6 +2,44 @@
 
 All notable changes to MyPollingApp Docker are documented here.
 
+## [2.2.0] - 2026-01-22
+
+### Added
+- **Poll Scheduling** - Schedule polls to auto-open and auto-close at specific times
+  - Added `scheduledAt` field to Poll model
+  - Polls can be created in "draft" or "scheduled" status
+  - Cron endpoint `/api/cron/process-polls` for automatic status transitions
+  - Admin poll form now includes scheduling options
+
+- **Payment Checkout Flow** - Complete checkout pages for subscription upgrades
+  - `/checkout/[planId]` - Payment checkout page with card form
+  - `/checkout/success` - Payment success confirmation page
+  - `/checkout/cancel` - Payment cancellation page
+  - `/api/checkout/create-session` - Stripe session creation
+  - `/api/checkout/verify` - Payment verification endpoint
+
+- **Payment Webhooks** - Webhook handlers for all payment providers
+  - `/api/webhooks/stripe` - Handles checkout, subscription, and invoice events
+  - `/api/webhooks/paypal` - Handles order approval and subscription events
+  - `/api/webhooks/braintree` - Handles subscription notifications
+  - `/api/webhooks/square` - Handles payment and subscription events
+  - `/api/webhooks/authorize` - Handles ARB subscription events
+
+- **Email Notifications** - SMTP email service with professional templates
+  - Nodemailer integration for sending emails
+  - 9 email templates (welcome, subscription, payment, poll notifications)
+  - Welcome email on user registration
+  - Payment receipts on successful payments
+  - Subscription status emails (activated, cancelled, past due)
+
+### Changed
+- Subscribe API now creates real Stripe checkout sessions
+- Registration API now sends welcome email and creates default subscription
+- Poll creation form includes scheduling UI (start time, end time toggles)
+- Vote API validates poll status including scheduling
+
+---
+
 ## [2.1.0] - 2026-01-22
 
 ### Added

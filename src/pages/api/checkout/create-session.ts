@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '../../../auth/[...nextauth]';
+import { authOptions } from '../auth/[...nextauth]';
 import { prisma } from '@/lib/prisma';
 import logger from '@/utils/logger';
 import Stripe from 'stripe';
@@ -17,9 +17,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(401).json({ error: 'Authentication required' });
     }
 
-    const { planId } = req.query;
+    const { planId } = req.body;
 
-    if (!planId || typeof planId !== 'string') {
+    if (!planId) {
       return res.status(400).json({ error: 'Plan ID is required' });
     }
 
@@ -42,29 +42,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(404).json({ error: 'Plan not found' });
     }
 
-    // For free plans, just update the subscription directly
     if (plan.price === 0) {
-      await prisma.subscription.upsert({
-        where: { userId: user.id },
-        update: {
-          plan: 'FREE',
-          planId: plan.id,
-          status: 'ACTIVE',
-          paymentGateway: null
-        },
-        create: {
-          userId: user.id,
-          plan: 'FREE',
-          planId: plan.id,
-          status: 'ACTIVE'
-        }
-      });
-
-      return res.json({
-        success: true,
-        message: 'Switched to free plan',
-        redirect: '/admin/my-subscription'
-      });
+      return res.status(400).json({ error: 'Cannot create checkout for free plan' });
     }
 
     // Get enabled payment gateway
@@ -73,10 +52,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     });
 
     if (!gateway) {
-      return res.status(400).json({
-        success: false,
-        error: 'No payment gateway is configured. Please contact support.'
-      });
+      return res.status(400).json({ error: 'No payment gateway is configured' });
     }
 
     const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:8610';
@@ -85,10 +61,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     switch (gateway.provider) {
       case 'stripe': {
         if (!gateway.secretKey) {
-          return res.status(500).json({
-            success: false,
-            error: 'Stripe is not properly configured'
-          });
+          return res.status(500).json({ error: 'Stripe is not properly configured' });
         }
 
         const stripe = new Stripe(gateway.secretKey, {
@@ -106,27 +79,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           });
           customerId = customer.id;
 
-          // Save customer ID to subscription
+          // Save customer ID
           if (user.subscription) {
             await prisma.subscription.update({
               where: { userId: user.id },
               data: { stripeCustomerId: customerId }
             });
-          } else {
-            await prisma.subscription.create({
-              data: {
-                userId: user.id,
-                plan: 'FREE',
-                status: 'ACTIVE',
-                stripeCustomerId: customerId
-              }
-            });
           }
         }
 
         // Create checkout session
-        let sessionParams: Stripe.Checkout.SessionCreateParams;
         const priceId = plan.stripePriceId;
+
+        // If no Stripe price ID, create a price on the fly
+        let sessionParams: Stripe.Checkout.SessionCreateParams;
 
         if (priceId) {
           sessionParams = {
@@ -153,7 +119,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                   name: plan.displayName,
                   description: plan.description || undefined
                 },
-                unit_amount: Math.round(plan.price * 100),
+                unit_amount: Math.round(plan.price * 100), // Convert to cents
                 recurring: {
                   interval: plan.interval === 'year' ? 'year' : 'month'
                 }
@@ -172,55 +138,34 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         const checkoutSession = await stripe.checkout.sessions.create(sessionParams);
 
-        logger.info({ sessionId: checkoutSession.id, planId, userId: user.id }, 'Stripe checkout session created');
+        logger.info({ sessionId: checkoutSession.id, planId }, 'Stripe checkout session created');
 
         return res.json({
           success: true,
-          checkout_url: checkoutSession.url
+          sessionId: checkoutSession.id,
+          url: checkoutSession.url
         });
       }
 
       case 'paypal': {
-        // Redirect to PayPal checkout page
+        // For PayPal, redirect to a PayPal-specific checkout flow
         return res.json({
           success: true,
-          checkout_url: `${baseUrl}/checkout/${planId}?gateway=paypal`
-        });
-      }
-
-      case 'braintree': {
-        return res.json({
-          success: true,
-          checkout_url: `${baseUrl}/checkout/${planId}?gateway=braintree`
-        });
-      }
-
-      case 'square': {
-        return res.json({
-          success: true,
-          checkout_url: `${baseUrl}/checkout/${planId}?gateway=square`
-        });
-      }
-
-      case 'authorize': {
-        return res.json({
-          success: true,
-          checkout_url: `${baseUrl}/checkout/${planId}?gateway=authorize`
+          url: `${baseUrl}/checkout/${planId}?gateway=paypal`
         });
       }
 
       default: {
         return res.status(400).json({
-          success: false,
-          error: `Payment gateway '${gateway.provider}' is not supported`
+          error: `Payment gateway '${gateway.provider}' is not supported for checkout`
         });
       }
     }
   } catch (error) {
-    logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Subscribe error');
+    logger.error({ error: error instanceof Error ? error.message : String(error) }, 'Checkout session creation failed');
     return res.status(500).json({
-      success: false,
-      error: 'Failed to start subscription process'
+      error: 'Failed to create checkout session',
+      details: error instanceof Error ? error.message : 'Unknown error'
     });
   }
 }

@@ -261,9 +261,18 @@ Content-Type: application/json
   "options": [
     { "label": "Option A", "orderIndex": 0 },
     { "label": "Option B", "orderIndex": 1 }
-  ]
+  ],
+  "enableScheduling": true,
+  "scheduledAt": "2026-01-25T09:00:00.000Z",
+  "closedAt": "2026-01-30T17:00:00.000Z"
 }
 ```
+
+**Scheduling Options:**
+- `enableScheduling` - Enable scheduling features
+- `scheduledAt` - When to auto-open the poll (optional)
+- `closedAt` - When to auto-close the poll (optional)
+- If `scheduledAt` is in the future, poll status will be "scheduled"
 
 **Error:** `POLL_LIMIT_REACHED` or `POLL_TYPE_NOT_ALLOWED` based on subscription.
 
@@ -465,18 +474,79 @@ API endpoints are rate limited:
 | Chat | 20/minute |
 | Admin | 60/minute |
 
+## Checkout API
+
+### Create Checkout Session
+
+```http
+POST /api/checkout/create-session
+Content-Type: application/json
+
+{
+  "planId": "plan-id"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "sessionId": "cs_xxx",
+  "url": "https://checkout.stripe.com/..."
+}
+```
+
+### Verify Payment
+
+```http
+POST /api/checkout/verify
+Content-Type: application/json
+
+{
+  "sessionId": "cs_xxx"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "plan": "PROFESSIONAL"
+}
+```
+
 ## Webhooks
 
 ### Payment Webhooks
 
 ```
-POST /api/webhooks/stripe
-POST /api/webhooks/braintree
-POST /api/webhooks/square
-POST /api/webhooks/authorizenet
+POST /api/webhooks/stripe     - Stripe events (checkout, subscriptions, invoices)
+POST /api/webhooks/paypal     - PayPal events (orders, subscriptions)
+POST /api/webhooks/braintree  - Braintree subscription events
+POST /api/webhooks/square     - Square payment events
+POST /api/webhooks/authorize  - Authorize.net ARB events
 ```
 
 Webhook payloads are verified using gateway-specific signatures.
+
+**Stripe Events Handled:**
+- `checkout.session.completed` - Activates subscription
+- `customer.subscription.created` - Creates subscription
+- `customer.subscription.updated` - Updates subscription status
+- `customer.subscription.deleted` - Cancels subscription
+- `invoice.payment_succeeded` - Sends receipt email
+- `invoice.payment_failed` - Marks subscription past due
+
+## Cron API
+
+### Process Scheduled Polls
+
+```http
+GET /api/cron/process-polls
+Authorization: Bearer {CRON_SECRET}
+```
+
+Opens scheduled polls and closes expired polls. Call periodically (e.g., every minute).
 
 ## SWR Integration
 
