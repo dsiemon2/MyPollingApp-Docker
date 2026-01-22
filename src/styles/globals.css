@@ -228,3 +228,68 @@ body {
   border-color: #4f46e5;
   box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.25);
 }
+
+/* AI Chat Slider Animations */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes soundwave {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.5); }
+}
+
+@keyframes bounce-dots {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
+
+.animate-slideUp {
+  animation: slideUp 0.3s ease;
+}
+
+.ai-voice-visualizer span {
+  animation: soundwave 0.5s ease-in-out infinite;
+}
+
+.ai-voice-visualizer span:nth-child(1) { animation-delay: 0s; }
+.ai-voice-visualizer span:nth-child(2) { animation-delay: 0.1s; }
+.ai-voice-visualizer span:nth-child(3) { animation-delay: 0.2s; }
+.ai-voice-visualizer span:nth-child(4) { animation-delay: 0.3s; }
+.ai-voice-visualizer span:nth-child(5) { animation-delay: 0.4s; }
+
+/* AI Chat Slider Dark Mode */
+.dark .ai-chat-panel {
+  background-color: var(--bg-secondary);
+}
+
+.dark .ai-chat-messages {
+  background-color: var(--bg-primary);
+}
+
+.dark .ai-message-content {
+  background-color: var(--card-bg);
+}
+
+.dark .ai-quick-actions button {
+  background-color: var(--bg-tertiary);
+  border-color: var(--border-color);
+  color: var(--text-secondary);
+}
+
+.dark .ai-quick-actions button:hover {
+  background-color: var(--border-color);
+}
+
+.dark .ai-chat-input input {
+  background-color: var(--bg-tertiary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}

@@ -15,13 +15,28 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   if (req.method === 'POST') {
     try {
-      const { name, code, nativeName, flag, enabled } = req.body;
-      const language = await prisma.language.create({
-        data: { name, code, nativeName: nativeName || name, flag, enabled: enabled ?? true }
-      });
-      return res.json(language);
+      const { code, enabled, name, nativeName, flag } = req.body;
+
+      // If toggling enabled status by code
+      if (code && enabled !== undefined) {
+        const language = await prisma.language.update({
+          where: { code },
+          data: { enabled }
+        });
+        return res.json(language);
+      }
+
+      // If creating a new language
+      if (name && code) {
+        const language = await prisma.language.create({
+          data: { name, code, nativeName: nativeName || name, flag, enabled: enabled ?? true }
+        });
+        return res.json(language);
+      }
+
+      return res.status(400).json({ error: 'Invalid request' });
     } catch (error) {
-      return res.status(500).json({ error: 'Failed to create language' });
+      return res.status(500).json({ error: 'Failed to update language' });
     }
   }
 

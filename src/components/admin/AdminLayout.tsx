@@ -21,6 +21,7 @@ const menuItems = [
 
   { section: 'AI Settings' },
   { id: 'ai-providers', label: 'AI Providers', icon: '🧠', href: '/admin/ai-providers' },
+  { id: 'greeting', label: 'Greeting', icon: '💬', href: '/admin/greeting' },
   { id: 'voices', label: 'Voices & Mode', icon: '🔊', href: '/admin/voices' },
   { id: 'knowledge-base', label: 'Knowledge Base', icon: '📚', href: '/admin/knowledge-base' },
   { id: 'ai-config', label: 'AI Config', icon: '⚙️', href: '/admin/ai-config' },
@@ -79,28 +80,22 @@ export default function AdminLayout({ children, active }: AdminLayoutProps) {
       {/* Sidebar */}
       <aside className="w-64 admin-sidebar flex-shrink-0 flex flex-col">
         <div className="p-4 text-white flex-shrink-0">
-          <Link href="/" className="flex items-center gap-3">
+          <Link href="/" className="block">
             {settings.logoUrl ? (
               <img
                 src={settings.logoUrl}
                 alt={`${settings.businessName} Logo`}
-                width={40}
-                height={40}
-                className="rounded-lg w-10 h-10 object-cover"
+                className="w-full h-[110px] object-contain"
               />
             ) : (
               <Image
                 src="/images/MyPollingSoftwareLogo.png"
                 alt={`${settings.businessName} Logo`}
-                width={40}
-                height={40}
-                className="rounded-lg"
+                width={200}
+                height={110}
+                className="w-full h-[110px] object-contain"
               />
             )}
-            <div>
-              <span className="text-xl font-bold block">{settings.businessName}</span>
-              <span className="text-white/60 text-xs">Admin Panel</span>
-            </div>
           </Link>
         </div>
 

@@ -68,9 +68,9 @@ export default function AdminLoginPage() {
             <Image
               src="/images/MyPollingSoftwareLogo.png"
               alt={`${settings.businessName} Logo`}
-              width={40}
-              height={40}
-              className="h-10 w-auto"
+              width={200}
+              height={110}
+              className="w-full h-[110px] object-contain"
             />
             <div>
               <span className="font-bold text-lg text-white">{settings.businessName}</span>

@@ -108,7 +108,7 @@ export async function createOrder(
     application_context: {
       return_url: returnUrl,
       cancel_url: cancelUrl,
-      brand_name: 'PollChat',
+      brand_name: 'MyPollingApp',
       user_action: 'PAY_NOW'
     }
   };

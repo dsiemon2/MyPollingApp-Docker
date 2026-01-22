@@ -1,10 +1,10 @@
-# PollChat Docker - Project Reference
+# MyPollingApp Docker - Project Reference
 
 **Type:** Voice-enabled Polling Platform
 **Port:** 8610
 **Status:** Active (Development)
 **Live URL:** https://www.poligopro.com
-**Last Updated:** 2026-01-19
+**Last Updated:** 2026-01-22
 
 ---
 
@@ -12,7 +12,7 @@ This file helps Claude Code maintain context about the project.
 
 ## Project Overview
 
-**Name**: PollChat Docker (MyPollingApp-Docker)
+**Name**: MyPollingApp Docker
 **Port**: 8610
 **Type**: Advanced voice-enabled polling platform with subscription management
 **Status**: Active development
@@ -35,6 +35,8 @@ This file helps Claude Code maintain context about the project.
 | `src/pages/polls/index.tsx` | Public polls listing with SWR |
 | `src/pages/polls/[id].tsx` | Poll detail with all poll types |
 | `src/pages/admin/*` | Admin panel pages |
+| `src/pages/admin/greeting.tsx` | AI greeting configuration |
+| `src/pages/admin/voices.tsx` | Voices, languages, KB documents |
 | `src/pages/admin/subscriptions.tsx` | Subscription management |
 | `src/pages/admin/payment-processing.tsx` | Payment gateway configuration |
 | `src/pages/admin/trial-codes.tsx` | Trial codes management |
@@ -43,10 +45,17 @@ This file helps Claude Code maintain context about the project.
 | `src/pages/admin/pricing.tsx` | Pricing plans page |
 | `src/pages/admin/analytics.tsx` | Analytics dashboard with charts |
 | `src/pages/api/admin/analytics.ts` | Analytics API endpoint |
+| `src/pages/api/admin/greeting.ts` | Greeting API endpoint |
 | `src/pages/api/admin/polls/[id]/export.ts` | CSV export endpoint |
 | `src/contexts/ThemeContext.tsx` | Dark mode context provider |
+| `src/contexts/AIAssistantContext.tsx` | AI Chat Slider context provider |
 | `src/components/ThemeToggle.tsx` | Dark mode toggle button |
 | `src/components/ShareModal.tsx` | Poll sharing with QR code |
+| `src/components/AIChatSlider.tsx` | Floating AI assistant chat component |
+| `src/components/admin/AdminLayout.tsx` | Admin sidebar layout |
+| `src/pages/api/ai-assistant/chat.ts` | AI assistant chat endpoint (OpenAI) |
+| `src/pages/api/ai-assistant/transcribe.ts` | Voice transcription endpoint (Whisper) |
+| `src/pages/api/ai-assistant/settings.ts` | AI assistant settings endpoint |
 | `src/hooks/usePolls.ts` | SWR hooks for data fetching |
 | `src/hooks/useSettings.ts` | App-wide settings hook |
 | `src/hooks/useSubscription.ts` | Subscription status hook |
@@ -58,6 +67,7 @@ This file helps Claude Code maintain context about the project.
 | `prisma/schema.prisma` | Database schema |
 | `prisma/seed.js` | Database seeding script |
 | `docker-entrypoint.sh` | Docker startup script |
+| `tests/*` | Jest test suite (256 tests) |
 
 ## Poll Types
 
@@ -141,6 +151,8 @@ src/services/payments/
    - Poll types management
    - Templates management
    - AI configuration
+   - Greeting configuration
+   - Voices, languages, KB documents
    - Subscription management
    - Payment processing configuration
    - System settings (business name, logo, colors)
@@ -149,11 +161,103 @@ src/services/payments/
 
 ```javascript
 const demoUsers = [
-  { email: 'admin@pollchat.com', password: 'password123', role: 'SUPER_ADMIN', plan: 'ENTERPRISE' },
-  { email: 'polladmin@pollchat.com', password: 'password123', role: 'POLL_ADMIN', plan: 'PROFESSIONAL' },
-  { email: 'user@pollchat.com', password: 'password123', role: 'USER', plan: 'FREE' },
+  { email: 'admin@mypollingapp.com', password: 'password123', role: 'SUPER_ADMIN', plan: 'ENTERPRISE' },
+  { email: 'polladmin@mypollingapp.com', password: 'password123', role: 'POLL_ADMIN', plan: 'PROFESSIONAL' },
+  { email: 'user@mypollingapp.com', password: 'password123', role: 'USER', plan: 'FREE' },
 ];
 ```
+
+## Seed Data
+
+The seed script (`prisma/seed.js`) creates:
+
+| Data Type | Count | Description |
+|-----------|-------|-------------|
+| Users | 4 | Owner + 3 demo accounts |
+| Voices | 6 | OpenAI TTS voices (alloy, echo, fable, onyx, nova, shimmer) |
+| Languages | 24 | Full language support with native names |
+| KB Documents | 8 | Knowledge base articles |
+| AI Providers | 6 | OpenAI, Anthropic, Gemini, DeepSeek, Groq, Hugging Face |
+| AI Agents | 4 | Poll Assistant, Results Analyst, Survey Designer, Moderator |
+| AI Tools | 6 | Calculator, Calendar, Poll Results, etc. |
+| Logic Rules | 5 | Greeting, Results, Help, Off-Topic, Negative Sentiment |
+| Custom Functions | 4 | Get Poll Stats, Format Results, Calculate NPS, Validate Vote |
+| Webhooks | 5 | Vote, Poll Created, Poll Closed, Milestone, Slack |
+| Payment Gateways | 5 | Stripe, PayPal, Braintree, Square, Authorize.net |
+| Poll Types | 7 | All poll types with configurations |
+| Poll Templates | 8 | Quick Poll, Customer Satisfaction, NPS, etc. |
+| Sample Polls | 8 | Various poll types with sample votes |
+| Trial Codes | 3 | TRIAL14FREE, WELCOME30, STARTER7DAY |
+
+## AI Chat Slider
+
+A floating AI assistant available on all pages. Provides natural language interaction with the polling system.
+
+### Features
+- **Floating Button**: 60px circular button, configurable position (bottom-right default)
+- **Slide-out Panel**: 380px wide chat interface with smooth animations
+- **OpenAI Integration**: GPT-4o-mini for intelligent responses
+- **Voice Input**: Whisper API for voice-to-text transcription
+- **Context-Aware**: Understands current polls, results, and user context
+- **Visual Aids**: Stats cards, poll previews, step-by-step guides
+- **Dark Mode Support**: Automatically adapts to theme
+
+### Configuration
+Settings stored in `SystemSetting` with category `ai_assistant`:
+
+| Setting Key | Default | Description |
+|-------------|---------|-------------|
+| `ai_assistant_enabled` | true | Enable/disable the chat slider |
+| `ai_assistant_position` | bottom-right | Position: bottom-right, bottom-left, top-right, top-left |
+| `ai_assistant_button_color` | #1e40af | Button and header color |
+| `ai_assistant_panel_width` | 380 | Panel width in pixels |
+| `ai_assistant_voice_enabled` | true | Enable voice input |
+| `ai_assistant_show_on_public` | true | Show on public pages |
+| `ai_assistant_show_on_admin` | true | Show in admin panel |
+
+### Usage (React)
+```typescript
+import { useAIAssistant } from '@/contexts/AIAssistantContext';
+
+const {
+  isOpen,
+  messages,
+  sendMessage,
+  toggleChat,
+  startRecording,
+  stopRecording,
+  settings,
+  updateSettings
+} = useAIAssistant();
+```
+
+### Plan Requirements
+- **AI Chat**: Requires Starter plan or higher
+- **Voice Input**: Requires Starter plan or higher
+
+## Testing
+
+Jest test suite with 256 tests covering:
+
+```
+tests/
+├── api/
+│   └── ApiEndpoints.test.ts      # 30 API endpoint tests
+├── feature/
+│   ├── AiChatSlider.test.ts      # 32 AI chat tests
+│   ├── Authentication.test.ts    # 19 auth tests
+│   ├── Authorization.test.ts     # 23 role-based access tests
+│   ├── PollManagement.test.ts    # 26 poll CRUD tests
+│   ├── Results.test.ts           # 15 results tests
+│   ├── Subscription.test.ts      # 21 subscription tests
+│   ├── TrialCode.test.ts         # 26 trial code tests
+│   └── VotingEdgeCases.test.ts   # 24 voting validation tests
+└── unit/
+    ├── PollTypes.test.ts         # 20 poll type tests
+    └── SubscriptionLimits.test.ts # 14 limit tests
+```
+
+Run tests: `npm test`
 
 ## Logging
 
@@ -208,6 +312,12 @@ docker-compose up -d --build
 # Rebuild without cache
 docker-compose build --no-cache
 docker-compose up -d
+
+# Run seed manually
+docker-compose exec -T app node prisma/seed.js
+
+# Run tests
+npm test
 ```
 
 ## SWR Hooks
@@ -269,8 +379,15 @@ invalidateSubscription();
 - `POST /api/chat` - AI chat (plan-gated)
 - `POST /api/voice/transcribe` - Voice transcription (plan-gated)
 
+### AI Assistant
+- `POST /api/ai-assistant/chat` - AI chat with OpenAI (plan-gated)
+- `POST /api/ai-assistant/transcribe` - Voice-to-text with Whisper (plan-gated)
+- `GET/POST /api/ai-assistant/settings` - AI assistant configuration
+
 ### Admin
 - `GET/POST /api/admin/polls` - Manage polls (enforces plan limits)
+- `GET/POST /api/admin/greeting` - AI greeting configuration
+- `GET/POST /api/admin/voices` - Manage voices, languages, KB documents
 - `GET/POST /api/admin/subscriptions` - Manage subscriptions
 - `GET/POST /api/admin/payment-gateways` - Configure payment processors
 - `GET/POST /api/admin/settings` - System settings
@@ -302,21 +419,31 @@ Before deployment, verify:
 
 - [ ] Docker builds successfully
 - [ ] Database migrations run
-- [ ] Seeding completes
+- [ ] Seeding completes (all data visible)
 - [ ] Landing page loads with all sections
 - [ ] Login/Register work
 - [ ] All 7 poll types work
 - [ ] SWR auto-refresh works
 - [ ] Admin panel accessible
+- [ ] Voices page shows 6 voices, 24 languages, 8 KB docs
+- [ ] Greeting page works
 - [ ] Vote calculations correct
 - [ ] Subscription limits enforced
 - [ ] Payment processing page loads
 - [ ] Settings changes reflect app-wide
+- [ ] Jest tests pass (256 tests)
 
 ## Recent Changes Log
 
 | Date | Change |
 |------|--------|
+| 2026-01-22 | Added greeting configuration page (`/admin/greeting`) |
+| 2026-01-22 | Added Jest test suite with 256 tests |
+| 2026-01-22 | Fixed business name consistency (removed PollChat references) |
+| 2026-01-22 | Updated demo account emails to @mypollingapp.com |
+| 2026-01-22 | Added floating AI Chat Slider with OpenAI integration |
+| 2026-01-22 | Added voice transcription with OpenAI Whisper |
+| 2026-01-22 | Added AI assistant settings API |
 | 2026-01-19 | Replaced payment services with full implementations |
 | 2026-01-19 | Added logging utilities for payment services |
 | 2026-01-19 | Added Trial Codes management system |
@@ -349,3 +476,5 @@ Before deployment, verify:
 - Remove subscription enforcement
 - Delete payment service modules
 - Break docker-entrypoint.sh
+- Use hardcoded names (use settings.businessName instead)
+- Use @pollchat.com emails (use @mypollingapp.com)
