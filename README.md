@@ -1,4 +1,4 @@
-# PollChat Docker - Advanced Polling Platform
+# MyPollingApp Docker - Advanced Polling Platform
 
 A full-featured polling application with multiple poll types, admin panel, voice chat, and AI insights.
 
@@ -18,17 +18,19 @@ App runs at: http://localhost:8610
 - **Real-time Updates**: SWR with auto-refresh
 - **Admin Panel**: Full poll and user management
 - **Voice Chat**: OpenAI Whisper transcription
-- **AI Assistant**: Configurable AI providers
+- **AI Assistant**: Floating chat slider with OpenAI integration
 - **SMS Notifications**: Twilio integration for poll alerts
 - **Templates**: Quick poll creation from templates
+- **Dark Mode**: System and manual toggle support
+- **Subscriptions**: 4-tier plan system with payment processing
 
 ## Demo Accounts
 
-| Email | Password | Role | Access |
-|-------|----------|------|--------|
-| admin@pollchat.com | password123 | Super Admin | Full admin |
-| polladmin@pollchat.com | password123 | Poll Admin | Poll management |
-| user@pollchat.com | password123 | User | Voting only |
+| Email | Password | Role | Plan |
+|-------|----------|------|------|
+| admin@mypollingapp.com | password123 | Super Admin | Enterprise |
+| polladmin@mypollingapp.com | password123 | Poll Admin | Professional |
+| user@mypollingapp.com | password123 | User | Free |
 
 ## Poll Types
 
@@ -47,7 +49,7 @@ App runs at: http://localhost:8610
 ### Public
 | Route | Description |
 |-------|-------------|
-| `/` | Splash screen |
+| `/` | Landing page with features and pricing |
 | `/login` | Login with demo accounts |
 | `/register` | User registration |
 | `/polls` | Browse active polls |
@@ -61,9 +63,14 @@ App runs at: http://localhost:8610
 | `/admin/poll-types` | Configure poll types |
 | `/admin/poll-templates` | Manage templates |
 | `/admin/ai-providers` | AI configuration |
-| `/admin/voices` | Voice settings |
+| `/admin/greeting` | AI greeting message |
+| `/admin/voices` | Voice, language, KB settings |
 | `/admin/webhooks` | Webhook management |
 | `/admin/sms-settings` | Twilio SMS configuration |
+| `/admin/subscriptions` | Subscription management |
+| `/admin/payment-processing` | Payment gateway config |
+| `/admin/trial-codes` | Trial code management |
+| `/admin/analytics` | Analytics dashboard |
 
 ## Tech Stack
 
@@ -75,13 +82,14 @@ App runs at: http://localhost:8610
 - NextAuth.js
 - SWR
 - Docker
+- OpenAI (GPT-4o-mini, Whisper)
 
 ## Project Structure
 
 ```
 src/
 ├── pages/
-│   ├── index.tsx          # Splash
+│   ├── index.tsx          # Landing page
 │   ├── login.tsx          # Auth
 │   ├── polls/             # Public polls
 │   ├── admin/             # Admin panel
@@ -89,18 +97,29 @@ src/
 ├── components/
 │   ├── admin/             # Admin components
 │   ├── poll-inputs/       # Vote inputs
-│   └── poll-results/      # Results display
+│   ├── poll-results/      # Results display
+│   └── AIChatSlider.tsx   # AI assistant
+├── contexts/
+│   ├── ThemeContext.tsx   # Dark mode
+│   └── AIAssistantContext.tsx
 ├── hooks/
-│   ├── index.ts           # Hook exports
-│   └── usePolls.ts        # SWR hooks
+│   ├── usePolls.ts        # SWR hooks
+│   ├── useSettings.ts     # App settings
+│   └── useSubscription.ts # Subscription hooks
+├── services/
+│   └── payments/          # Payment processors
 └── styles/
     └── globals.css
+tests/
+├── api/                   # API tests
+├── feature/               # Feature tests
+└── unit/                  # Unit tests
 ```
 
 ## Environment Variables
 
 ```env
-DATABASE_URL=postgresql://user:pass@localhost:5432/pollchat
+DATABASE_URL=postgresql://user:pass@localhost:5432/mypollingapp
 NEXTAUTH_SECRET=your-secret
 NEXTAUTH_URL=http://localhost:8610
 OPENAI_API_KEY=your-key
@@ -110,6 +129,12 @@ HUGGINGFACE_API_KEY=your-key
 TWILIO_ACCOUNT_SID=your-twilio-sid
 TWILIO_AUTH_TOKEN=your-twilio-token
 TWILIO_PHONE_NUMBER=+1234567890
+
+# Payment Gateways (optional)
+STRIPE_SECRET_KEY=sk_test_xxx
+STRIPE_PUBLISHABLE_KEY=pk_test_xxx
+PAYPAL_CLIENT_ID=your-client-id
+PAYPAL_CLIENT_SECRET=your-client-secret
 ```
 
 ## Docker Commands
@@ -129,8 +154,29 @@ docker-compose down -v
 docker-compose up -d --build
 
 # Shell into container
-docker exec -it pollchat-app sh
+docker exec -it mypollingapp-app sh
+
+# Run seed manually
+docker-compose exec -T app node prisma/seed.js
 ```
+
+## Testing
+
+```bash
+# Run all tests
+npm test
+
+# Run specific test file
+npm test -- tests/feature/Results.test.ts
+```
+
+Test suite includes 256 tests covering:
+- AI Chat functionality
+- API endpoints
+- Authentication & Authorization
+- Poll management
+- Voting edge cases
+- Subscriptions & Trial codes
 
 ## Database
 
@@ -158,6 +204,24 @@ npx prisma studio
 | Single poll | 5 seconds |
 | Messages | 3 seconds |
 
+## Subscription Plans
+
+| Plan | Price | Polls | Votes/Poll | AI Features |
+|------|-------|-------|------------|-------------|
+| Free | $0 | 3 | 50 | No |
+| Starter | $9.99/mo | 10 | 200 | Basic |
+| Professional | $29.99/mo | 50 | Unlimited | Advanced |
+| Enterprise | $99/mo | Unlimited | Unlimited | Advanced |
+
 ## Related Projects
 
 - **MyPollingApp** (port 8600) - Simple SQLite version
+
+## Documentation
+
+- [Getting Started](./docs/GETTING_STARTED.md)
+- [API Reference](./docs/API.md)
+- [Subscriptions](./docs/SUBSCRIPTIONS.md)
+- [Payment Processing](./docs/PAYMENT_PROCESSING.md)
+- [Roadmap](./docs/ROADMAP.md)
+- [Gap Analysis](./GAP_ANALYSIS.md)

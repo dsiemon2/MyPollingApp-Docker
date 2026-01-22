@@ -1,6 +1,6 @@
 # Subscription System
 
-PollChat includes a comprehensive subscription management system with four tiers designed for different user needs.
+MyPollingApp includes a comprehensive subscription management system with four tiers designed for different user needs.
 
 ## Plan Tiers
 

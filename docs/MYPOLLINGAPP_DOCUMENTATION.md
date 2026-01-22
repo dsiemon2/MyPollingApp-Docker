@@ -1,8 +1,8 @@
-# PollChat - Complete Documentation
+# MyPollingApp - Complete Documentation
 
 ## Overview
 
-PollChat is a Next.js-based polling application with AI-powered chat discussions, voice input capabilities, and comprehensive poll sharing/embedding features. It runs in Docker with PostgreSQL and supports role-based access control.
+MyPollingApp is a Next.js-based polling application with AI-powered chat discussions, voice input capabilities, and comprehensive poll sharing/embedding features. It runs in Docker with PostgreSQL and supports role-based access control.
 
 ---
 
@@ -284,7 +284,7 @@ The ShareModal (`src/components/ShareModal.tsx`) provides three tabs:
 <div id="pollchat-[id]"></div>
 <script src="https://yourdomain.com/widget.js"></script>
 <script>
-  PollChat.render({
+  MyPollingApp.render({
     container: '#pollchat-[id]',
     pollId: '[id]',
     theme: 'light',      // 'light' or 'dark'
@@ -349,15 +349,15 @@ Poll pages include oEmbed discovery for WordPress:
 
 | Role | Email | Password |
 |------|-------|----------|
-| Super Admin | superadmin@pollchat.com | super123 |
-| Poll Admin | polladmin@pollchat.com | poll123 |
-| User | user@pollchat.com | user123 |
+| Super Admin | superadmin@mypollingapp.com | super123 |
+| Poll Admin | polladmin@mypollingapp.com | poll123 |
+| User | user@mypollingapp.com | user123 |
 
 ### Vote Tracking
 
 Votes are tracked using:
 1. **userId** - For authenticated users
-2. **voterFingerprint** - For anonymous users (stored in localStorage as `pollchat_visitor_id`)
+2. **voterFingerprint** - For anonymous users (stored in localStorage as `mypollingapp_visitor_id`)
 
 Duplicate votes prevented by unique constraint on `[pollId, optionId, voterFingerprint]`.
 
@@ -520,7 +520,7 @@ npx prisma studio
 
 | Document | Description |
 |----------|-------------|
-| `POLLCHAT_DOCUMENTATION.md` | This file - Master documentation for current features |
+| `MYPOLLINGAPP_DOCUMENTATION.md` | This file - Master documentation for current features |
 | `POLL_SHARING_PLAN.md` | Poll sharing & embedding features (✅ Implemented) |
 | `POLLING_ARCHITECTURE1.md` | Advanced polling system roadmap (Future) |
 

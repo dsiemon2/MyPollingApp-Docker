@@ -1,6 +1,6 @@
-# Getting Started with PollChat
+# Getting Started with MyPollingApp
 
-This guide will help you get PollChat up and running quickly.
+This guide will help you get MyPollingApp up and running quickly.
 
 ## Prerequisites
 
@@ -43,9 +43,9 @@ PollChat comes with pre-configured demo accounts for testing:
 
 | Email | Password | Role | Plan |
 |-------|----------|------|------|
-| admin@pollchat.com | password123 | Super Admin | Enterprise |
-| polladmin@pollchat.com | password123 | Poll Admin | Professional |
-| user@pollchat.com | password123 | User | Free |
+| admin@mypollingapp.com | password123 | Super Admin | Enterprise |
+| polladmin@mypollingapp.com | password123 | Poll Admin | Professional |
+| user@mypollingapp.com | password123 | User | Free |
 
 ## First Steps
 

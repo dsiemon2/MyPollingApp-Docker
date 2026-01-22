@@ -1,6 +1,6 @@
 # API Reference
 
-PollChat provides a comprehensive REST API for all operations. All endpoints return JSON responses.
+MyPollingApp provides a comprehensive REST API for all operations. All endpoints return JSON responses.
 
 ## Base URL
 

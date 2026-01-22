@@ -1,6 +1,6 @@
-# PollChat Roadmap
+# MyPollingApp Roadmap
 
-This document outlines the development roadmap for PollChat, including completed features and planned enhancements.
+This document outlines the development roadmap for MyPollingApp, including completed features and planned enhancements.
 
 ## Current Version: 1.0
 
@@ -233,4 +233,4 @@ Have suggestions for the roadmap? We'd love to hear from you:
 
 - Open a GitHub issue
 - Join our Discord community
-- Email: feedback@pollchat.com
+- Email: feedback@mypollingapp.com

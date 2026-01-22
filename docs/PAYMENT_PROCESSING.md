@@ -1,6 +1,6 @@
 # Payment Processing
 
-PollChat supports multiple payment gateways for subscription management. Configure the gateway that best fits your needs.
+MyPollingApp supports multiple payment gateways for subscription management. Configure the gateway that best fits your needs.
 
 ## Supported Gateways
 

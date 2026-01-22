@@ -1,4 +1,4 @@
-# PollChat Docker Roadmap
+# MyPollingApp Docker Roadmap
 
 ## Current Version: 2.0.0
 

@@ -1,6 +1,27 @@
 # Changelog
 
-All notable changes to PollChat Docker are documented here.
+All notable changes to MyPollingApp Docker are documented here.
+
+## [2.1.0] - 2026-01-22
+
+### Added
+- **AI Chat Slider** - Floating AI assistant on all pages (OpenAI GPT-4o-mini)
+- **Voice Transcription** - OpenAI Whisper integration for voice-to-text
+- **Greeting Configuration** - Admin page to customize AI greeting message
+- **Jest Test Suite** - 256 tests covering all features
+- **Gap Analysis** - Comprehensive documentation of implementation status
+
+### Changed
+- Updated demo account emails from @pollchat.com to @mypollingapp.com
+- Renamed "PollChat" references to "MyPollingApp" throughout documentation
+- Updated business name handling to use dynamic settings
+
+### Fixed
+- Seed data now correctly uses @mypollingapp.com email domain
+- PayPal service brand_name fixed to "MyPollingApp"
+- Consistent naming across all documentation files
+
+---
 
 ## [2.0.0] - 2026-01-14
 
