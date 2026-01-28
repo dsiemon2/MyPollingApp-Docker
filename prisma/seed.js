@@ -718,11 +718,11 @@ async function main() {
 
   // Create default system settings
   const settings = [
-    { key: 'businessName', value: 'MyPollingApp', category: 'branding' },
+    { key: 'businessName', value: 'VotigoPro', category: 'branding' },
     { key: 'tagline', value: 'Voice-Enabled Polling', category: 'branding' },
     { key: 'primaryColor', value: '#7c3aed', category: 'branding' },
     { key: 'secondaryColor', value: '#4f46e5', category: 'branding' },
-    { key: 'logoUrl', value: '/images/MyPollingSoftwareLogo.png', category: 'branding' },
+    { key: 'logoUrl', value: '/images/VotigoPro.png', category: 'branding' },
     // Twilio SMS settings
     { key: 'twilio_account_sid', value: process.env.TWILIO_ACCOUNT_SID || '', category: 'sms' },
     { key: 'twilio_auth_token', value: process.env.TWILIO_AUTH_TOKEN || '', category: 'sms' },

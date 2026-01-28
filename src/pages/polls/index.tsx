@@ -30,28 +30,15 @@ export default function PollsPage() {
       <Head>
         <title>Active Polls - {settings.businessName}</title>
       </Head>
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-gray-900 dark:to-gray-800">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 dark:from-gray-900 dark:to-gray-800">
         <header className="bg-white dark:bg-gray-800 shadow-sm">
           <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
             <Link href="/" className="flex items-center gap-3">
-              {settings.logoUrl ? (
-                <img
-                  src={settings.logoUrl}
-                  alt={`${settings.businessName} Logo`}
-                  width={40}
-                  height={40}
-                  className="rounded-lg w-10 h-10 object-cover"
-                />
-              ) : (
-                <Image
-                  src="/images/MyPollingSoftwareLogo.png"
-                  alt={`${settings.businessName} Logo`}
-                  width={40}
-                  height={40}
-                  className="rounded-lg"
-                />
-              )}
-              <span className="text-2xl font-bold text-purple-600">{settings.businessName}</span>
+              <img
+                src={settings.logoUrl || '/images/VotigoPro.png'}
+                alt={`${settings.businessName} Logo`}
+                className="h-10 w-auto object-contain"
+              />
             </Link>
             <div className="flex items-center gap-4">
               <ThemeToggle />
