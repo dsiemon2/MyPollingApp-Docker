@@ -273,7 +273,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     // Build system prompt
-    const systemPrompt = `You are a helpful AI assistant for ${businessName || 'MyPollingApp'}, a polling and survey application.
+    const systemPrompt = `You are a helpful AI assistant for ${businessName || 'PoligoPro'}, a polling and survey application.
 
 Your role is to help users:
 - Create and manage polls

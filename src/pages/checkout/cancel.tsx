@@ -65,7 +65,7 @@ export default function CheckoutCancelPage() {
           <p className="text-sm text-gray-500 dark:text-gray-400">
             Need help? Contact us at{' '}
             <a href={`mailto:support@${settings.businessName?.toLowerCase().replace(/\s+/g, '')}.com`} className="text-green-700 hover:underline">
-              support@{settings.businessName?.toLowerCase().replace(/\s+/g, '') || 'mypollingapp'}.com
+              support@{settings.businessName?.toLowerCase().replace(/\s+/g, '') || 'poligopro'}.com
             </a>
           </p>
         </div>

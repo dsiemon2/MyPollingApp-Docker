@@ -108,7 +108,7 @@ export async function createOrder(
     application_context: {
       return_url: returnUrl,
       cancel_url: cancelUrl,
-      brand_name: 'MyPollingApp',
+      brand_name: 'PoligoPro',
       user_action: 'PAY_NOW'
     }
   };

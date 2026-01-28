@@ -4,10 +4,10 @@ import { invalidateSettings } from '@/hooks/useSettings';
 
 export default function SettingsPage() {
   const [settings, setSettings] = useState({
-    businessName: 'MyPollingApp',
+    businessName: 'PoligoPro',
     tagline: 'Voice-Enabled Polling',
-    primaryColor: '#7c3aed',
-    secondaryColor: '#4f46e5',
+    primaryColor: '#0d7a3e',
+    secondaryColor: '#1a3a5c',
     logoUrl: '',
     timezone: 'America/New_York'
   });

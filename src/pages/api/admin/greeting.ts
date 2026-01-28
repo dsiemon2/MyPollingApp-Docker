@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         prisma.systemSetting.findFirst({ where: { key: 'business_name' } })
       ]);
 
-      const businessName = businessNameSetting?.value || 'MyPollingApp';
+      const businessName = businessNameSetting?.value || 'PoligoPro';
 
       return res.json({
         greeting: greetingSetting?.value || `Hello! Welcome to ${businessName}. I'm your AI assistant and I'm here to help you with polls, voting, and getting feedback. How can I assist you today?`

@@ -12,7 +12,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 // Default settings for fallback
 const defaultSettings = {
-  businessName: 'MyPollingApp',
+  businessName: 'PoligoPro',
   tagline: 'Voice-Enabled Polling',
 };
 

@@ -31,7 +31,7 @@ interface EmailTemplate {
   text: string;
 }
 
-const businessName = process.env.SMTP_FROM_NAME || 'MyPollingApp';
+const businessName = process.env.SMTP_FROM_NAME || 'PoligoPro';
 const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:8610';
 
 // Base HTML template wrapper
@@ -48,11 +48,11 @@ function wrapHtml(content: string): string {
     .container { max-width: 600px; margin: 0 auto; padding: 40px 20px; }
     .card { background: #fff; border-radius: 12px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
     .header { text-align: center; margin-bottom: 32px; }
-    .logo { font-size: 24px; font-weight: bold; color: #7c3aed; }
+    .logo { font-size: 24px; font-weight: bold; color: #0d7a3e; }
     h1 { color: #1f2937; font-size: 24px; margin: 0 0 16px; }
     p { color: #4b5563; margin: 0 0 16px; }
-    .button { display: inline-block; background: #7c3aed; color: #fff !important; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; margin: 16px 0; }
-    .button:hover { background: #6d28d9; }
+    .button { display: inline-block; background: #0d7a3e; color: #fff !important; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; margin: 16px 0; }
+    .button:hover { background: #0a6332; }
     .footer { text-align: center; margin-top: 32px; padding-top: 24px; border-top: 1px solid #e5e7eb; color: #9ca3af; font-size: 14px; }
     .highlight { background: #f3f4f6; padding: 16px; border-radius: 8px; margin: 16px 0; }
     .success { color: #059669; }
@@ -70,7 +70,7 @@ function wrapHtml(content: string): string {
     </div>
     <div class="footer">
       <p>&copy; ${new Date().getFullYear()} ${businessName}. All rights reserved.</p>
-      <p><a href="${baseUrl}" style="color: #7c3aed;">Visit our website</a></p>
+      <p><a href="${baseUrl}" style="color: #0d7a3e;">Visit our website</a></p>
     </div>
   </div>
 </body>
