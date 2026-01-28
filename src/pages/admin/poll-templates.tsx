@@ -30,7 +30,7 @@ const categoryColors: Record<string, string> = {
   general: 'bg-gray-100 text-gray-800',
   feedback: 'bg-blue-100 text-blue-800',
   events: 'bg-green-100 text-green-800',
-  contests: 'bg-purple-100 text-purple-800'
+  contests: 'bg-green-100 text-green-800'
 };
 
 export default function PollTemplatesPage() {
@@ -215,7 +215,7 @@ export default function PollTemplatesPage() {
     return (
       <AdminLayout active="poll-templates">
         <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-700"></div>
         </div>
       </AdminLayout>
     );
@@ -247,7 +247,7 @@ export default function PollTemplatesPage() {
               }
               setShowModal(true);
             }}
-            className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 flex items-center gap-2"
+            className="bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-800 flex items-center gap-2"
           >
             <span>+</span>
             <span>Add Template</span>
@@ -273,7 +273,7 @@ export default function PollTemplatesPage() {
             <div className="text-gray-600 text-sm">System Templates</div>
           </div>
           <div className="bg-white rounded-xl p-4 shadow-sm">
-            <div className="text-2xl font-bold text-purple-600">
+            <div className="text-2xl font-bold text-green-700">
               {Object.keys(groupedTemplates).length}
             </div>
             <div className="text-gray-600 text-sm">Categories</div>
@@ -296,7 +296,7 @@ export default function PollTemplatesPage() {
                 <div
                   key={template.id}
                   className={`bg-white rounded-xl p-4 shadow-sm border-2 transition-all ${
-                    template.isActive ? 'border-transparent hover:border-purple-200' : 'border-gray-200 opacity-60'
+                    template.isActive ? 'border-transparent hover:border-green-200' : 'border-gray-200 opacity-60'
                   }`}
                 >
                   <div className="flex items-start justify-between">
@@ -317,7 +317,7 @@ export default function PollTemplatesPage() {
                         onChange={() => handleToggle(template)}
                         className="sr-only peer"
                       />
-                      <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-purple-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple-600"></div>
+                      <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-700"></div>
                     </label>
                   </div>
                   {template.description && (
@@ -331,7 +331,7 @@ export default function PollTemplatesPage() {
                   <div className="flex items-center gap-2 mt-4 pt-3 border-t">
                     <button
                       onClick={() => handleEdit(template)}
-                      className="text-sm text-purple-600 hover:text-purple-800"
+                      className="text-sm text-green-700 hover:text-green-800"
                     >
                       Edit
                     </button>
@@ -368,7 +368,7 @@ export default function PollTemplatesPage() {
                 resetForm();
                 setShowModal(true);
               }}
-              className="mt-4 text-purple-600 hover:text-purple-800"
+              className="mt-4 text-green-700 hover:text-green-800"
             >
               Create your first template
             </button>
@@ -505,7 +505,7 @@ export default function PollTemplatesPage() {
                   </button>
                   <button
                     type="submit"
-                    className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
+                    className="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800"
                   >
                     {editingTemplate ? 'Save Changes' : 'Create Template'}
                   </button>

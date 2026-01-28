@@ -42,7 +42,7 @@ export default function AIToolsPage() {
           <h1 className="text-3xl font-bold text-gray-800">AI Tools</h1>
           <p className="text-gray-600 mt-1">Configure tools available to the AI</p>
         </div>
-        <button onClick={() => setShowModal(true)} className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
+        <button onClick={() => setShowModal(true)} className="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800">
           + Add Custom Tool
         </button>
       </div>
@@ -61,7 +61,7 @@ export default function AIToolsPage() {
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input type="checkbox" checked={toolData?.enabled ?? true}
                     onChange={(e) => toolData && toggleTool(toolData.id, e.target.checked)} className="sr-only peer" />
-                  <div className="w-11 h-6 bg-gray-200 peer-checked:bg-purple-600 rounded-full peer after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></div>
+                  <div className="w-11 h-6 bg-gray-200 peer-checked:bg-green-700 rounded-full peer after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></div>
                 </label>
               </div>
             );
@@ -84,7 +84,7 @@ export default function AIToolsPage() {
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input type="checkbox" checked={tool.enabled}
                     onChange={(e) => toggleTool(tool.id, e.target.checked)} className="sr-only peer" />
-                  <div className="w-11 h-6 bg-gray-200 peer-checked:bg-purple-600 rounded-full peer after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></div>
+                  <div className="w-11 h-6 bg-gray-200 peer-checked:bg-green-700 rounded-full peer after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></div>
                 </label>
               </div>
             ))}

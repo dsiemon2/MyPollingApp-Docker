@@ -125,7 +125,7 @@ export default function PaymentProcessingPage() {
               onChange={(e) => setMasterEnabled(e.target.checked)}
               className="sr-only peer"
             />
-            <div className="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-purple-600"></div>
+            <div className="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-green-700"></div>
           </label>
         </div>
       </div>
@@ -136,7 +136,7 @@ export default function PaymentProcessingPage() {
           <div className="bg-white rounded-xl shadow-sm p-6 mb-6">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
                   <span className="text-xl">💳</span>
                 </div>
                 <div>
@@ -151,7 +151,7 @@ export default function PaymentProcessingPage() {
                   onChange={() => handleProviderToggle('stripe')}
                   className="sr-only peer"
                 />
-                <div className="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-purple-600"></div>
+                <div className="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-green-700"></div>
               </label>
             </div>
 
@@ -194,7 +194,7 @@ export default function PaymentProcessingPage() {
                         type="checkbox"
                         checked={gateways.stripe.testMode}
                         onChange={(e) => updateGateway('stripe', 'testMode', e.target.checked)}
-                        className="w-4 h-4 text-purple-600 rounded"
+                        className="w-4 h-4 text-green-700 rounded"
                       />
                       <span className="text-sm text-gray-700">Test Mode</span>
                     </label>
@@ -203,7 +203,7 @@ export default function PaymentProcessingPage() {
                         type="checkbox"
                         checked={gateways.stripe.achEnabled}
                         onChange={(e) => updateGateway('stripe', 'achEnabled', e.target.checked)}
-                        className="w-4 h-4 text-purple-600 rounded"
+                        className="w-4 h-4 text-green-700 rounded"
                       />
                       <span className="text-sm text-gray-700">Enable ACH Bank Transfers</span>
                     </label>
@@ -552,7 +552,7 @@ export default function PaymentProcessingPage() {
       <button
         onClick={handleSave}
         disabled={saving}
-        className="px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50"
+        className="px-6 py-3 bg-green-700 text-white rounded-lg hover:bg-green-800 disabled:opacity-50"
       >
         {saving ? 'Saving...' : 'Save Settings'}
       </button>

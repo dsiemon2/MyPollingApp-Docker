@@ -343,7 +343,7 @@ export default function AccountPage() {
   if (status === 'loading' || loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-700"></div>
       </div>
     );
   }
@@ -366,7 +366,7 @@ export default function AccountPage() {
             </Link>
             <div className="flex items-center gap-4">
               <ThemeToggle />
-              <Link href="/polls" className="text-gray-600 dark:text-gray-300 hover:text-purple-600 transition">
+              <Link href="/polls" className="text-gray-600 dark:text-gray-300 hover:text-green-700 transition">
                 Polls
               </Link>
               <button
@@ -410,7 +410,7 @@ export default function AccountPage() {
                     onClick={() => setActiveTab(tab.id)}
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition ${
                       activeTab === tab.id
-                        ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300'
+                        ? 'bg-green-100 dark:bg-blue-900/30 text-green-700 dark:text-green-300'
                         : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700'
                     }`}
                   >
@@ -437,7 +437,7 @@ export default function AccountPage() {
                         </div>
                         <button
                           onClick={() => { setNewName(profile?.name || ''); setEditNameModal(true); }}
-                          className="text-purple-600 hover:text-purple-700 font-medium"
+                          className="text-green-700 hover:text-green-700 font-medium"
                         >
                           Edit
                         </button>
@@ -451,7 +451,7 @@ export default function AccountPage() {
                         </div>
                         <button
                           onClick={() => { setNewEmail(profile?.email || ''); setEditEmailModal(true); }}
-                          className="text-purple-600 hover:text-purple-700 font-medium"
+                          className="text-green-700 hover:text-green-700 font-medium"
                         >
                           Edit
                         </button>
@@ -465,7 +465,7 @@ export default function AccountPage() {
                         </div>
                         <button
                           onClick={() => { setNewPhone(profile?.phone || ''); setEditPhoneModal(true); }}
-                          className="text-purple-600 hover:text-purple-700 font-medium"
+                          className="text-green-700 hover:text-green-700 font-medium"
                         >
                           {profile?.phone ? 'Edit' : 'Add'}
                         </button>
@@ -479,7 +479,7 @@ export default function AccountPage() {
                         </div>
                         <button
                           onClick={() => setChangePasswordModal(true)}
-                          className="text-purple-600 hover:text-purple-700 font-medium"
+                          className="text-green-700 hover:text-green-700 font-medium"
                         >
                           Change
                         </button>
@@ -495,7 +495,7 @@ export default function AccountPage() {
                       <h2 className="text-xl font-bold text-gray-800 dark:text-white">Payment Options</h2>
                       <button
                         onClick={() => setAddPaymentModal(true)}
-                        className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition flex items-center gap-2"
+                        className="bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-800 transition flex items-center gap-2"
                       >
                         <span>+</span> Add Payment Method
                       </button>
@@ -514,7 +514,7 @@ export default function AccountPage() {
                             key={pm.id}
                             className={`flex items-center justify-between p-4 rounded-xl border-2 ${
                               pm.isDefault
-                                ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/20'
+                                ? 'border-green-500 bg-green-50 dark:bg-blue-900/20'
                                 : 'border-gray-200 dark:border-gray-700'
                             }`}
                           >
@@ -531,14 +531,14 @@ export default function AccountPage() {
                                 </p>
                               </div>
                               {pm.isDefault && (
-                                <span className="bg-purple-600 text-white text-xs px-2 py-1 rounded">Default</span>
+                                <span className="bg-green-700 text-white text-xs px-2 py-1 rounded">Default</span>
                               )}
                             </div>
                             <div className="flex items-center gap-2">
                               {!pm.isDefault && (
                                 <button
                                   onClick={() => handleSetDefaultPayment(pm.id)}
-                                  className="text-purple-600 hover:text-purple-700 text-sm font-medium"
+                                  className="text-green-700 hover:text-green-700 text-sm font-medium"
                                 >
                                   Set Default
                                 </button>
@@ -711,7 +711,7 @@ export default function AccountPage() {
               type="text"
               value={newName}
               onChange={e => setNewName(e.target.value)}
-              className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
+              className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
               placeholder="Enter your name"
             />
             <div className="flex gap-3 mt-4">
@@ -724,7 +724,7 @@ export default function AccountPage() {
               <button
                 onClick={handleUpdateName}
                 disabled={saving}
-                className="flex-1 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 disabled:opacity-50"
+                className="flex-1 bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-800 disabled:opacity-50"
               >
                 {saving ? 'Saving...' : 'Save'}
               </button>
@@ -740,14 +740,14 @@ export default function AccountPage() {
                 type="email"
                 value={newEmail}
                 onChange={e => setNewEmail(e.target.value)}
-                className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
+                className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
                 placeholder="Enter new email"
               />
               <input
                 type="password"
                 value={emailPassword}
                 onChange={e => setEmailPassword(e.target.value)}
-                className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
+                className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
                 placeholder="Confirm with your password"
               />
             </div>
@@ -761,7 +761,7 @@ export default function AccountPage() {
               <button
                 onClick={handleUpdateEmail}
                 disabled={saving}
-                className="flex-1 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 disabled:opacity-50"
+                className="flex-1 bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-800 disabled:opacity-50"
               >
                 {saving ? 'Saving...' : 'Save'}
               </button>
@@ -776,7 +776,7 @@ export default function AccountPage() {
               type="tel"
               value={newPhone}
               onChange={e => setNewPhone(e.target.value)}
-              className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
+              className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
               placeholder="Enter phone number"
             />
             <div className="flex gap-3 mt-4">
@@ -789,7 +789,7 @@ export default function AccountPage() {
               <button
                 onClick={handleUpdatePhone}
                 disabled={saving}
-                className="flex-1 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 disabled:opacity-50"
+                className="flex-1 bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-800 disabled:opacity-50"
               >
                 {saving ? 'Saving...' : 'Save'}
               </button>
@@ -805,21 +805,21 @@ export default function AccountPage() {
                 type="password"
                 value={currentPassword}
                 onChange={e => setCurrentPassword(e.target.value)}
-                className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
+                className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
                 placeholder="Current password"
               />
               <input
                 type="password"
                 value={newPassword}
                 onChange={e => setNewPassword(e.target.value)}
-                className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
+                className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
                 placeholder="New password (min 8 characters)"
               />
               <input
                 type="password"
                 value={confirmPassword}
                 onChange={e => setConfirmPassword(e.target.value)}
-                className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
+                className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
                 placeholder="Confirm new password"
               />
             </div>
@@ -833,7 +833,7 @@ export default function AccountPage() {
               <button
                 onClick={handleChangePassword}
                 disabled={saving}
-                className="flex-1 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 disabled:opacity-50"
+                className="flex-1 bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-800 disabled:opacity-50"
               >
                 {saving ? 'Changing...' : 'Change Password'}
               </button>
@@ -889,7 +889,7 @@ function NotificationRow({
             type="checkbox"
             checked={prefs[emailKey] as boolean}
             onChange={e => onUpdate(emailKey, e.target.checked)}
-            className="w-4 h-4 text-purple-600 rounded focus:ring-purple-500"
+            className="w-4 h-4 text-green-700 rounded focus:ring-green-500"
           />
           <span className="text-sm text-gray-600 dark:text-gray-400">Email</span>
         </label>
@@ -898,7 +898,7 @@ function NotificationRow({
             type="checkbox"
             checked={prefs[smsKey] as boolean}
             onChange={e => onUpdate(smsKey, e.target.checked)}
-            className="w-4 h-4 text-purple-600 rounded focus:ring-purple-500"
+            className="w-4 h-4 text-green-700 rounded focus:ring-green-500"
           />
           <span className="text-sm text-gray-600 dark:text-gray-400">SMS</span>
         </label>
@@ -907,7 +907,7 @@ function NotificationRow({
             type="checkbox"
             checked={prefs[pushKey] as boolean}
             onChange={e => onUpdate(pushKey, e.target.checked)}
-            className="w-4 h-4 text-purple-600 rounded focus:ring-purple-500"
+            className="w-4 h-4 text-green-700 rounded focus:ring-green-500"
           />
           <span className="text-sm text-gray-600 dark:text-gray-400">Push</span>
         </label>

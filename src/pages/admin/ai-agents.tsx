@@ -85,7 +85,7 @@ export default function AIAgentsPage() {
           <h1 className="text-3xl font-bold text-gray-800">AI Agents</h1>
           <p className="text-gray-600 mt-1">Configure different AI personalities</p>
         </div>
-        <button onClick={() => setShowModal(true)} className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
+        <button onClick={() => setShowModal(true)} className="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800">
           + Create Agent
         </button>
       </div>
@@ -94,12 +94,12 @@ export default function AIAgentsPage() {
         <h2 className="text-lg font-semibold text-gray-800 mb-4">Agent Templates</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {templateAgents.map(agent => (
-            <div key={agent.name} className="p-4 border-2 border-dashed border-gray-200 rounded-xl text-center hover:border-purple-300 cursor-pointer"
+            <div key={agent.name} className="p-4 border-2 border-dashed border-gray-200 rounded-xl text-center hover:border-green-300 cursor-pointer"
               onClick={() => { setFormData({ ...agent, name: `${agent.name}_${Date.now()}` }); setShowModal(true); }}>
               <div className="text-3xl mb-2">🤖</div>
               <h3 className="font-medium text-gray-800">{agent.displayName}</h3>
               <p className="text-xs text-gray-500 mt-1">{agent.description}</p>
-              <p className="text-xs text-purple-600 mt-2">Temp: {agent.temperature}</p>
+              <p className="text-xs text-green-700 mt-2">Temp: {agent.temperature}</p>
             </div>
           ))}
         </div>
@@ -136,7 +136,7 @@ export default function AIAgentsPage() {
                     <span className="font-medium">Prompt:</span> {agent.systemPrompt.slice(0, 150)}...
                   </div>
                 )}
-                <p className="text-xs text-purple-600">Temperature: {agent.temperature}</p>
+                <p className="text-xs text-green-700">Temperature: {agent.temperature}</p>
               </div>
             ))}
           </div>
@@ -177,7 +177,7 @@ export default function AIAgentsPage() {
               </div>
               <div className="flex gap-3">
                 <button type="button" onClick={() => setShowModal(false)} className="flex-1 px-4 py-2 border rounded-lg">Cancel</button>
-                <button type="submit" className="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg">Create</button>
+                <button type="submit" className="flex-1 px-4 py-2 bg-green-700 text-white rounded-lg">Create</button>
               </div>
             </form>
           </div>

@@ -110,7 +110,7 @@ export default function AIConfigPage() {
       <button
         onClick={handleSave}
         disabled={saving}
-        className="px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50"
+        className="px-6 py-3 bg-green-700 text-white rounded-lg hover:bg-green-800 disabled:opacity-50"
       >
         {saving ? 'Saving...' : 'Save Configuration'}
       </button>

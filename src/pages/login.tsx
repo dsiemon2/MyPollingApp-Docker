@@ -62,7 +62,7 @@ export default function LoginPage() {
               className="object-contain"
             />
           </Link>
-          <Link href="/" className="text-purple-600 hover:text-purple-800 flex items-center gap-2">
+          <Link href="/" className="text-green-700 hover:text-green-800 flex items-center gap-2">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
@@ -130,7 +130,7 @@ export default function LoginPage() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition"
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
                   placeholder="Enter your email"
                   required
                   autoComplete="email"
@@ -144,7 +144,7 @@ export default function LoginPage() {
                     type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-4 py-3 pr-12 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition"
+                    className="w-full px-4 py-3 pr-12 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
                     placeholder="Enter your password"
                     required
                     autoComplete="current-password"
@@ -195,7 +195,7 @@ export default function LoginPage() {
             <div className="mt-6 text-center">
               <p className="text-gray-600">
                 Don't have an account?{' '}
-                <Link href="/register" className="text-purple-600 font-semibold hover:underline">
+                <Link href="/register" className="text-green-700 font-semibold hover:underline">
                   Create one now
                 </Link>
               </p>
@@ -205,7 +205,7 @@ export default function LoginPage() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-purple-900 text-white text-center py-4">
+      <footer className="bg-blue-900 text-white text-center py-4">
         <p>&copy; {new Date().getFullYear()} {settings.businessName}. All rights reserved.</p>
       </footer>
     </div>

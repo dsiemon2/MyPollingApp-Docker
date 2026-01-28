@@ -108,7 +108,7 @@ export default function TestEmbedPage() {
                 <select
                   value={selectedPoll}
                   onChange={(e) => setSelectedPoll(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
                 >
                   {polls.map(poll => (
                     <option key={poll.id} value={poll.id}>{poll.title}</option>
@@ -125,13 +125,13 @@ export default function TestEmbedPage() {
                     <div className="flex gap-3">
                       <button
                         onClick={() => setTheme('light')}
-                        className={`px-4 py-2 rounded-lg border-2 ${theme === 'light' ? 'border-purple-600 bg-purple-50' : 'border-gray-200'}`}
+                        className={`px-4 py-2 rounded-lg border-2 ${theme === 'light' ? 'border-green-700 bg-green-50' : 'border-gray-200'}`}
                       >
                         Light
                       </button>
                       <button
                         onClick={() => setTheme('dark')}
-                        className={`px-4 py-2 rounded-lg border-2 ${theme === 'dark' ? 'border-purple-600 bg-purple-50' : 'border-gray-200'}`}
+                        className={`px-4 py-2 rounded-lg border-2 ${theme === 'dark' ? 'border-green-700 bg-green-50' : 'border-gray-200'}`}
                       >
                         Dark
                       </button>
@@ -144,7 +144,7 @@ export default function TestEmbedPage() {
                       id="showResults"
                       checked={showResults}
                       onChange={(e) => setShowResults(e.target.checked)}
-                      className="w-4 h-4 text-purple-600"
+                      className="w-4 h-4 text-green-700"
                     />
                     <label htmlFor="showResults" className="text-sm text-gray-700">Show results after voting</label>
                   </div>
@@ -155,7 +155,7 @@ export default function TestEmbedPage() {
                       id="allowVote"
                       checked={allowVote}
                       onChange={(e) => setAllowVote(e.target.checked)}
-                      className="w-4 h-4 text-purple-600"
+                      className="w-4 h-4 text-green-700"
                     />
                     <label htmlFor="allowVote" className="text-sm text-gray-700">Allow voting</label>
                   </div>
@@ -184,7 +184,7 @@ export default function TestEmbedPage() {
                       />
                       <button
                         onClick={() => copyToClipboard(shareUrl, 'url')}
-                        className={`px-3 py-2 rounded-lg text-sm font-medium ${copied === 'url' ? 'bg-green-500 text-white' : 'bg-purple-600 text-white hover:bg-purple-700'}`}
+                        className={`px-3 py-2 rounded-lg text-sm font-medium ${copied === 'url' ? 'bg-green-500 text-white' : 'bg-green-700 text-white hover:bg-green-800'}`}
                       >
                         {copied === 'url' ? 'Copied!' : 'Copy'}
                       </button>
@@ -216,7 +216,7 @@ export default function TestEmbedPage() {
                       onClick={() => setActiveTab(tab.id as typeof activeTab)}
                       className={`flex-1 py-3 text-sm font-medium transition-colors ${
                         activeTab === tab.id
-                          ? 'text-purple-600 border-b-2 border-purple-600'
+                          ? 'text-green-700 border-b-2 border-green-700'
                           : 'text-gray-500 hover:text-gray-700'
                       }`}
                     >
@@ -329,7 +329,7 @@ export default function TestEmbedPage() {
                         <div className="space-y-4">
                           <div>
                             <label className="block text-sm font-semibold text-gray-700 mb-2">QR Code API</label>
-                            <code className="block text-xs bg-gray-100 p-3 rounded-lg text-purple-600 break-all">
+                            <code className="block text-xs bg-gray-100 p-3 rounded-lg text-green-700 break-all">
                               GET /api/polls/{'{id}'}/qrcode
                             </code>
                           </div>
@@ -349,7 +349,7 @@ export default function TestEmbedPage() {
                               href={`/api/polls/${selectedPoll}/qrcode?size=400`}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="px-4 py-2 bg-purple-600 text-white rounded-lg text-sm hover:bg-purple-700"
+                              className="px-4 py-2 bg-green-700 text-white rounded-lg text-sm hover:bg-green-800"
                             >
                               Download PNG
                             </a>
@@ -365,9 +365,9 @@ export default function TestEmbedPage() {
                         </div>
                       </div>
 
-                      <div className="bg-purple-50 rounded-lg p-4">
-                        <h4 className="font-semibold text-purple-800 mb-2">Instagram Sharing Tip</h4>
-                        <p className="text-sm text-purple-700">Download the QR code and add it to your Instagram Story. Followers can scan to vote directly!</p>
+                      <div className="bg-green-50 rounded-lg p-4">
+                        <h4 className="font-semibold text-green-800 mb-2">Instagram Sharing Tip</h4>
+                        <p className="text-sm text-green-700">Download the QR code and add it to your Instagram Story. Followers can scan to vote directly!</p>
                       </div>
                     </div>
                   )}
@@ -383,12 +383,12 @@ export default function TestEmbedPage() {
                             href={oembedUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-xs px-2 py-1 rounded bg-purple-100 text-purple-700 hover:bg-purple-200"
+                            className="text-xs px-2 py-1 rounded bg-green-100 text-green-700 hover:bg-green-200"
                           >
                             Test
                           </a>
                         </div>
-                        <code className="text-xs text-purple-600 break-all block">{oembedUrl}</code>
+                        <code className="text-xs text-green-700 break-all block">{oembedUrl}</code>
                         <p className="text-xs text-gray-500 mt-2">WordPress automatically discovers oEmbed. Just paste the poll URL in the editor!</p>
                       </div>
 
@@ -400,12 +400,12 @@ export default function TestEmbedPage() {
                             href={`/api/polls/${selectedPoll}/embed`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-xs px-2 py-1 rounded bg-purple-100 text-purple-700 hover:bg-purple-200"
+                            className="text-xs px-2 py-1 rounded bg-green-100 text-green-700 hover:bg-green-200"
                           >
                             Test
                           </a>
                         </div>
-                        <code className="text-xs text-purple-600 break-all">GET {baseUrl}/api/polls/{selectedPoll}/embed</code>
+                        <code className="text-xs text-green-700 break-all">GET {baseUrl}/api/polls/{selectedPoll}/embed</code>
                         <p className="text-xs text-gray-500 mt-2">Returns poll data as JSON for custom integrations.</p>
                       </div>
 
@@ -417,12 +417,12 @@ export default function TestEmbedPage() {
                             href={previewImageUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-xs px-2 py-1 rounded bg-purple-100 text-purple-700 hover:bg-purple-200"
+                            className="text-xs px-2 py-1 rounded bg-green-100 text-green-700 hover:bg-green-200"
                           >
                             View
                           </a>
                         </div>
-                        <code className="text-xs text-purple-600 break-all">GET {baseUrl}/api/polls/{selectedPoll}/preview.png</code>
+                        <code className="text-xs text-green-700 break-all">GET {baseUrl}/api/polls/{selectedPoll}/preview.png</code>
                         <p className="text-xs text-gray-500 mt-2">Auto-generated image for rich social media previews (1200x630 SVG).</p>
                       </div>
 
@@ -434,12 +434,12 @@ export default function TestEmbedPage() {
                             href={`/api/polls/${selectedPoll}/qrcode?size=300`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-xs px-2 py-1 rounded bg-purple-100 text-purple-700 hover:bg-purple-200"
+                            className="text-xs px-2 py-1 rounded bg-green-100 text-green-700 hover:bg-green-200"
                           >
                             View
                           </a>
                         </div>
-                        <code className="text-xs text-purple-600 break-all">GET {baseUrl}/api/polls/{selectedPoll}/qrcode?size=300&format=png</code>
+                        <code className="text-xs text-green-700 break-all">GET {baseUrl}/api/polls/{selectedPoll}/qrcode?size=300&format=png</code>
                         <p className="text-xs text-gray-500 mt-2">Parameters: size (100-1000), format (png/svg), dark, light</p>
                       </div>
 
@@ -499,10 +499,10 @@ export default function TestEmbedPage() {
           <div className="mt-8 bg-white rounded-xl shadow-sm p-6">
             <h2 className="text-lg font-semibold text-gray-800 mb-4">Quick Test Links</h2>
             <div className="flex flex-wrap gap-3">
-              <a href="/polls" className="px-4 py-2 bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200">
+              <a href="/polls" className="px-4 py-2 bg-green-100 text-green-700 rounded-lg hover:bg-green-200">
                 Public Polls Page
               </a>
-              <a href="/admin/polls" className="px-4 py-2 bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200">
+              <a href="/admin/polls" className="px-4 py-2 bg-green-100 text-green-700 rounded-lg hover:bg-green-200">
                 Admin Polls
               </a>
               <a href={shareUrl} target="_blank" className="px-4 py-2 bg-green-100 text-green-700 rounded-lg hover:bg-green-200">

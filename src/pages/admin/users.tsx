@@ -166,7 +166,7 @@ export default function UsersPage() {
   const getRoleBadgeColor = (role: Role) => {
     switch (role) {
       case 'SUPER_ADMIN': return 'bg-red-100 text-red-700';
-      case 'POLL_ADMIN': return 'bg-purple-100 text-purple-700';
+      case 'POLL_ADMIN': return 'bg-green-100 text-green-700';
       case 'USER': return 'bg-gray-100 text-gray-700';
       default: return 'bg-gray-100 text-gray-700';
     }
@@ -176,7 +176,7 @@ export default function UsersPage() {
     switch (plan) {
       case 'FREE': return 'bg-gray-100 text-gray-600';
       case 'STARTER': return 'bg-blue-100 text-blue-700';
-      case 'PROFESSIONAL': return 'bg-purple-100 text-purple-700';
+      case 'PROFESSIONAL': return 'bg-green-100 text-green-700';
       case 'ENTERPRISE': return 'bg-orange-100 text-orange-700';
       default: return 'bg-gray-100 text-gray-600';
     }
@@ -191,7 +191,7 @@ export default function UsersPage() {
         </div>
         <button
           onClick={openCreateModal}
-          className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
+          className="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800"
         >
           + Add User
         </button>
@@ -211,7 +211,7 @@ export default function UsersPage() {
         </div>
         <div className="bg-white rounded-xl shadow-sm p-4">
           <div className="text-sm text-gray-500">Poll Admins</div>
-          <div className="text-2xl font-bold text-purple-600">
+          <div className="text-2xl font-bold text-green-700">
             {users.filter(u => u.role === 'POLL_ADMIN').length}
           </div>
         </div>
@@ -307,7 +307,7 @@ export default function UsersPage() {
                     <button
                       onClick={() => handlePageChange(p)}
                       className={`px-3 py-1 border rounded text-sm ${
-                        p === pagination.page ? 'bg-purple-600 text-white border-purple-600' : 'hover:bg-gray-50'
+                        p === pagination.page ? 'bg-green-700 text-white border-green-700' : 'hover:bg-gray-50'
                       }`}
                     >
                       {p}
@@ -399,7 +399,7 @@ export default function UsersPage() {
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
+                  className="flex-1 px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800"
                 >
                   {editingUser ? 'Save Changes' : 'Create User'}
                 </button>

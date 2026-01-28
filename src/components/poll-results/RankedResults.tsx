@@ -62,7 +62,7 @@ export default function RankedResults({
         {pointSystem.map((points, index) => (
           <span key={index} className="flex items-center gap-1">
             <span className="font-medium">{['1st', '2nd', '3rd', '4th', '5th'][index]}:</span>
-            <span className="text-purple-600">{points} pts</span>
+            <span className="text-green-700">{points} pts</span>
           </span>
         ))}
       </div>
@@ -96,7 +96,7 @@ export default function RankedResults({
                         index === 0 ? 'bg-yellow-400' :
                         index === 1 ? 'bg-gray-400' :
                         index === 2 ? 'bg-orange-400' :
-                        'bg-purple-400'
+                        'bg-green-500'
                       }`}
                       style={{ width: `${percentOfMax}%` }}
                     />
@@ -105,7 +105,7 @@ export default function RankedResults({
 
                 {/* Points */}
                 <div className="text-right">
-                  <div className="text-xl font-bold text-purple-600">
+                  <div className="text-xl font-bold text-green-700">
                     {option.points}
                   </div>
                   <div className="text-xs text-gray-500">points</div>

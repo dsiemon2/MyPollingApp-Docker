@@ -89,8 +89,8 @@ export default function AdminLoginPage() {
           <div className="p-8">
             {/* Header */}
             <div className="text-center mb-8">
-              <div className="w-20 h-20 bg-purple-600/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-10 h-10 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-20 h-20 bg-green-700/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
@@ -114,7 +114,7 @@ export default function AdminLoginPage() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 bg-slate-700 border border-slate-600 text-white rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition placeholder:text-slate-500"
+                  className="w-full px-4 py-3 bg-slate-700 border border-slate-600 text-white rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition placeholder:text-slate-500"
                   placeholder="admin@mypollingapp.com"
                   required
                   autoComplete="email"
@@ -128,7 +128,7 @@ export default function AdminLoginPage() {
                     type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-4 py-3 pr-12 bg-slate-700 border border-slate-600 text-white rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition placeholder:text-slate-500"
+                    className="w-full px-4 py-3 pr-12 bg-slate-700 border border-slate-600 text-white rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition placeholder:text-slate-500"
                     placeholder="Enter your password"
                     required
                     autoComplete="current-password"
@@ -155,7 +155,7 @@ export default function AdminLoginPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-purple-600 hover:bg-purple-700 text-white py-4 rounded-xl font-semibold text-lg transition transform hover:-translate-y-0.5 hover:shadow-lg hover:shadow-purple-500/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full bg-green-700 hover:bg-green-800 text-white py-4 rounded-xl font-semibold text-lg transition transform hover:-translate-y-0.5 hover:shadow-lg hover:shadow-green-500/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {loading ? (
                   <>
@@ -179,7 +179,7 @@ export default function AdminLoginPage() {
             {/* Demo Accounts */}
             <div className="mt-6 p-4 bg-slate-700/50 border border-slate-600 rounded-xl">
               <h3 className="text-slate-300 font-medium text-sm mb-3 flex items-center gap-2">
-                <svg className="w-4 h-4 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                 </svg>
                 Demo Admin Accounts
@@ -190,7 +190,7 @@ export default function AdminLoginPage() {
                     key={admin.email}
                     type="button"
                     onClick={() => fillDemo(admin.email, admin.password)}
-                    className="bg-purple-600/30 hover:bg-purple-600/50 text-purple-300 px-3 py-2 rounded-lg text-sm font-medium transition flex items-center gap-1 border border-purple-500/30"
+                    className="bg-green-700/30 hover:bg-green-700/50 text-green-300 px-3 py-2 rounded-lg text-sm font-medium transition flex items-center gap-1 border border-green-500/30"
                   >
                     <span>{admin.icon}</span>
                     {admin.role}
@@ -203,7 +203,7 @@ export default function AdminLoginPage() {
           <div className="bg-slate-900/50 border-t border-slate-700 p-4 text-center">
             <p className="text-slate-400 text-sm">
               Not an admin?{' '}
-              <Link href="/login" className="text-purple-400 font-medium hover:text-purple-300">
+              <Link href="/login" className="text-green-400 font-medium hover:text-green-300">
                 User Login
               </Link>
             </p>

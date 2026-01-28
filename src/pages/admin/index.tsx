@@ -31,7 +31,7 @@ export default function AdminDashboard() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <div className="bg-white rounded-xl shadow-sm p-6 hover-card">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-2xl">
+            <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center text-2xl">
               🗳️
             </div>
             <div>
@@ -82,7 +82,7 @@ export default function AdminDashboard() {
       <div className="bg-white rounded-xl shadow-sm p-6 mb-8">
         <h2 className="text-xl font-semibold text-gray-800 mb-4">Quick Actions</h2>
         <div className="flex flex-wrap gap-4">
-          <a href="/admin/polls" className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition">
+          <a href="/admin/polls" className="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 transition">
             + Create Poll
           </a>
           <a href="/admin/ai-providers" className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">

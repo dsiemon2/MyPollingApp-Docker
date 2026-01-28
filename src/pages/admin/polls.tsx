@@ -428,7 +428,7 @@ export default function PollManagementPage() {
         </div>
         <button
           onClick={() => { setShowModal(true); resetForm(); }}
-          className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition"
+          className="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 transition"
         >
           + Create Poll
         </button>
@@ -437,7 +437,7 @@ export default function PollManagementPage() {
       {/* Stats */}
       <div className="grid grid-cols-4 gap-4 mb-6">
         <div className="bg-white rounded-xl shadow-sm p-4">
-          <p className="text-2xl font-bold text-purple-600">{polls.length}</p>
+          <p className="text-2xl font-bold text-green-700">{polls.length}</p>
           <p className="text-sm text-gray-500">Total Polls</p>
         </div>
         <div className="bg-white rounded-xl shadow-sm p-4">
@@ -449,7 +449,7 @@ export default function PollManagementPage() {
           <p className="text-sm text-gray-500">Scheduled</p>
         </div>
         <div className="bg-white rounded-xl shadow-sm p-4">
-          <p className="text-2xl font-bold text-indigo-600">{polls.reduce((sum, p) => sum + p._count.votes, 0)}</p>
+          <p className="text-2xl font-bold text-green-700">{polls.reduce((sum, p) => sum + p._count.votes, 0)}</p>
           <p className="text-sm text-gray-500">Total Votes</p>
         </div>
       </div>
@@ -514,7 +514,7 @@ export default function PollManagementPage() {
                     )}
                   </td>
                   <td className="px-6 py-4 text-right">
-                    <Link href={`/polls/${poll.id}`} className="text-purple-600 hover:text-purple-800 mr-3">
+                    <Link href={`/polls/${poll.id}`} className="text-green-700 hover:text-green-800 mr-3">
                       View
                     </Link>
                     {poll.status === 'open' && (
@@ -559,7 +559,7 @@ export default function PollManagementPage() {
                       <button
                         onClick={() => handlePageChange(p)}
                         className={`px-3 py-1 border rounded text-sm ${
-                          p === pagination.page ? 'bg-purple-600 text-white border-purple-600' : 'hover:bg-gray-50'
+                          p === pagination.page ? 'bg-green-700 text-white border-green-700' : 'hover:bg-gray-50'
                         }`}
                       >
                         {p}
@@ -604,7 +604,7 @@ export default function PollManagementPage() {
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   <button
                     onClick={() => setCreateMode('scratch')}
-                    className="p-6 border-2 border-gray-200 rounded-xl hover:border-purple-500 hover:bg-purple-50 transition text-left"
+                    className="p-6 border-2 border-gray-200 rounded-xl hover:border-green-500 hover:bg-green-50 transition text-left"
                   >
                     <div className="text-3xl mb-2">✏️</div>
                     <div className="font-semibold text-gray-800">From Scratch</div>
@@ -612,7 +612,7 @@ export default function PollManagementPage() {
                   </button>
                   <button
                     onClick={() => setCreateMode('template')}
-                    className="p-6 border-2 border-gray-200 rounded-xl hover:border-purple-500 hover:bg-purple-50 transition text-left"
+                    className="p-6 border-2 border-gray-200 rounded-xl hover:border-green-500 hover:bg-green-50 transition text-left"
                   >
                     <div className="text-3xl mb-2">📋</div>
                     <div className="font-semibold text-gray-800">Use Template</div>
@@ -627,7 +627,7 @@ export default function PollManagementPage() {
               <div className="p-6">
                 <button
                   onClick={() => setCreateMode('select')}
-                  className="text-purple-600 hover:text-purple-800 mb-4 flex items-center gap-1"
+                  className="text-green-700 hover:text-green-800 mb-4 flex items-center gap-1"
                 >
                   ← Back
                 </button>
@@ -637,14 +637,14 @@ export default function PollManagementPage() {
                     <button
                       key={template.id}
                       onClick={() => handleTemplateSelect(template)}
-                      className="p-4 border-2 border-gray-200 rounded-xl hover:border-purple-500 hover:bg-purple-50 transition text-left"
+                      className="p-4 border-2 border-gray-200 rounded-xl hover:border-green-500 hover:bg-green-50 transition text-left"
                     >
                       <div className="flex items-center gap-2 mb-2">
                         <span className="text-2xl">{template.icon}</span>
                         <span className="font-semibold text-gray-800">{template.name}</span>
                       </div>
                       <div className="text-sm text-gray-500">{template.description}</div>
-                      <div className="mt-2 text-xs text-purple-600">{template.pollType?.name}</div>
+                      <div className="mt-2 text-xs text-green-700">{template.pollType?.name}</div>
                     </button>
                   ))}
                 </div>
@@ -656,7 +656,7 @@ export default function PollManagementPage() {
               <div className="p-6">
                 <button
                   onClick={() => setCreateMode('select')}
-                  className="text-purple-600 hover:text-purple-800 mb-4 flex items-center gap-1"
+                  className="text-green-700 hover:text-green-800 mb-4 flex items-center gap-1"
                 >
                   ← Back
                 </button>
@@ -668,7 +668,7 @@ export default function PollManagementPage() {
                     <button
                       key={type.id}
                       onClick={() => handleTypeSelect(type)}
-                      className="p-4 border-2 border-gray-200 rounded-xl hover:border-purple-500 hover:bg-purple-50 transition text-left"
+                      className="p-4 border-2 border-gray-200 rounded-xl hover:border-green-500 hover:bg-green-50 transition text-left"
                     >
                       <div className="flex items-center gap-2 mb-1">
                         <span className="text-xl">{type.icon}</span>
@@ -687,16 +687,16 @@ export default function PollManagementPage() {
                 <button
                   type="button"
                   onClick={() => { setSelectedType(null); setSelectedTemplate(null); }}
-                  className="text-purple-600 hover:text-purple-800 mb-4 flex items-center gap-1"
+                  className="text-green-700 hover:text-green-800 mb-4 flex items-center gap-1"
                 >
                   ← Change Type
                 </button>
 
-                <div className="flex items-center gap-2 mb-4 p-3 bg-purple-50 rounded-lg">
+                <div className="flex items-center gap-2 mb-4 p-3 bg-green-50 rounded-lg">
                   <span className="text-2xl">{selectedType.icon}</span>
                   <div>
-                    <div className="font-semibold text-purple-800">{selectedType.name}</div>
-                    <div className="text-xs text-purple-600">{selectedType.description}</div>
+                    <div className="font-semibold text-green-800">{selectedType.name}</div>
+                    <div className="text-xs text-green-700">{selectedType.description}</div>
                   </div>
                 </div>
 
@@ -706,7 +706,7 @@ export default function PollManagementPage() {
                     type="text"
                     value={formData.title}
                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
                     placeholder="What do you want to ask?"
                     required
                   />
@@ -717,7 +717,7 @@ export default function PollManagementPage() {
                   <textarea
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
                     placeholder="Add more context (optional)"
                     rows={2}
                   />
@@ -730,7 +730,7 @@ export default function PollManagementPage() {
                       type="checkbox"
                       checked={formData.enableScheduling}
                       onChange={(e) => setFormData({ ...formData, enableScheduling: e.target.checked })}
-                      className="rounded text-purple-600 focus:ring-purple-500"
+                      className="rounded text-green-700 focus:ring-green-500"
                     />
                     <span className="font-medium text-gray-700">Enable Scheduling</span>
                   </label>
@@ -745,7 +745,7 @@ export default function PollManagementPage() {
                           type="datetime-local"
                           value={formData.scheduledAt}
                           onChange={(e) => setFormData({ ...formData, scheduledAt: e.target.value })}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
                         />
                         <p className="text-xs text-gray-500 mt-1">Leave empty to open immediately</p>
                       </div>
@@ -757,7 +757,7 @@ export default function PollManagementPage() {
                           type="datetime-local"
                           value={formData.closedAt}
                           onChange={(e) => setFormData({ ...formData, closedAt: e.target.value })}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
                         />
                         <p className="text-xs text-gray-500 mt-1">Leave empty for manual close</p>
                       </div>
@@ -778,7 +778,7 @@ export default function PollManagementPage() {
                           type="text"
                           value={option}
                           onChange={(e) => updateOption(index, e.target.value)}
-                          className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                          className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
                           placeholder={`Option ${index + 1}`}
                         />
                         {formData.options.length > 2 && (
@@ -796,7 +796,7 @@ export default function PollManagementPage() {
                       <button
                         type="button"
                         onClick={addOption}
-                        className="text-purple-600 hover:text-purple-700 text-sm"
+                        className="text-green-700 hover:text-green-700 text-sm"
                       >
                         + Add Option
                       </button>
@@ -814,7 +814,7 @@ export default function PollManagementPage() {
                   </button>
                   <button
                     type="submit"
-                    className="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
+                    className="flex-1 px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800"
                   >
                     Create Poll
                   </button>

@@ -41,7 +41,7 @@ export default function CheckoutCancelPage() {
         <div className="space-y-3">
           <button
             onClick={handleRetry}
-            className="block w-full px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition"
+            className="block w-full px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 transition"
           >
             Try Again
           </button>
@@ -64,7 +64,7 @@ export default function CheckoutCancelPage() {
         <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
           <p className="text-sm text-gray-500 dark:text-gray-400">
             Need help? Contact us at{' '}
-            <a href={`mailto:support@${settings.businessName?.toLowerCase().replace(/\s+/g, '')}.com`} className="text-purple-600 hover:underline">
+            <a href={`mailto:support@${settings.businessName?.toLowerCase().replace(/\s+/g, '')}.com`} className="text-green-700 hover:underline">
               support@{settings.businessName?.toLowerCase().replace(/\s+/g, '') || 'mypollingapp'}.com
             </a>
           </p>

@@ -70,7 +70,7 @@ export default function VoiceRecorder({ onTranscription }: VoiceRecorderProps) {
           ? 'bg-red-500 hover:bg-red-600 animate-pulse'
           : isProcessing
           ? 'bg-gray-400 cursor-not-allowed'
-          : 'bg-purple-600 hover:bg-purple-700'
+          : 'bg-green-700 hover:bg-green-800'
       }`}
       title={isRecording ? 'Stop recording' : isProcessing ? 'Processing...' : 'Start voice recording'}
     >

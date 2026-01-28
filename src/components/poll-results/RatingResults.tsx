@@ -56,7 +56,7 @@ export default function RatingResults({
         <span
           key={i}
           className={`w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold ${
-            isActive ? 'bg-purple-500 text-white' : 'bg-gray-200 text-gray-500'
+            isActive ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-500'
           }`}
         >
           {i}
@@ -82,7 +82,7 @@ export default function RatingResults({
         {style === 'emoji' && renderEmoji()}
       </div>
 
-      <div className="text-3xl font-bold text-purple-600 mb-2">
+      <div className="text-3xl font-bold text-green-700 mb-2">
         {(averageRating || 0).toFixed(1)} / {maxRating}
       </div>
 
@@ -93,7 +93,7 @@ export default function RatingResults({
       {/* Rating distribution bar */}
       <div className="mt-6 bg-gray-100 rounded-full h-3 overflow-hidden">
         <div
-          className="bg-gradient-to-r from-purple-400 to-purple-600 h-full transition-all duration-500"
+          className="bg-gradient-to-r from-green-500 to-green-700 h-full transition-all duration-500"
           style={{ width: `${((averageRating || 0) / maxRating) * 100}%` }}
         />
       </div>

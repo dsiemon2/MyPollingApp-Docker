@@ -720,8 +720,8 @@ async function main() {
   const settings = [
     { key: 'businessName', value: 'PoligoPro', category: 'branding' },
     { key: 'tagline', value: 'Voice-Enabled Polling', category: 'branding' },
-    { key: 'primaryColor', value: '#7c3aed', category: 'branding' },
-    { key: 'secondaryColor', value: '#4f46e5', category: 'branding' },
+    { key: 'primaryColor', value: '#0d7a3e', category: 'branding' },
+    { key: 'secondaryColor', value: '#1a3a5c', category: 'branding' },
     { key: 'logoUrl', value: '/images/PoligoPro.png', category: 'branding' },
     // Twilio SMS settings
     { key: 'twilio_account_sid', value: process.env.TWILIO_ACCOUNT_SID || '', category: 'sms' },

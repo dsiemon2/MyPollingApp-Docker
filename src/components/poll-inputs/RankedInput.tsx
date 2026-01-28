@@ -103,12 +103,12 @@ export default function RankedInput({
       })}
 
       {votedRankings && Object.keys(votedRankings).length > 0 && (
-        <div className="mt-4 p-3 bg-purple-50 rounded-lg">
-          <p className="text-sm text-purple-700 font-medium mb-2">Your rankings:</p>
+        <div className="mt-4 p-3 bg-green-50 rounded-lg">
+          <p className="text-sm text-green-700 font-medium mb-2">Your rankings:</p>
           {Object.entries(votedRankings).map(([rank, optionId]) => {
             const option = options.find(o => o.id === optionId);
             return (
-              <p key={rank} className="text-sm text-purple-600">
+              <p key={rank} className="text-sm text-green-700">
                 {rankLabels[Number(rank) - 1]}: {option?.label}
               </p>
             );

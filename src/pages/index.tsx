@@ -35,20 +35,20 @@ export default function SplashPage() {
             />
           </Link>
           <div className="hidden md:flex items-center gap-8">
-            <a href="#features" className="text-gray-600 hover:text-purple-600 transition">Features</a>
-            <a href="#use-cases" className="text-gray-600 hover:text-purple-600 transition">Use Cases</a>
-            <a href="#pricing" className="text-gray-600 hover:text-purple-600 transition">Pricing</a>
-            <a href="#about" className="text-gray-600 hover:text-purple-600 transition">About</a>
+            <a href="#features" className="text-gray-600 hover:text-green-700 transition">Features</a>
+            <a href="#use-cases" className="text-gray-600 hover:text-green-700 transition">Use Cases</a>
+            <a href="#pricing" className="text-gray-600 hover:text-green-700 transition">Pricing</a>
+            <a href="#about" className="text-gray-600 hover:text-green-700 transition">About</a>
           </div>
           <div className="flex gap-3 items-center">
             <ThemeToggle />
             {session ? (
               <>
-                <Link href="/polls" className="text-purple-600 hover:text-purple-800 px-4 py-2 transition">
+                <Link href="/polls" className="text-green-700 hover:text-green-800 px-4 py-2 transition">
                   Dashboard
                 </Link>
                 {(session.user as any)?.role !== 'USER' && (
-                  <Link href="/admin" className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">
+                  <Link href="/admin" className="bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-800 transition">
                     Admin
                   </Link>
                 )}
@@ -56,9 +56,9 @@ export default function SplashPage() {
                 <div className="relative" ref={userMenuRef}>
                   <button
                     onClick={() => setUserMenuOpen(!userMenuOpen)}
-                    className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+                    className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-green-700 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition"
                   >
-                    <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white text-sm font-semibold">
+                    <div className="w-8 h-8 bg-green-700 rounded-full flex items-center justify-center text-white text-sm font-semibold">
                       {session.user?.name?.charAt(0).toUpperCase() || session.user?.email?.charAt(0).toUpperCase() || 'U'}
                     </div>
                     <svg className={`w-4 h-4 transition-transform ${userMenuOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -98,7 +98,7 @@ export default function SplashPage() {
               </>
             ) : (
               <>
-                <Link href="/login" className="text-purple-600 border-2 border-purple-600 px-4 py-2 rounded-lg hover:bg-purple-600 hover:text-white transition">
+                <Link href="/login" className="text-green-700 border-2 border-green-700 px-4 py-2 rounded-lg hover:bg-green-700 hover:text-white transition">
                   Sign In
                 </Link>
                 <Link href="/register" className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition">
@@ -145,7 +145,7 @@ export default function SplashPage() {
                 </span>
               </div>
               <div className="flex flex-wrap gap-4">
-                <Link href="/register" className="bg-white text-purple-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition transform hover:scale-105 shadow-lg">
+                <Link href="/register" className="bg-white text-blue-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition transform hover:scale-105 shadow-lg">
                   Start Free Trial
                 </Link>
                 <a href="#pricing" className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition">
@@ -158,7 +158,7 @@ export default function SplashPage() {
             <div className="relative hidden lg:block">
               <div className="bg-white rounded-2xl p-6 shadow-2xl transform rotate-2 hover:rotate-0 transition-transform">
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-xl flex items-center justify-center text-white text-xl">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-900 to-green-700 rounded-xl flex items-center justify-center text-white text-xl">
                     📊
                   </div>
                   <div>
@@ -173,7 +173,7 @@ export default function SplashPage() {
                       <span className="text-gray-600">🍕 Pizza Palace</span>
                       <div className="flex items-center gap-2">
                         <div className="w-32 bg-gray-200 rounded-full h-2">
-                          <div className="bg-purple-600 h-2 rounded-full" style={{width: '65%'}}></div>
+                          <div className="bg-green-700 h-2 rounded-full" style={{width: '65%'}}></div>
                         </div>
                         <span className="text-sm text-gray-500">65%</span>
                       </div>
@@ -182,7 +182,7 @@ export default function SplashPage() {
                       <span className="text-gray-600">🍔 Burger Barn</span>
                       <div className="flex items-center gap-2">
                         <div className="w-32 bg-gray-200 rounded-full h-2">
-                          <div className="bg-purple-400 h-2 rounded-full" style={{width: '25%'}}></div>
+                          <div className="bg-green-500 h-2 rounded-full" style={{width: '25%'}}></div>
                         </div>
                         <span className="text-sm text-gray-500">25%</span>
                       </div>
@@ -191,7 +191,7 @@ export default function SplashPage() {
                       <span className="text-gray-600">🥗 Salad Stop</span>
                       <div className="flex items-center gap-2">
                         <div className="w-32 bg-gray-200 rounded-full h-2">
-                          <div className="bg-purple-300 h-2 rounded-full" style={{width: '10%'}}></div>
+                          <div className="bg-green-400 h-2 rounded-full" style={{width: '10%'}}></div>
                         </div>
                         <span className="text-sm text-gray-500">10%</span>
                       </div>
@@ -231,42 +231,42 @@ export default function SplashPage() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="bg-gray-50 rounded-2xl p-8 text-center hover:shadow-lg transition hover:-translate-y-1">
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-900 to-green-700 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-4">
                 📊
               </div>
               <h4 className="text-xl font-bold text-gray-800 mb-2">Multiple Poll Types</h4>
               <p className="text-gray-600">Single choice, multiple choice, rating scales, NPS, ranked choice, and open text polls.</p>
             </div>
             <div className="bg-gray-50 rounded-2xl p-8 text-center hover:shadow-lg transition hover:-translate-y-1">
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-900 to-green-700 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-4">
                 ⚡
               </div>
               <h4 className="text-xl font-bold text-gray-800 mb-2">Real-time Results</h4>
               <p className="text-gray-600">Watch votes come in live with automatic updates and beautiful visualizations.</p>
             </div>
             <div className="bg-gray-50 rounded-2xl p-8 text-center hover:shadow-lg transition hover:-translate-y-1">
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-900 to-green-700 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-4">
                 🎤
               </div>
               <h4 className="text-xl font-bold text-gray-800 mb-2">Voice Chat</h4>
               <p className="text-gray-600">Discuss poll topics with voice-to-text powered by OpenAI Whisper technology.</p>
             </div>
             <div className="bg-gray-50 rounded-2xl p-8 text-center hover:shadow-lg transition hover:-translate-y-1">
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-900 to-green-700 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-4">
                 🤖
               </div>
               <h4 className="text-xl font-bold text-gray-800 mb-2">AI Assistant</h4>
               <p className="text-gray-600">Get intelligent summaries and insights from poll discussions automatically.</p>
             </div>
             <div className="bg-gray-50 rounded-2xl p-8 text-center hover:shadow-lg transition hover:-translate-y-1">
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-900 to-green-700 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-4">
                 📱
               </div>
               <h4 className="text-xl font-bold text-gray-800 mb-2">Mobile Optimized</h4>
               <p className="text-gray-600">Perfect experience on any device - desktop, tablet, or smartphone.</p>
             </div>
             <div className="bg-gray-50 rounded-2xl p-8 text-center hover:shadow-lg transition hover:-translate-y-1">
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-900 to-green-700 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-4">
                 🔒
               </div>
               <h4 className="text-xl font-bold text-gray-800 mb-2">Secure & Private</h4>
@@ -345,7 +345,7 @@ export default function SplashPage() {
                   <span>✗</span> AI Insights
                 </li>
               </ul>
-              <Link href="/register?plan=free" className="block w-full text-center border-2 border-purple-600 text-purple-600 py-3 rounded-full font-semibold hover:bg-purple-600 hover:text-white transition">
+              <Link href="/register?plan=free" className="block w-full text-center border-2 border-green-700 text-green-700 py-3 rounded-full font-semibold hover:bg-green-700 hover:text-white transition">
                 Get Started Free
               </Link>
             </div>
@@ -375,7 +375,7 @@ export default function SplashPage() {
                   <span className="text-green-500">✓</span> Email Support
                 </li>
               </ul>
-              <Link href="/register?plan=starter" className="block w-full text-center border-2 border-purple-600 text-purple-600 py-3 rounded-full font-semibold hover:bg-purple-600 hover:text-white transition">
+              <Link href="/register?plan=starter" className="block w-full text-center border-2 border-green-700 text-green-700 py-3 rounded-full font-semibold hover:bg-green-700 hover:text-white transition">
                 Start Free Trial
               </Link>
             </div>
@@ -408,14 +408,14 @@ export default function SplashPage() {
                   <span className="text-green-500">✓</span> Priority Support
                 </li>
               </ul>
-              <Link href="/register?plan=professional" className="block w-full text-center bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-3 rounded-full font-semibold hover:from-purple-700 hover:to-indigo-700 transition">
+              <Link href="/register?plan=professional" className="block w-full text-center bg-gradient-to-r from-blue-900 to-green-700 text-white py-3 rounded-full font-semibold hover:from-blue-950 hover:to-green-800 transition">
                 Start Free Trial
               </Link>
             </div>
 
             {/* Enterprise Plan */}
             <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition hover:-translate-y-2">
-              <div className="text-purple-600 font-semibold uppercase tracking-wide text-sm mb-2">Enterprise</div>
+              <div className="text-green-700 font-semibold uppercase tracking-wide text-sm mb-2">Enterprise</div>
               <div className="text-4xl font-bold text-gray-800 mb-1">$99<span className="text-lg font-normal text-gray-500">/mo</span></div>
               <p className="text-gray-500 mb-6">For large organizations</p>
               <ul className="space-y-3 mb-8">
@@ -438,7 +438,7 @@ export default function SplashPage() {
                   <span className="text-green-500">✓</span> Dedicated Support
                 </li>
               </ul>
-              <Link href="/register?plan=enterprise" className="block w-full text-center border-2 border-purple-600 text-purple-600 py-3 rounded-full font-semibold hover:bg-purple-600 hover:text-white transition">
+              <Link href="/register?plan=enterprise" className="block w-full text-center border-2 border-green-700 text-green-700 py-3 rounded-full font-semibold hover:bg-green-700 hover:text-white transition">
                 Contact Sales
               </Link>
             </div>
@@ -465,15 +465,15 @@ export default function SplashPage() {
               </p>
               <div className="flex gap-12">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-purple-600">1,000+</div>
+                  <div className="text-3xl font-bold text-green-700">1,000+</div>
                   <div className="text-gray-500">Polls Created</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-purple-600">50K+</div>
+                  <div className="text-3xl font-bold text-green-700">50K+</div>
                   <div className="text-gray-500">Votes Cast</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-purple-600">99%</div>
+                  <div className="text-3xl font-bold text-green-700">99%</div>
                   <div className="text-gray-500">Satisfaction</div>
                 </div>
               </div>
@@ -492,7 +492,7 @@ export default function SplashPage() {
         <div className="max-w-4xl mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Get Started?</h2>
           <p className="text-xl text-white/80 mb-8">Start your free trial today - no credit card required</p>
-          <Link href="/register" className="inline-block bg-white text-purple-900 px-10 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition transform hover:scale-105 shadow-lg">
+          <Link href="/register" className="inline-block bg-white text-blue-900 px-10 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition transform hover:scale-105 shadow-lg">
             Get Started Free →
           </Link>
         </div>

@@ -360,7 +360,7 @@ export default function AIProvidersPage() {
     return (
       <AdminLayout active="ai-providers">
         <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-700"></div>
         </div>
       </AdminLayout>
     );
@@ -467,12 +467,12 @@ export default function AIProvidersPage() {
                     placeholder={provider.maskedApiKey || 'Enter API key...'}
                     value={apiKeys[provider.code] || ''}
                     onChange={(e) => setApiKeys({ ...apiKeys, [provider.code]: e.target.value })}
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-green-500 focus:border-transparent"
                   />
                   <button
                     onClick={() => saveApiKey(provider.code)}
                     disabled={!apiKeys[provider.code] || saving === provider.code}
-                    className="px-3 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50"
+                    className="px-3 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 disabled:opacity-50"
                   >
                     {saving === provider.code ? '...' : '💾'}
                   </button>
@@ -485,7 +485,7 @@ export default function AIProvidersPage() {
                 <select
                   value={provider.defaultModel}
                   onChange={(e) => updateModel(provider.code, e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-purple-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-green-500"
                 >
                   {provider.availableModels.map((model) => (
                     <option key={model.id} value={model.id}>
@@ -513,7 +513,7 @@ export default function AIProvidersPage() {
                   className={`flex-1 py-2 text-sm rounded-lg transition ${
                     provider.isSelected && provider.isConfigured
                       ? 'bg-green-600 text-white'
-                      : 'bg-purple-600 text-white hover:bg-purple-700'
+                      : 'bg-green-700 text-white hover:bg-green-800'
                   } disabled:opacity-50 disabled:cursor-not-allowed`}
                 >
                   {provider.isSelected && provider.isConfigured ? '✓ Selected' : '✓ Select'}

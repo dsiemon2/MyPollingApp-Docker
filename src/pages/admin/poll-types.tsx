@@ -21,7 +21,7 @@ interface PollType {
 const categoryColors: Record<string, string> = {
   choice: 'bg-blue-100 text-blue-800',
   rating: 'bg-yellow-100 text-yellow-800',
-  ranking: 'bg-purple-100 text-purple-800',
+  ranking: 'bg-green-100 text-green-800',
   text: 'bg-green-100 text-green-800'
 };
 
@@ -163,7 +163,7 @@ export default function PollTypesPage() {
     return (
       <AdminLayout active="poll-types">
         <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-700"></div>
         </div>
       </AdminLayout>
     );
@@ -191,7 +191,7 @@ export default function PollTypesPage() {
               });
               setShowModal(true);
             }}
-            className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 flex items-center gap-2"
+            className="bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-800 flex items-center gap-2"
           >
             <span>+</span>
             <span>Add Type</span>
@@ -217,7 +217,7 @@ export default function PollTypesPage() {
             <div className="text-gray-600 text-sm">System Types</div>
           </div>
           <div className="bg-white rounded-xl p-4 shadow-sm">
-            <div className="text-2xl font-bold text-purple-600">
+            <div className="text-2xl font-bold text-green-700">
               {pollTypes.reduce((acc, t) => acc + t._count.polls, 0)}
             </div>
             <div className="text-gray-600 text-sm">Polls Using</div>
@@ -268,7 +268,7 @@ export default function PollTypesPage() {
                           onChange={() => handleToggle(type)}
                           className="sr-only peer"
                         />
-                        <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+                        <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-700"></div>
                       </label>
                       {type.isSystem && (
                         <span className="text-xs text-gray-400">System</span>
@@ -278,7 +278,7 @@ export default function PollTypesPage() {
                   <td className="p-4 text-right">
                     <button
                       onClick={() => handleEdit(type)}
-                      className="text-purple-600 hover:text-purple-800 mr-3"
+                      className="text-green-700 hover:text-green-800 mr-3"
                     >
                       Edit
                     </button>
@@ -386,7 +386,7 @@ export default function PollTypesPage() {
                   </button>
                   <button
                     type="submit"
-                    className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
+                    className="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800"
                   >
                     {editingType ? 'Save Changes' : 'Create Type'}
                   </button>

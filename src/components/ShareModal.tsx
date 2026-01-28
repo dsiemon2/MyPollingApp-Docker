@@ -97,7 +97,7 @@ export default function ShareModal({ isOpen, onClose, pollId, pollTitle, pollDes
               onClick={() => setActiveTab(tab.id as typeof activeTab)}
               className={`flex-1 py-3 text-sm font-medium transition-colors ${
                 activeTab === tab.id
-                  ? 'text-purple-600 border-b-2 border-purple-600'
+                  ? 'text-green-700 border-b-2 border-green-700'
                   : 'text-gray-500 hover:text-gray-700'
               }`}
             >
@@ -108,9 +108,9 @@ export default function ShareModal({ isOpen, onClose, pollId, pollTitle, pollDes
 
         <div className="p-5 space-y-5">
           {/* Poll Preview */}
-          <div className="bg-purple-50 rounded-xl p-4">
-            <p className="font-semibold text-purple-800">{pollTitle}</p>
-            {pollDescription && <p className="text-sm text-purple-600 mt-1">{pollDescription}</p>}
+          <div className="bg-green-50 rounded-xl p-4">
+            <p className="font-semibold text-green-800">{pollTitle}</p>
+            {pollDescription && <p className="text-sm text-green-700 mt-1">{pollDescription}</p>}
           </div>
 
           {/* Share Tab */}
@@ -123,7 +123,7 @@ export default function ShareModal({ isOpen, onClose, pollId, pollTitle, pollDes
                   <input type="text" readOnly value={pollUrl} className="flex-1 px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-600" />
                   <button
                     onClick={() => copyToClipboard(pollUrl, 'link')}
-                    className={`px-4 py-2.5 rounded-lg font-medium transition-all ${copied === 'link' ? 'bg-green-500 text-white' : 'bg-purple-600 text-white hover:bg-purple-700'}`}
+                    className={`px-4 py-2.5 rounded-lg font-medium transition-all ${copied === 'link' ? 'bg-green-500 text-white' : 'bg-green-700 text-white hover:bg-green-800'}`}
                   >
                     {copied === 'link' ? 'Copied!' : 'Copy'}
                   </button>
@@ -163,7 +163,7 @@ export default function ShareModal({ isOpen, onClose, pollId, pollTitle, pollDes
                   <div className="flex-1">
                     <p className="text-sm text-gray-600 mb-3">Scan to vote! Perfect for Instagram Stories or printed materials.</p>
                     <div className="flex gap-2">
-                      <button onClick={downloadQR} className="px-3 py-1.5 bg-purple-600 text-white text-sm rounded-lg hover:bg-purple-700">Download QR</button>
+                      <button onClick={downloadQR} className="px-3 py-1.5 bg-green-700 text-white text-sm rounded-lg hover:bg-green-800">Download QR</button>
                       <button
                         onClick={() => copyToClipboard(`${baseUrl}/api/polls/${pollId}/qrcode?size=400`, 'qr')}
                         className={`px-3 py-1.5 text-sm rounded-lg ${copied === 'qr' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
@@ -237,7 +237,7 @@ export default function ShareModal({ isOpen, onClose, pollId, pollTitle, pollDes
                     {copied === 'api' ? 'Copied!' : 'Copy'}
                   </button>
                 </div>
-                <code className="text-xs text-purple-600 break-all">GET {baseUrl}/api/polls/{pollId}/embed</code>
+                <code className="text-xs text-green-700 break-all">GET {baseUrl}/api/polls/{pollId}/embed</code>
                 <p className="text-xs text-gray-500 mt-2">Returns poll data as JSON for custom integrations.</p>
               </div>
 
@@ -252,7 +252,7 @@ export default function ShareModal({ isOpen, onClose, pollId, pollTitle, pollDes
                     {copied === 'oembed' ? 'Copied!' : 'Copy'}
                   </button>
                 </div>
-                <code className="text-xs text-purple-600 break-all">GET {baseUrl}/api/oembed?url=...</code>
+                <code className="text-xs text-green-700 break-all">GET {baseUrl}/api/oembed?url=...</code>
                 <p className="text-xs text-gray-500 mt-2">For WordPress and other oEmbed-compatible platforms.</p>
               </div>
 
@@ -264,12 +264,12 @@ export default function ShareModal({ isOpen, onClose, pollId, pollTitle, pollDes
                     href={`${baseUrl}/api/polls/${pollId}/preview.png`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs px-2 py-1 rounded bg-purple-100 text-purple-700 hover:bg-purple-200"
+                    className="text-xs px-2 py-1 rounded bg-green-100 text-green-700 hover:bg-green-200"
                   >
                     View
                   </a>
                 </div>
-                <code className="text-xs text-purple-600 break-all">{baseUrl}/api/polls/{pollId}/preview.png</code>
+                <code className="text-xs text-green-700 break-all">{baseUrl}/api/polls/{pollId}/preview.png</code>
                 <p className="text-xs text-gray-500 mt-2">Auto-generated image for rich social media previews.</p>
               </div>
 
@@ -281,12 +281,12 @@ export default function ShareModal({ isOpen, onClose, pollId, pollTitle, pollDes
                     href={`${baseUrl}/api/polls/${pollId}/qrcode?size=300`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs px-2 py-1 rounded bg-purple-100 text-purple-700 hover:bg-purple-200"
+                    className="text-xs px-2 py-1 rounded bg-green-100 text-green-700 hover:bg-green-200"
                   >
                     View
                   </a>
                 </div>
-                <code className="text-xs text-purple-600 break-all">{baseUrl}/api/polls/{pollId}/qrcode?size=300&format=png</code>
+                <code className="text-xs text-green-700 break-all">{baseUrl}/api/polls/{pollId}/qrcode?size=300&format=png</code>
                 <p className="text-xs text-gray-500 mt-2">Parameters: size (100-1000), format (png/svg), dark, light</p>
               </div>
             </>

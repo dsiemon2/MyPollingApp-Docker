@@ -55,7 +55,7 @@ export default function LogicRulesPage() {
           <h1 className="text-3xl font-bold text-gray-800">Logic Rules</h1>
           <p className="text-gray-600 mt-1">Automate actions based on triggers</p>
         </div>
-        <button onClick={() => setShowModal(true)} className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
+        <button onClick={() => setShowModal(true)} className="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800">
           + Add Rule
         </button>
       </div>
@@ -88,7 +88,7 @@ export default function LogicRulesPage() {
                   <td className="px-6 py-4">
                     <label className="relative inline-flex items-center cursor-pointer">
                       <input type="checkbox" checked={rule.enabled} onChange={(e) => toggleRule(rule.id, e.target.checked)} className="sr-only peer" />
-                      <div className="w-9 h-5 bg-gray-200 peer-checked:bg-purple-600 rounded-full peer after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:after:translate-x-full"></div>
+                      <div className="w-9 h-5 bg-gray-200 peer-checked:bg-green-700 rounded-full peer after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:after:translate-x-full"></div>
                     </label>
                   </td>
                   <td className="px-6 py-4 text-right">
@@ -132,7 +132,7 @@ export default function LogicRulesPage() {
               </div>
               <div className="flex gap-3">
                 <button type="button" onClick={() => setShowModal(false)} className="flex-1 px-4 py-2 border rounded-lg">Cancel</button>
-                <button type="submit" className="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg">Create</button>
+                <button type="submit" className="flex-1 px-4 py-2 bg-green-700 text-white rounded-lg">Create</button>
               </div>
             </form>
           </div>

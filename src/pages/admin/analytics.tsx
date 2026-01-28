@@ -57,11 +57,11 @@ export default function AnalyticsDashboard() {
   const planColors: Record<string, string> = {
     FREE: 'bg-gray-500',
     STARTER: 'bg-blue-500',
-    PROFESSIONAL: 'bg-purple-500',
+    PROFESSIONAL: 'bg-green-500',
     ENTERPRISE: 'bg-yellow-500'
   };
 
-  const typeColors = ['bg-purple-500', 'bg-blue-500', 'bg-green-500', 'bg-yellow-500', 'bg-red-500', 'bg-pink-500', 'bg-indigo-500'];
+  const typeColors = ['bg-green-500', 'bg-blue-500', 'bg-green-500', 'bg-yellow-500', 'bg-red-500', 'bg-pink-500', 'bg-green-700'];
 
   return (
     <AdminLayout active="analytics">
@@ -74,7 +74,7 @@ export default function AnalyticsDashboard() {
               onClick={() => setDays(d)}
               className={`px-4 py-2 rounded-lg transition ${
                 days === d
-                  ? 'bg-purple-600 text-white'
+                  ? 'bg-green-700 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -86,7 +86,7 @@ export default function AnalyticsDashboard() {
 
       {loading ? (
         <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-4 border-purple-500 border-t-transparent"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-4 border-green-500 border-t-transparent"></div>
         </div>
       ) : analytics ? (
         <>
@@ -94,7 +94,7 @@ export default function AnalyticsDashboard() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
             <div className="bg-white rounded-xl shadow-sm p-6">
               <p className="text-sm text-gray-500 mb-1">Votes ({days}d)</p>
-              <p className="text-3xl font-bold text-purple-600">{analytics.summary.totalVotes}</p>
+              <p className="text-3xl font-bold text-green-700">{analytics.summary.totalVotes}</p>
               <p className="text-xs text-gray-400 mt-1">{analytics.summary.avgVotesPerDay}/day avg</p>
             </div>
             <div className="bg-white rounded-xl shadow-sm p-6">
@@ -125,7 +125,7 @@ export default function AnalyticsDashboard() {
               {analytics.trends.votes.slice(-30).map((v, i) => (
                 <div
                   key={i}
-                  className="flex-1 bg-purple-500 rounded-t hover:bg-purple-600 transition cursor-pointer group relative"
+                  className="flex-1 bg-green-500 rounded-t hover:bg-green-700 transition cursor-pointer group relative"
                   style={{ height: `${(v.votes / maxVotes) * 100}%`, minHeight: v.votes > 0 ? '4px' : '0' }}
                 >
                   <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-800 text-white text-xs px-2 py-1 rounded whitespace-nowrap z-10">
@@ -216,7 +216,7 @@ export default function AnalyticsDashboard() {
                           {poll.status}
                         </span>
                       </td>
-                      <td className="py-3 text-right font-bold text-purple-600">{poll.votes}</td>
+                      <td className="py-3 text-right font-bold text-green-700">{poll.votes}</td>
                       <td className="py-3 text-right">
                         <a
                           href={`/polls/${poll.id}`}

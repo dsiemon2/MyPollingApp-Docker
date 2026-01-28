@@ -64,7 +64,7 @@ export default function FunctionsPage() {
           <h1 className="text-3xl font-bold text-gray-800">Custom Functions</h1>
           <p className="text-gray-600 mt-1">Create reusable JavaScript functions</p>
         </div>
-        <button onClick={() => setShowModal(true)} className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
+        <button onClick={() => setShowModal(true)} className="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800">
           + Create Function
         </button>
       </div>
@@ -83,7 +83,7 @@ export default function FunctionsPage() {
                   <div>
                     <h3 className="font-medium text-gray-800">{fn.displayName}</h3>
                     <p className="text-sm text-gray-500">{fn.description}</p>
-                    <code className="text-xs text-purple-600 mt-2 block">{fn.name}()</code>
+                    <code className="text-xs text-green-700 mt-2 block">{fn.name}()</code>
                   </div>
                   <div className="flex gap-2">
                     <span className={`px-2 py-1 text-xs rounded ${fn.enabled ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'}`}>
@@ -143,7 +143,7 @@ export default function FunctionsPage() {
               </div>
               <div className="flex gap-3">
                 <button type="button" onClick={() => setShowModal(false)} className="flex-1 px-4 py-2 border rounded-lg">Cancel</button>
-                <button type="submit" className="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg">Create</button>
+                <button type="submit" className="flex-1 px-4 py-2 bg-green-700 text-white rounded-lg">Create</button>
               </div>
             </form>
           </div>

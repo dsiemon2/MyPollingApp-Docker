@@ -49,7 +49,7 @@ export default function CheckoutSuccessPage() {
       <div className="max-w-md w-full bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 text-center">
         {verifying ? (
           <>
-            <div className="animate-spin w-16 h-16 border-4 border-purple-600 border-t-transparent rounded-full mx-auto mb-6"></div>
+            <div className="animate-spin w-16 h-16 border-4 border-green-700 border-t-transparent rounded-full mx-auto mb-6"></div>
             <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
               Verifying Payment...
             </h1>
@@ -73,7 +73,7 @@ export default function CheckoutSuccessPage() {
             <div className="space-y-3">
               <Link
                 href="/admin/my-subscription"
-                className="block w-full px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition"
+                className="block w-full px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 transition"
               >
                 View My Subscription
               </Link>
@@ -104,7 +104,7 @@ export default function CheckoutSuccessPage() {
             <div className="space-y-3">
               <Link
                 href="/admin/my-subscription"
-                className="block w-full px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition"
+                className="block w-full px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 transition"
               >
                 Check Subscription Status
               </Link>

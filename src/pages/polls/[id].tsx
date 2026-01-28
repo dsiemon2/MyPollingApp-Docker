@@ -455,7 +455,7 @@ export default function PollPage() {
               return (
                 <div key={option.id} className="relative">
                   <div className={`p-3 rounded-lg border ${
-                    isVotedOption ? 'border-purple-500 bg-purple-50' : 'border-gray-200'
+                    isVotedOption ? 'border-green-500 bg-green-50' : 'border-gray-200'
                   }`}>
                     <div className="flex justify-between items-center mb-2">
                       <span className="font-medium text-gray-800 flex items-center gap-2">
@@ -464,11 +464,11 @@ export default function PollPage() {
                           <span className="text-green-600 text-sm">(Your vote)</span>
                         )}
                       </span>
-                      <span className="text-purple-600 font-semibold">{percentage}%</span>
+                      <span className="text-green-700 font-semibold">{percentage}%</span>
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2">
                       <div
-                        className="bg-purple-600 h-2 rounded-full transition-all duration-500"
+                        className="bg-green-700 h-2 rounded-full transition-all duration-500"
                         style={{ width: `${percentage}%` }}
                       />
                     </div>
@@ -590,18 +590,18 @@ export default function PollPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
+      <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-700"></div>
       </div>
     );
   }
 
   if (!poll) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-50 flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-800 mb-4">Poll Not Found</h1>
-          <Link href="/polls" className="text-purple-600 hover:underline">Back to Polls</Link>
+          <Link href="/polls" className="text-green-700 hover:underline">Back to Polls</Link>
         </div>
       </div>
     );
@@ -650,7 +650,7 @@ export default function PollPage() {
         pollDescription={poll.description || undefined}
       />
 
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-50">
+      <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-50">
         <header className="bg-white shadow-sm">
           <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
             <Link href="/" className="flex items-center gap-3">
@@ -660,7 +660,7 @@ export default function PollPage() {
                 className="h-10 w-auto object-contain"
               />
             </Link>
-            <Link href="/polls" className="text-gray-600 hover:text-purple-600">
+            <Link href="/polls" className="text-gray-600 hover:text-green-700">
               ← All Polls
             </Link>
           </div>
@@ -679,7 +679,7 @@ export default function PollPage() {
                 </div>
                 <button
                   onClick={() => setShowShareModal(true)}
-                  className="flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200 transition-colors ml-4"
+                  className="flex items-center gap-2 px-4 py-2 bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition-colors ml-4"
                   title="Share this poll"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -713,7 +713,7 @@ export default function PollPage() {
                   <button
                     onClick={handleVote}
                     disabled={!canSubmitVote() || voting}
-                    className="flex-1 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex-1 py-3 bg-green-700 text-white rounded-lg font-semibold hover:bg-green-800 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {voting ? 'Submitting...' : 'Submit Vote'}
                   </button>
@@ -757,7 +757,7 @@ export default function PollPage() {
                       <div
                         className={`max-w-[80%] rounded-lg px-4 py-2 ${
                           msg.sender === 'user'
-                            ? 'bg-purple-600 text-white'
+                            ? 'bg-green-700 text-white'
                             : 'bg-gray-100 text-gray-800'
                         }`}
                       >
@@ -777,13 +777,13 @@ export default function PollPage() {
                     onChange={(e) => setInput(e.target.value)}
                     placeholder="Type a message..."
                     disabled={sending}
-                    className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                   />
                   <VoiceRecorder onTranscription={(text) => sendMessage(text)} />
                   <button
                     type="submit"
                     disabled={!input.trim() || sending}
-                    className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50"
+                    className="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 disabled:opacity-50"
                   >
                     {sending ? '...' : 'Send'}
                   </button>

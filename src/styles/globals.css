@@ -99,9 +99,9 @@ body {
 .dark input:focus,
 .dark textarea:focus,
 .dark select:focus {
-  border-color: #7c3aed;
+  border-color: #0d7a3e;
   outline: none;
-  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2);
+  box-shadow: 0 0 0 2px rgba(13, 122, 62, 0.2);
 }
 
 /* Dark mode for specific components */
@@ -133,7 +133,7 @@ body {
 
 /* Admin sidebar styles */
 .admin-sidebar {
-  background: linear-gradient(180deg, #4f46e5 0%, #7c3aed 100%);
+  background: #0d6e38;
   min-height: 100vh;
   max-height: 100vh;
   overflow-y: scroll;
@@ -225,8 +225,8 @@ body {
 }
 
 .voice-card.selected {
-  border-color: #4f46e5;
-  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.25);
+  border-color: #0d7a3e;
+  box-shadow: 0 0 0 4px rgba(13, 122, 62, 0.25);
 }
 
 /* AI Chat Slider Animations */

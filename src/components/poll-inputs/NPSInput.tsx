@@ -92,7 +92,7 @@ export default function NPSInput({
       </div>
 
       {votedScore !== null && votedScore !== undefined && (
-        <div className="text-center text-sm text-purple-600">
+        <div className="text-center text-sm text-green-700">
           Your score: {votedScore}
         </div>
       )}

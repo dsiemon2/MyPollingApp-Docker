@@ -62,14 +62,14 @@ export default function KnowledgeBasePage() {
           <h1 className="text-3xl font-bold text-gray-800">Knowledge Base</h1>
           <p className="text-gray-600 mt-1">Manage documents for AI context</p>
         </div>
-        <button onClick={() => setShowModal(true)} className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
+        <button onClick={() => setShowModal(true)} className="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800">
           + Add Document
         </button>
       </div>
 
       <div className="grid grid-cols-3 gap-4 mb-6">
         <div className="bg-white rounded-xl shadow-sm p-4">
-          <p className="text-2xl font-bold text-purple-600">{documents.length}</p>
+          <p className="text-2xl font-bold text-green-700">{documents.length}</p>
           <p className="text-sm text-gray-500">Total Documents</p>
         </div>
         <div className="bg-white rounded-xl shadow-sm p-4">
@@ -133,7 +133,7 @@ export default function KnowledgeBasePage() {
               </div>
               <div className="flex gap-3">
                 <button type="button" onClick={() => setShowModal(false)} className="flex-1 px-4 py-2 border rounded-lg">Cancel</button>
-                <button type="submit" className="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg">Add</button>
+                <button type="submit" className="flex-1 px-4 py-2 bg-green-700 text-white rounded-lg">Add</button>
               </div>
             </form>
           </div>

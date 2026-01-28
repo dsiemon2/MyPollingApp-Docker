@@ -76,10 +76,10 @@ export default function RatingInput({
         disabled={disabled}
         className={`w-12 h-12 rounded-lg border-2 font-bold transition-all ${
           isSelected
-            ? 'border-purple-600 bg-purple-600 text-white'
+            ? 'border-green-700 bg-green-700 text-white'
             : disabled
             ? 'border-gray-200 bg-gray-50 cursor-not-allowed'
-            : 'border-gray-200 hover:border-purple-300'
+            : 'border-gray-200 hover:border-green-300'
         }`}
       >
         {rating}
@@ -98,10 +98,10 @@ export default function RatingInput({
         disabled={disabled}
         className={`text-4xl p-2 rounded-lg border-2 transition-all ${
           isSelected
-            ? 'border-purple-600 bg-purple-50'
+            ? 'border-green-700 bg-green-50'
             : disabled
             ? 'border-transparent cursor-not-allowed opacity-50'
-            : 'border-transparent hover:border-purple-200'
+            : 'border-transparent hover:border-green-200'
         }`}
       >
         {emoji}
@@ -133,7 +133,7 @@ export default function RatingInput({
       )}
 
       {votedRating && (
-        <div className="text-center text-sm text-purple-600">
+        <div className="text-center text-sm text-green-700">
           You rated: {votedRating} / {maxValue}
         </div>
       )}

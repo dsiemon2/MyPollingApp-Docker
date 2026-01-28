@@ -28,7 +28,27 @@
       "Bash(__NEW_LINE_82ae607f13285a1f__ echo \"1. SINGLE CHOICE POLL TEST \\(sample-poll-1\\)\")",
       "Bash(npm install:*)",
       "Bash(npx playwright install chromium)",
-      "Bash(npx playwright test:*)"
+      "Bash(npx playwright test:*)",
+      "Bash(npm run dev)",
+      "Bash(npx prisma db push:*)",
+      "Bash(ping:*)",
+      "Bash(netstat:*)",
+      "Bash(taskkill:*)",
+      "Bash(cmd /c \"taskkill /F /PID 115252\")",
+      "Bash(cmd /c \"taskkill /F /IM node.exe\")",
+      "Bash(powershell -Command \"Stop-Process -Id 115252 -Force\")",
+      "Bash(docker-compose restart:*)",
+      "Bash(python:*)",
+      "WebFetch(domain:localhost)",
+      "Bash(npm test:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd AI assistant, greeting page, test suite, and fixes\n\n- Add floating AI Chat Slider with OpenAI integration\n- Add voice transcription with OpenAI Whisper API\n- Add greeting configuration page \\(/admin/greeting\\)\n- Add Jest test suite with 256 tests\n- Fix business name consistency \\(removed PollChat references\\)\n- Update demo account emails to @mypollingapp.com\n- Update seed data with 6 voices, 24 languages, 8 KB docs\n- Update CLAUDE.md documentation\n- Fix PayPal brand name\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nUpdate documentation: rename PollChat to MyPollingApp\n\n- Update all .md files to use MyPollingApp instead of PollChat\n- Update demo account emails to @mypollingapp.com\n- Rename POLLCHAT_DOCUMENTATION.md to MYPOLLINGAPP_DOCUMENTATION.md\n- Add GAP_ANALYSIS.md with comprehensive feature status\n- Update CHANGELOG.md with v2.1.0 release notes\n- Update README.md with current features and structure\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(npx tsc:*)",
+      "Bash(npx prisma migrate:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ]
   }
 }

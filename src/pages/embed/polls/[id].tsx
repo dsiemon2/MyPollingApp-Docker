@@ -92,15 +92,15 @@ export default function EmbedPollPage() {
   const textColor = isDark ? 'text-white' : 'text-gray-800';
   const textMuted = isDark ? 'text-gray-400' : 'text-gray-500';
   const borderColor = isDark ? 'border-gray-700' : 'border-gray-200';
-  const hoverBg = isDark ? 'hover:border-purple-500' : 'hover:border-purple-300';
-  const selectedBg = isDark ? 'bg-purple-900/50 border-purple-500' : 'bg-purple-50 border-purple-600';
+  const hoverBg = isDark ? 'hover:border-green-500' : 'hover:border-green-300';
+  const selectedBg = isDark ? 'bg-blue-900/50 border-green-500' : 'bg-green-50 border-green-700';
   const votedBg = isDark ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200';
   const barBg = isDark ? 'bg-gray-700' : 'bg-gray-200';
 
   if (loading) {
     return (
       <div className={`min-h-screen ${bgColor} flex items-center justify-center`}>
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-700"></div>
       </div>
     );
   }
@@ -162,13 +162,13 @@ export default function EmbedPollPage() {
                   <div className="flex justify-between items-center mb-1">
                     <span className={`font-medium text-sm ${textColor}`}>{optionText}</span>
                     {showPercentage && (
-                      <span className="text-purple-600 font-semibold text-sm">{percentage}%</span>
+                      <span className="text-green-700 font-semibold text-sm">{percentage}%</span>
                     )}
                   </div>
                   {showPercentage && (
                     <div className={`w-full ${barBg} rounded-full h-1.5`}>
                       <div
-                        className="bg-purple-600 h-1.5 rounded-full transition-all duration-500"
+                        className="bg-green-700 h-1.5 rounded-full transition-all duration-500"
                         style={{ width: `${percentage}%` }}
                       />
                     </div>
@@ -183,7 +183,7 @@ export default function EmbedPollPage() {
             <button
               onClick={handleVote}
               disabled={!selectedOption}
-              className="w-full py-2.5 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="w-full py-2.5 bg-green-700 text-white rounded-lg font-medium hover:bg-green-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               Submit Vote
             </button>
@@ -198,7 +198,7 @@ export default function EmbedPollPage() {
               href={`/polls/${id}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-purple-600 hover:underline flex items-center gap-1"
+              className="text-xs text-green-700 hover:underline flex items-center gap-1"
             >
               View on {settings.businessName}
               <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -65,7 +65,7 @@ export default function SubscriptionsPage() {
     switch (plan) {
       case 'FREE': return 'bg-gray-100 text-gray-700';
       case 'STARTER': return 'bg-blue-100 text-blue-700';
-      case 'PROFESSIONAL': return 'bg-purple-100 text-purple-700';
+      case 'PROFESSIONAL': return 'bg-green-100 text-green-700';
       case 'ENTERPRISE': return 'bg-orange-100 text-orange-700';
       default: return 'bg-gray-100 text-gray-700';
     }
@@ -168,7 +168,7 @@ export default function SubscriptionsPage() {
                           <span className="text-xs bg-blue-50 text-blue-600 px-1.5 py-0.5 rounded">AI</span>
                         )}
                         {planConfig.features.customBranding && (
-                          <span className="text-xs bg-purple-50 text-purple-600 px-1.5 py-0.5 rounded">Brand</span>
+                          <span className="text-xs bg-green-50 text-green-700 px-1.5 py-0.5 rounded">Brand</span>
                         )}
                         {planConfig.features.apiAccess && (
                           <span className="text-xs bg-orange-50 text-orange-600 px-1.5 py-0.5 rounded">API</span>
@@ -197,7 +197,7 @@ export default function SubscriptionsPage() {
                             setEditingId(sub.id);
                             setEditPlan(sub.plan);
                           }}
-                          className="text-sm text-purple-600 hover:text-purple-800"
+                          className="text-sm text-green-700 hover:text-green-800"
                         >
                           Change Plan
                         </button>

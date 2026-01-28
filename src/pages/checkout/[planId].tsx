@@ -116,7 +116,7 @@ export default function CheckoutPage() {
   if (status === 'loading' || loading) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
-        <div className="animate-spin w-8 h-8 border-4 border-purple-600 border-t-transparent rounded-full"></div>
+        <div className="animate-spin w-8 h-8 border-4 border-green-700 border-t-transparent rounded-full"></div>
       </div>
     );
   }
@@ -134,7 +134,7 @@ export default function CheckoutPage() {
           </p>
           <Link
             href="/admin/pricing"
-            className="inline-block px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition"
+            className="inline-block px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 transition"
           >
             View All Plans
           </Link>
@@ -179,7 +179,7 @@ export default function CheckoutPage() {
 
               <div className="flex justify-between text-lg font-bold">
                 <span className="text-gray-800 dark:text-white">Total</span>
-                <span className="text-purple-600">${plan.price.toFixed(2)}/{plan.interval === 'year' ? 'yr' : 'mo'}</span>
+                <span className="text-green-700">${plan.price.toFixed(2)}/{plan.interval === 'year' ? 'yr' : 'mo'}</span>
               </div>
 
               {plan.description && (
@@ -235,7 +235,7 @@ export default function CheckoutPage() {
                       type="text"
                       name="name"
                       required
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:text-white"
                       placeholder="John Doe"
                     />
                   </div>
@@ -249,7 +249,7 @@ export default function CheckoutPage() {
                       name="cardNumber"
                       required
                       maxLength={19}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:text-white"
                       placeholder="1234 5678 9012 3456"
                     />
                   </div>
@@ -262,7 +262,7 @@ export default function CheckoutPage() {
                       <select
                         name="expMonth"
                         required
-                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:text-white"
                       >
                         {Array.from({ length: 12 }, (_, i) => (
                           <option key={i + 1} value={String(i + 1).padStart(2, '0')}>
@@ -278,7 +278,7 @@ export default function CheckoutPage() {
                       <select
                         name="expYear"
                         required
-                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:text-white"
                       >
                         {Array.from({ length: 10 }, (_, i) => {
                           const year = new Date().getFullYear() + i;
@@ -299,7 +299,7 @@ export default function CheckoutPage() {
                         name="cvv"
                         required
                         maxLength={4}
-                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:text-white"
                         placeholder="123"
                       />
                     </div>
@@ -308,7 +308,7 @@ export default function CheckoutPage() {
                   <button
                     type="submit"
                     disabled={processing}
-                    className="w-full px-4 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition disabled:opacity-50 flex items-center justify-center gap-2"
+                    className="w-full px-4 py-3 bg-green-700 text-white rounded-lg hover:bg-green-800 transition disabled:opacity-50 flex items-center justify-center gap-2"
                   >
                     {processing ? (
                       <span className="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full"></span>
@@ -330,7 +330,7 @@ export default function CheckoutPage() {
             <div className="mt-4 text-center">
               <Link
                 href="/admin/pricing"
-                className="text-sm text-gray-500 dark:text-gray-400 hover:text-purple-600"
+                className="text-sm text-gray-500 dark:text-gray-400 hover:text-green-700"
               >
                 Cancel and return to pricing
               </Link>

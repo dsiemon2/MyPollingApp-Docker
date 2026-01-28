@@ -32,8 +32,8 @@ export default function OpenTextInput({
   if (votedValue) {
     return (
       <div className="space-y-2">
-        <div className="p-4 bg-purple-50 rounded-lg border border-purple-200">
-          <p className="text-sm text-purple-700 font-medium mb-2">Your response:</p>
+        <div className="p-4 bg-green-50 rounded-lg border border-green-200">
+          <p className="text-sm text-green-700 font-medium mb-2">Your response:</p>
           <p className="text-gray-700 whitespace-pre-wrap">{votedValue}</p>
         </div>
       </div>

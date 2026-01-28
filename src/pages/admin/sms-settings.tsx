@@ -99,7 +99,7 @@ export default function SmsSettingsPage() {
                 type="text"
                 value={settings.twilio_account_sid}
                 onChange={(e) => setSettings({ ...settings, twilio_account_sid: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 placeholder="ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
               />
             </div>
@@ -110,7 +110,7 @@ export default function SmsSettingsPage() {
                 type="password"
                 value={settings.twilio_auth_token}
                 onChange={(e) => setSettings({ ...settings, twilio_auth_token: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 placeholder="Your auth token"
               />
             </div>
@@ -121,7 +121,7 @@ export default function SmsSettingsPage() {
                 type="tel"
                 value={settings.twilio_phone_number}
                 onChange={(e) => setSettings({ ...settings, twilio_phone_number: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 placeholder="+1234567890"
               />
             </div>
@@ -132,7 +132,7 @@ export default function SmsSettingsPage() {
                 id="smsEnabled"
                 checked={settings.sms_enabled}
                 onChange={(e) => setSettings({ ...settings, sms_enabled: e.target.checked })}
-                className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 dark:border-gray-600 rounded"
+                className="h-4 w-4 text-green-700 focus:ring-green-500 border-gray-300 dark:border-gray-600 rounded"
               />
               <label htmlFor="smsEnabled" className="ml-2 text-sm text-gray-700 dark:text-gray-300">
                 Enable SMS Notifications
@@ -144,7 +144,7 @@ export default function SmsSettingsPage() {
             <button
               onClick={handleSave}
               disabled={saving}
-              className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50 flex items-center"
+              className="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 disabled:opacity-50 flex items-center"
             >
               {saving ? (
                 <>
@@ -200,7 +200,7 @@ export default function SmsSettingsPage() {
               <strong className="dark:text-gray-300">Getting Twilio Credentials:</strong>
             </p>
             <ol className="list-decimal pl-5 space-y-1">
-              <li>Sign up at <a href="https://www.twilio.com" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">twilio.com</a></li>
+              <li>Sign up at <a href="https://www.twilio.com" target="_blank" rel="noopener noreferrer" className="text-green-700 dark:text-green-400 hover:underline">twilio.com</a></li>
               <li>Navigate to your Twilio Console</li>
               <li>Find your Account SID and Auth Token on the dashboard</li>
               <li>Get a phone number from Twilio</li>

@@ -144,7 +144,7 @@ export default function WebhooksPage() {
         </div>
         <button
           onClick={() => openModal()}
-          className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition"
+          className="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 transition"
         >
           + Add Webhook
         </button>
@@ -158,7 +158,7 @@ export default function WebhooksPage() {
             <p>No webhooks configured yet.</p>
             <button
               onClick={() => openModal()}
-              className="mt-4 text-purple-600 hover:underline"
+              className="mt-4 text-green-700 hover:underline"
             >
               Add your first webhook
             </button>
@@ -188,7 +188,7 @@ export default function WebhooksPage() {
                   <td className="px-6 py-4">
                     <div className="flex flex-wrap gap-1">
                       {webhook.events.slice(0, 3).map((event) => (
-                        <span key={event} className="px-2 py-1 bg-purple-100 text-purple-700 text-xs rounded">
+                        <span key={event} className="px-2 py-1 bg-green-100 text-green-700 text-xs rounded">
                           {event}
                         </span>
                       ))}
@@ -207,7 +207,7 @@ export default function WebhooksPage() {
                         onChange={(e) => toggleWebhook(webhook.id, e.target.checked)}
                         className="sr-only peer"
                       />
-                      <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+                      <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-700"></div>
                     </label>
                   </td>
                   <td className="px-6 py-4 text-right">
@@ -219,7 +219,7 @@ export default function WebhooksPage() {
                     </button>
                     <button
                       onClick={() => openModal(webhook)}
-                      className="text-purple-600 hover:text-purple-800 mr-3"
+                      className="text-green-700 hover:text-green-800 mr-3"
                     >
                       Edit
                     </button>
@@ -266,7 +266,7 @@ export default function WebhooksPage() {
                   type="text"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
                   placeholder="My Webhook"
                   required
                 />
@@ -278,7 +278,7 @@ export default function WebhooksPage() {
                   type="url"
                   value={formData.url}
                   onChange={(e) => setFormData({ ...formData, url: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
                   placeholder="https://example.com/webhook"
                   required
                 />
@@ -290,7 +290,7 @@ export default function WebhooksPage() {
                   type="text"
                   value={formData.secret}
                   onChange={(e) => setFormData({ ...formData, secret: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
                   placeholder="Webhook secret for signing payloads"
                 />
               </div>
@@ -304,7 +304,7 @@ export default function WebhooksPage() {
                         type="checkbox"
                         checked={formData.events.includes(event.id)}
                         onChange={() => toggleEvent(event.id)}
-                        className="rounded text-purple-600"
+                        className="rounded text-green-700"
                       />
                       <span className="text-sm">{event.label}</span>
                     </label>
@@ -322,7 +322,7 @@ export default function WebhooksPage() {
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
+                  className="flex-1 px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800"
                 >
                   {editingWebhook ? 'Update' : 'Create'}
                 </button>

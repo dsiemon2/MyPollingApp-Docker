@@ -46,9 +46,9 @@ export default function PollsPage() {
                 <div className="relative" ref={userMenuRef}>
                   <button
                     onClick={() => setUserMenuOpen(!userMenuOpen)}
-                    className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+                    className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-green-700 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition"
                   >
-                    <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white text-sm font-semibold">
+                    <div className="w-8 h-8 bg-green-700 rounded-full flex items-center justify-center text-white text-sm font-semibold">
                       {session.user?.name?.charAt(0).toUpperCase() || session.user?.email?.charAt(0).toUpperCase() || 'U'}
                     </div>
                     <svg className={`w-4 h-4 transition-transform ${userMenuOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -86,7 +86,7 @@ export default function PollsPage() {
                   )}
                 </div>
               ) : (
-                <Link href="/login" className="text-gray-600 dark:text-gray-300 hover:text-purple-600">
+                <Link href="/login" className="text-gray-600 dark:text-gray-300 hover:text-green-700">
                   Login
                 </Link>
               )}
@@ -102,7 +102,7 @@ export default function PollsPage() {
 
           {isLoading ? (
             <div className="text-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto"></div>
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-700 mx-auto"></div>
               <p className="text-gray-500 mt-4">Loading polls...</p>
             </div>
           ) : polls.length === 0 ? (
@@ -124,10 +124,10 @@ export default function PollsPage() {
                     <p className="text-gray-600 text-sm mb-4 line-clamp-2">{poll.description}</p>
                   )}
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-purple-600 font-medium">
+                    <span className="text-sm text-green-700 font-medium">
                       {poll._count?.votes || 0} vote{(poll._count?.votes || 0) !== 1 ? 's' : ''}
                     </span>
-                    <span className="text-purple-600 text-sm font-medium">Vote Now →</span>
+                    <span className="text-green-700 text-sm font-medium">Vote Now →</span>
                   </div>
                 </Link>
               ))}
