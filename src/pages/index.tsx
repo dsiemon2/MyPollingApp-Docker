@@ -30,7 +30,7 @@ export default function SplashPage() {
             <img
               src={settings.logoUrl || '/images/PoligoPro.png'}
               alt={`${settings.businessName} Logo`}
-              style={{ maxWidth: '100%', width: '80%', height: '110px' }}
+              style={{ maxWidth: '100%', height: '210px' }}
               className="object-contain"
             />
           </Link>

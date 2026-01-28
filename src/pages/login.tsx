@@ -58,7 +58,7 @@ export default function LoginPage() {
             <img
               src={settings.logoUrl || '/images/PoligoPro.png'}
               alt={`${settings.businessName} Logo`}
-              style={{ maxWidth: '100%', width: '80%', height: '110px' }}
+              style={{ maxWidth: '100%', height: '210px' }}
               className="object-contain"
             />
           </Link>
@@ -79,7 +79,7 @@ export default function LoginPage() {
             <img
               src={settings.logoUrl || '/images/PoligoPro.png'}
               alt={`${settings.businessName} Logo`}
-              className="mb-8 max-w-[220px] h-auto object-contain"
+              className="mb-8 max-w-[260px] max-h-[180px] w-auto h-auto object-contain"
             />
             <h2 className="text-2xl font-bold mb-4">Welcome Back!</h2>
             <p className="text-white/80 mb-8">Sign in to manage your polls, run voting sessions, and view real-time results.</p>

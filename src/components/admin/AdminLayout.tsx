@@ -84,7 +84,8 @@ export default function AdminLayout({ children, active }: AdminLayoutProps) {
             <img
               src={settings.logoUrl || '/images/PoligoPro.png'}
               alt={`${settings.businessName} Logo`}
-              className="max-w-[180px] h-auto object-contain mx-auto"
+              style={{ width: '100%', height: '210px' }}
+              className="object-contain"
             />
           </Link>
         </div>
