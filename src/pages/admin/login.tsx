@@ -65,13 +65,16 @@ export default function AdminLoginPage() {
       <nav className="bg-slate-900/50 backdrop-blur px-6 py-4 border-b border-slate-700">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
           <Link href="/" className="flex items-center gap-3">
-            <img
-              src={settings.logoUrl || '/images/VotigoPro.png'}
+            <Image
+              src="/images/MyPollingSoftwareLogo.png"
               alt={`${settings.businessName} Logo`}
-              className="h-[60px] w-auto object-contain"
+              width={200}
+              height={110}
+              className="w-full h-[110px] object-contain"
             />
             <div>
-              <span className="text-green-400 text-xs block">Admin Portal</span>
+              <span className="font-bold text-lg text-white">{settings.businessName}</span>
+              <span className="text-purple-400 text-xs block">Admin Portal</span>
             </div>
           </Link>
           <Link href="/" className="text-slate-400 hover:text-white flex items-center gap-2 transition">

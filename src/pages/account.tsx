@@ -358,11 +358,22 @@ export default function AccountPage() {
         <nav className="bg-white dark:bg-gray-800 shadow-sm">
           <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
             <Link href="/" className="flex items-center gap-3">
-              <img
-                src={settings.logoUrl || '/images/VotigoPro.png'}
-                alt={`${settings.businessName} Logo`}
-                className="h-10 w-auto object-contain"
-              />
+              {settings.logoUrl ? (
+                <img
+                  src={settings.logoUrl}
+                  alt={`${settings.businessName} Logo`}
+                  className="h-10 w-10 rounded-lg object-cover"
+                />
+              ) : (
+                <Image
+                  src="/images/MyPollingSoftwareLogo.png"
+                  alt={`${settings.businessName} Logo`}
+                  width={40}
+                  height={40}
+                  className="rounded-lg"
+                />
+              )}
+              <span className="text-2xl font-bold text-purple-600">{settings.businessName}</span>
             </Link>
             <div className="flex items-center gap-4">
               <ThemeToggle />

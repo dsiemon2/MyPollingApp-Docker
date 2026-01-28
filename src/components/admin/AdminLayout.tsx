@@ -81,11 +81,21 @@ export default function AdminLayout({ children, active }: AdminLayoutProps) {
       <aside className="w-64 admin-sidebar flex-shrink-0 flex flex-col">
         <div className="p-4 text-white flex-shrink-0">
           <Link href="/" className="block">
-            <img
-              src={settings.logoUrl || '/images/VotigoPro.png'}
-              alt={`${settings.businessName} Logo`}
-              className="max-w-[180px] h-auto object-contain mx-auto"
-            />
+            {settings.logoUrl ? (
+              <img
+                src={settings.logoUrl}
+                alt={`${settings.businessName} Logo`}
+                className="w-full h-[110px] object-contain"
+              />
+            ) : (
+              <Image
+                src="/images/MyPollingSoftwareLogo.png"
+                alt={`${settings.businessName} Logo`}
+                width={200}
+                height={110}
+                className="w-full h-[110px] object-contain"
+              />
+            )}
           </Link>
         </div>
 
