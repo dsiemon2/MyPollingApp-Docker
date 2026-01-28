@@ -133,65 +133,81 @@ body {
 
 /* Admin sidebar styles */
 .admin-sidebar {
-  background: #0d6e38;
+  width: 250px;
+  background-color: #0d6e38;
+  padding: 20px;
   min-height: 100vh;
   max-height: 100vh;
-  overflow-y: scroll;
+  overflow-y: auto;
   position: sticky;
   top: 0;
 }
 
-/* Custom scrollbar for sidebar - always visible */
+/* Custom scrollbar for sidebar */
 .admin-sidebar::-webkit-scrollbar {
-  width: 8px;
+  width: 12px;
 }
 
 .admin-sidebar::-webkit-scrollbar-track {
-  background: rgba(255,255,255,0.15);
-  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
 }
 
 .admin-sidebar::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.4);
-  border-radius: 4px;
-  min-height: 40px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
 }
 
 .admin-sidebar::-webkit-scrollbar-thumb:hover {
-  background: rgba(255,255,255,0.6);
+  background: rgba(255, 255, 255, 0.5);
 }
 
 /* Firefox scrollbar */
 .admin-sidebar {
   scrollbar-width: thin;
-  scrollbar-color: rgba(255,255,255,0.4) rgba(255,255,255,0.15);
+  scrollbar-color: rgba(255,255,255,0.3) rgba(255,255,255,0.1);
+}
+
+.admin-sidebar .nav-section {
+  color: white;
+  font-weight: bold;
+  padding: 10px 15px;
+  background-color: #064e2b;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.admin-sidebar .nav-section-spaced {
+  margin-top: 15px;
 }
 
 .admin-sidebar .nav-link {
-  color: rgba(255,255,255,0.8);
-  padding: 0.75rem 1rem;
-  border-radius: 0.5rem;
-  margin: 0.125rem 0.5rem;
-  transition: all 0.2s;
+  display: block;
+  color: #ffffff;
+  padding: 10px 15px;
+  background-color: #2eaa5e;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  transition: background-color 0.3s ease;
+  font-weight: normal;
+  font-size: 14px;
+  text-decoration: none;
 }
 
-.admin-sidebar .nav-link:hover,
-.admin-sidebar .nav-link.active {
+.admin-sidebar .nav-link:hover {
+  background-color: #0a6632;
   color: #fff;
-  background: rgba(255,255,255,0.15);
+}
+
+.admin-sidebar .nav-link.active {
+  background-color: #f39c12;
+  color: #fff;
 }
 
 .admin-sidebar .nav-divider {
   border-top: 1px solid rgba(255,255,255,0.2);
-  margin: 0.75rem 1rem;
-}
-
-.admin-sidebar .nav-section {
-  color: rgba(255,255,255,0.5);
-  font-size: 0.7rem;
-  padding: 0.5rem 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  margin: 0.75rem 0;
 }
 
 /* Toast notifications */

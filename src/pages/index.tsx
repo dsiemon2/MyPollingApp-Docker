@@ -24,21 +24,20 @@ export default function SplashPage() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
       {/* Navigation */}
-      <nav className="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 py-2 flex justify-between items-center">
+      <nav className="bg-white dark:bg-gray-800 sticky top-0 z-50" style={{ boxShadow: '0 2px 10px rgba(0,0,0,0.1)' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '15px 20px' }} className="flex justify-between items-center">
           <Link href="/" className="flex items-center gap-3">
             <img
               src={settings.logoUrl || '/images/PoligoPro.png'}
               alt={`${settings.businessName} Logo`}
-              style={{ maxWidth: '100%', height: '210px' }}
-              className="object-contain"
+              style={{ height: '110px' }}
             />
           </Link>
-          <div className="hidden md:flex items-center gap-8">
-            <a href="#features" className="text-gray-600 hover:text-green-700 transition">Features</a>
-            <a href="#use-cases" className="text-gray-600 hover:text-green-700 transition">Use Cases</a>
-            <a href="#pricing" className="text-gray-600 hover:text-green-700 transition">Pricing</a>
-            <a href="#about" className="text-gray-600 hover:text-green-700 transition">About</a>
+          <div className="hidden md:flex items-center" style={{ gap: '30px' }}>
+            <a href="#features" style={{ color: '#4b5563', fontWeight: 500, textDecoration: 'none' }} className="hover:text-green-700 transition">Features</a>
+            <a href="#use-cases" style={{ color: '#4b5563', fontWeight: 500, textDecoration: 'none' }} className="hover:text-green-700 transition">Use Cases</a>
+            <a href="#pricing" style={{ color: '#4b5563', fontWeight: 500, textDecoration: 'none' }} className="hover:text-green-700 transition">Pricing</a>
+            <a href="#about" style={{ color: '#4b5563', fontWeight: 500, textDecoration: 'none' }} className="hover:text-green-700 transition">About</a>
           </div>
           <div className="flex gap-3 items-center">
             <ThemeToggle />
@@ -98,10 +97,10 @@ export default function SplashPage() {
               </>
             ) : (
               <>
-                <Link href="/login" className="text-green-700 border-2 border-green-700 px-4 py-2 rounded-lg hover:bg-green-700 hover:text-white transition">
+                <Link href="/login" style={{ padding: '12px 24px', borderRadius: '6px', fontWeight: 600, fontSize: '14px', border: '2px solid #0d7a3e', color: '#0d7a3e', background: 'transparent' }} className="hover:bg-green-700 hover:text-white transition">
                   Sign In
                 </Link>
-                <Link href="/register" className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition">
+                <Link href="/register" style={{ padding: '12px 24px', borderRadius: '6px', fontWeight: 600, fontSize: '14px', background: '#f39c12', color: 'white', border: '2px solid #f39c12' }} className="hover:opacity-90 transition">
                   Get Started
                 </Link>
               </>

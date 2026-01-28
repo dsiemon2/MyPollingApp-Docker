@@ -30,14 +30,14 @@ export default function PollsPage() {
       <Head>
         <title>Active Polls - {settings.businessName}</title>
       </Head>
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 dark:from-gray-900 dark:to-gray-800">
-        <header className="bg-white dark:bg-gray-800 shadow-sm">
-          <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div className="min-h-screen" style={{ background: '#f8fafc' }}>
+        <header className="bg-white dark:bg-gray-800" style={{ boxShadow: '0 2px 10px rgba(0,0,0,0.1)' }}>
+          <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '15px 20px' }} className="flex justify-between items-center">
             <Link href="/" className="flex items-center gap-3">
               <img
                 src={settings.logoUrl || '/images/PoligoPro.png'}
                 alt={`${settings.businessName} Logo`}
-                className="h-10 w-auto object-contain"
+                style={{ height: '110px' }}
               />
             </Link>
             <div className="flex items-center gap-4">

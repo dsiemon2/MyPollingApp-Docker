@@ -76,71 +76,66 @@ export default function AdminLayout({ children, active }: AdminLayoutProps) {
   const user = session?.user as any;
 
   return (
-    <div className="flex min-h-screen bg-gray-100 dark:bg-gray-900">
-      {/* Sidebar */}
-      <aside className="w-64 admin-sidebar flex-shrink-0 flex flex-col">
-        <div className="p-4 text-white flex-shrink-0">
-          <Link href="/" className="block">
+    <div className="min-h-screen" style={{ background: '#f8fafc' }}>
+      {/* Top Header Bar */}
+      <header style={{ backgroundColor: '#1a3a5c', padding: '10px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'white' }}>
+        <div className="flex items-center gap-3">
+          <Link href="/">
             <img
               src={settings.logoUrl || '/images/PoligoPro.png'}
               alt={`${settings.businessName} Logo`}
-              style={{ width: '100%', height: '210px' }}
-              className="object-contain"
+              style={{ height: '110px' }}
             />
           </Link>
         </div>
-
-        {/* User info */}
-        <div className="px-4 pb-3 flex-shrink-0">
-          <div className="flex items-center justify-between text-white text-sm">
-            <div className="flex items-center gap-2">
-              <span className="text-white/70">👤</span>
-              <span className="truncate">{user?.name || 'Admin'}</span>
-              <span className="px-1.5 py-0.5 bg-white/20 rounded text-xs">{user?.role?.replace('_', ' ') || 'Admin'}</span>
-            </div>
-            <ThemeToggle className="!bg-white/20 !hover:bg-white/30" />
-          </div>
+        <div className="flex items-center gap-4" style={{ fontSize: '14px' }}>
+          <span>👤 {user?.name || 'Admin'}</span>
+          <span style={{ backgroundColor: '#0d7a3e', color: 'white', padding: '4px 10px', borderRadius: '20px', fontSize: '12px', fontWeight: 'bold' }}>
+            {user?.role?.replace('_', ' ') || 'Admin'}
+          </span>
+          <ThemeToggle />
+          <button
+            onClick={() => signOut({ callbackUrl: '/' })}
+            style={{ backgroundColor: '#f39c12', color: 'white', border: 'none', padding: '8px 15px', borderRadius: '4px', cursor: 'pointer', fontSize: '14px' }}
+            className="hover:opacity-90 transition"
+          >
+            🚪 Logout
+          </button>
         </div>
+      </header>
 
-        <nav className="flex-1 pb-4 border-t border-white/10 pt-2">
-          {menuItems.map((item, index) => {
-            if (item.section) {
+      <div className="flex" style={{ minHeight: 'calc(100vh - 70px)' }}>
+        {/* Sidebar */}
+        <aside className="admin-sidebar flex-shrink-0 flex flex-col">
+          <nav className="flex-1">
+            {menuItems.map((item, index) => {
+              if (item.section) {
+                return (
+                  <div key={index} className={`nav-section ${index > 0 ? 'nav-section-spaced' : ''}`}>
+                    {item.section}
+                  </div>
+                );
+              }
+
               return (
-                <div key={index} className="nav-section mt-4 first:mt-0">
-                  {item.section}
-                </div>
+                <Link
+                  key={item.id}
+                  href={item.href!}
+                  className={`nav-link flex items-center gap-3 ${active === item.id ? 'active' : ''}`}
+                >
+                  <span>{item.icon}</span>
+                  <span>{item.label}</span>
+                </Link>
               );
-            }
+            })}
+          </nav>
+        </aside>
 
-            return (
-              <Link
-                key={item.id}
-                href={item.href!}
-                className={`nav-link flex items-center gap-3 ${active === item.id ? 'active' : ''}`}
-              >
-                <span>{item.icon}</span>
-                <span>{item.label}</span>
-              </Link>
-            );
-          })}
-
-          {/* Logout at bottom of nav */}
-          <div className="border-t border-white/10 mt-4 pt-2">
-            <button
-              onClick={() => signOut({ callbackUrl: '/' })}
-              className="nav-link flex items-center gap-3 w-full text-left text-white/70 hover:text-white"
-            >
-              <span>🚪</span>
-              <span>Sign Out</span>
-            </button>
-          </div>
-        </nav>
-      </aside>
-
-      {/* Main Content */}
-      <main className="flex-1 p-8 overflow-auto">
-        {children}
-      </main>
+        {/* Main Content */}
+        <main className="flex-1 overflow-auto" style={{ padding: '20px' }}>
+          {children}
+        </main>
+      </div>
     </div>
   );
 }

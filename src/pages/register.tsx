@@ -53,18 +53,18 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-100 to-slate-200">
+    <div className="min-h-screen flex flex-col" style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)' }}>
       {/* Navigation */}
-      <nav className="bg-white shadow-sm px-6 py-4">
-        <div className="max-w-6xl mx-auto flex justify-between items-center">
+      <nav className="bg-white" style={{ boxShadow: '0 2px 10px rgba(0,0,0,0.1)', padding: '15px 20px' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }} className="flex justify-between items-center">
           <Link href="/" className="flex items-center gap-3">
             <img
               src={settings.logoUrl || '/images/PoligoPro.png'}
               alt={`${settings.businessName} Logo`}
-              className="h-10 w-auto object-contain"
+              style={{ height: '110px' }}
             />
           </Link>
-          <Link href="/" className="text-green-700 hover:text-green-800 flex items-center gap-2">
+          <Link href="/" style={{ color: '#0d7a3e', fontWeight: 500 }} className="flex items-center gap-2 hover:opacity-80 transition">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
@@ -74,14 +74,14 @@ export default function RegisterPage() {
       </nav>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center p-6">
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden w-full max-w-4xl grid md:grid-cols-2">
+      <div className="flex-1 flex items-center justify-center" style={{ padding: '40px 20px' }}>
+        <div className="grid md:grid-cols-2 overflow-hidden" style={{ maxWidth: '900px', width: '100%', background: 'white', borderRadius: '20px', boxShadow: '0 20px 50px rgba(0,0,0,0.1)' }}>
           {/* Left Side - Branding */}
-          <div className="bg-gradient-to-br from-blue-900 to-green-600 p-10 text-white flex flex-col justify-center items-center text-center">
+          <div className="text-white flex flex-col justify-center items-center text-center" style={{ background: 'linear-gradient(135deg, #1a3a5c 0%, #0d7a3e 100%)', padding: '50px' }}>
             <img
               src={settings.logoUrl || '/images/PoligoPro.png'}
               alt={`${settings.businessName} Logo`}
-              className="mb-8 max-w-[220px] h-auto object-contain"
+              style={{ maxWidth: '200px', marginBottom: '30px' }}
             />
             <h2 className="text-2xl font-bold mb-4">Join {settings.businessName}!</h2>
             <p className="text-white/80 mb-8">Create your account and start creating engaging polls with voice-powered AI features.</p>
