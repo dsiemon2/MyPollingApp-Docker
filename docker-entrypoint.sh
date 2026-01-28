@@ -22,7 +22,27 @@ if [ "$USER_COUNT" = "0" ]; then
   echo "Seeding database (first run)..."
   node prisma/seed.js || echo "Seeding failed"
 else
-  echo "Database already seeded ($USER_COUNT users found), skipping..."
+  echo "Database already seeded ($USER_COUNT users found), skipping full seed..."
+  echo "Updating branding settings..."
+  node -e "
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
+const settings = [
+  { key: 'businessName', value: 'PoligoPro', category: 'branding' },
+  { key: 'logoUrl', value: '/images/PoligoPro.png', category: 'branding' },
+  { key: 'primaryColor', value: '#0d7a3e', category: 'branding' },
+  { key: 'secondaryColor', value: '#1a3a5c', category: 'branding' },
+  { key: 'tagline', value: 'Voice-Enabled Polling', category: 'branding' },
+];
+Promise.all(settings.map(s =>
+  prisma.systemSetting.upsert({
+    where: { key: s.key },
+    update: { value: s.value },
+    create: s,
+  })
+)).then(() => { console.log('Branding updated'); prisma.\$disconnect(); })
+  .catch(e => { console.error('Branding update failed:', e.message); prisma.\$disconnect(); });
+" 2>/dev/null || echo "Branding update skipped"
 fi
 
 echo "Starting application..."
