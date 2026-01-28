@@ -58,14 +58,11 @@ export default function RegisterPage() {
       <nav className="bg-white shadow-sm px-6 py-4">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
           <Link href="/" className="flex items-center gap-3">
-            <Image
-              src="/images/MyPollingSoftwareLogo.png"
+            <img
+              src={settings.logoUrl || '/images/PoligoPro.png'}
               alt={`${settings.businessName} Logo`}
-              width={40}
-              height={40}
-              className="h-10 w-auto"
+              className="h-10 w-auto object-contain"
             />
-            <span className="font-bold text-lg text-purple-900">{settings.businessName}</span>
           </Link>
           <Link href="/" className="text-purple-600 hover:text-purple-800 flex items-center gap-2">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -80,13 +77,11 @@ export default function RegisterPage() {
       <div className="flex-1 flex items-center justify-center p-6">
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden w-full max-w-4xl grid md:grid-cols-2">
           {/* Left Side - Branding */}
-          <div className="bg-gradient-to-br from-purple-900 to-purple-600 p-10 text-white flex flex-col justify-center items-center text-center">
-            <Image
-              src="/images/MyPollingSoftwareLogo.png"
+          <div className="bg-gradient-to-br from-blue-900 to-green-600 p-10 text-white flex flex-col justify-center items-center text-center">
+            <img
+              src={settings.logoUrl || '/images/PoligoPro.png'}
               alt={`${settings.businessName} Logo`}
-              width={180}
-              height={180}
-              className="mb-8"
+              className="mb-8 max-w-[220px] h-auto object-contain"
             />
             <h2 className="text-2xl font-bold mb-4">Join {settings.businessName}!</h2>
             <p className="text-white/80 mb-8">Create your account and start creating engaging polls with voice-powered AI features.</p>

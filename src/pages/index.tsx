@@ -25,24 +25,14 @@ export default function SplashPage() {
     <div className="min-h-screen bg-white dark:bg-gray-900">
       {/* Navigation */}
       <nav className="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-4 py-2 flex justify-between items-center">
           <Link href="/" className="flex items-center gap-3">
-            {settings.logoUrl ? (
-              <img
-                src={settings.logoUrl}
-                alt={`${settings.businessName} Logo`}
-                className="h-12 w-12 rounded-lg object-cover"
-              />
-            ) : (
-              <Image
-                src="/images/MyPollingSoftwareLogo.png"
-                alt={`${settings.businessName} Logo`}
-                width={48}
-                height={48}
-                className="rounded-lg"
-              />
-            )}
-            <span className="font-bold text-xl text-purple-900">{settings.businessName}</span>
+            <img
+              src={settings.logoUrl || '/images/PoligoPro.png'}
+              alt={`${settings.businessName} Logo`}
+              style={{ maxWidth: '100%', width: '80%', height: '110px' }}
+              className="object-contain"
+            />
           </Link>
           <div className="hidden md:flex items-center gap-8">
             <a href="#features" className="text-gray-600 hover:text-purple-600 transition">Features</a>
@@ -121,7 +111,7 @@ export default function SplashPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-purple-900 via-purple-700 to-indigo-600 text-white py-20 relative overflow-hidden">
+      <section className="bg-gradient-to-br from-blue-900 via-blue-700 to-green-600 text-white py-20 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-white/5 to-transparent"></div>
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -498,7 +488,7 @@ export default function SplashPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-purple-900 via-purple-700 to-indigo-600 text-white text-center">
+      <section className="py-20 bg-gradient-to-br from-blue-900 via-blue-700 to-green-600 text-white text-center">
         <div className="max-w-4xl mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Get Started?</h2>
           <p className="text-xl text-white/80 mb-8">Start your free trial today - no credit card required</p>
@@ -514,22 +504,11 @@ export default function SplashPage() {
           <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div>
               <div className="flex items-center gap-3 mb-4">
-                {settings.logoUrl ? (
-                  <img
-                    src={settings.logoUrl}
-                    alt={`${settings.businessName} Logo`}
-                    className="h-10 w-10 rounded-lg object-cover"
-                  />
-                ) : (
-                  <Image
-                    src="/images/MyPollingSoftwareLogo.png"
-                    alt={`${settings.businessName} Logo`}
-                    width={40}
-                    height={40}
-                    className="rounded-lg"
-                  />
-                )}
-                <span className="font-bold text-lg">{settings.businessName}</span>
+                <img
+                  src={settings.logoUrl || '/images/PoligoPro.png'}
+                  alt={`${settings.businessName} Logo`}
+                  className="h-9 w-auto object-contain"
+                />
               </div>
               <p className="text-gray-400">{settings.tagline}</p>
             </div>

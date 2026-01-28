@@ -12,11 +12,11 @@ export interface AppSettings {
 
 // Default settings
 export const defaultSettings: AppSettings = {
-  businessName: 'MyPollingApp',
+  businessName: 'PoligoPro',
   tagline: 'Voice-Enabled Polling',
-  primaryColor: '#7c3aed',
-  secondaryColor: '#4f46e5',
-  logoUrl: '',
+  primaryColor: '#1e3a5f',
+  secondaryColor: '#0d7a3e',
+  logoUrl: '/images/PoligoPro.png',
   timezone: 'America/New_York',
 };
 
