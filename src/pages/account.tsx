@@ -355,23 +355,24 @@ export default function AccountPage() {
       </Head>
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         {/* Navigation */}
-        <nav className="bg-white dark:bg-gray-800 shadow-sm">
-          <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+        <nav className="bg-white dark:bg-gray-800" style={{ boxShadow: '0 2px 10px rgba(0,0,0,0.1)', padding: '15px 20px' }}>
+          <div style={{ maxWidth: '1200px', margin: '0 auto' }} className="flex justify-between items-center">
             <Link href="/" className="flex items-center gap-3">
               <img
                 src={settings.logoUrl || '/images/PoligoPro.png'}
                 alt={`${settings.businessName} Logo`}
-                className="h-10 w-auto object-contain"
+                style={{ height: '110px' }}
               />
             </Link>
             <div className="flex items-center gap-4">
               <ThemeToggle />
-              <Link href="/polls" className="text-gray-600 dark:text-gray-300 hover:text-green-700 transition">
+              <Link href="/polls" style={{ color: '#0d7a3e', fontWeight: 500 }} className="hover:opacity-80 transition">
                 Polls
               </Link>
               <button
                 onClick={() => signOut({ callbackUrl: '/' })}
-                className="text-red-600 hover:text-red-700 transition"
+                className="hover:opacity-90 transition"
+                style={{ backgroundColor: '#f39c12', color: 'white', border: 'none', padding: '8px 15px', borderRadius: '4px', cursor: 'pointer', fontSize: '14px' }}
               >
                 Sign Out
               </button>

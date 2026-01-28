@@ -651,17 +651,20 @@ export default function PollPage() {
       />
 
       <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-50">
-        <header className="bg-white shadow-sm">
-          <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+        <header className="bg-white dark:bg-gray-800" style={{ boxShadow: '0 2px 10px rgba(0,0,0,0.1)' }}>
+          <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '15px 20px' }} className="flex justify-between items-center">
             <Link href="/" className="flex items-center gap-3">
               <img
                 src={settings.logoUrl || '/images/PoligoPro.png'}
                 alt={`${settings.businessName} Logo`}
-                className="h-10 w-auto object-contain"
+                style={{ height: '110px' }}
               />
             </Link>
-            <Link href="/polls" className="text-gray-600 hover:text-green-700">
-              ← All Polls
+            <Link href="/polls" style={{ color: '#0d7a3e', fontWeight: 500 }} className="flex items-center gap-2 hover:opacity-80 transition">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              All Polls
             </Link>
           </div>
         </header>
